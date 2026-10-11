@@ -1,0 +1,2404 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RSM1240 Companion</title>
+<style>
+:root{
+  --bg:#f6f4ee;
+  --surface:#ffffff;
+  --surface-2:#eeece3;
+  --ink:#1f2420;
+  --ink-soft:#5b6058;
+  --line:#dcd8cb;
+  --accent:#8a3b2f;
+  --accent-soft:#f1e0da;
+  --accent-2:#3d5a52;
+  --accent-2-soft:#e2ece7;
+  --gold:#a97c1f;
+  --gold-soft:#f4e9d2;
+  --code-bg:#efece2;
+  --shadow: 0 1px 2px rgba(31,36,32,.06), 0 8px 24px rgba(31,36,32,.06);
+  color-scheme: light;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Source Sans 3', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight:600;
+  color:var(--ink);
+  text-wrap:balance;
+  margin:0 0 .4em 0;
+}
+p{margin:0 0 1em 0;color:var(--ink);}
+a{color:var(--accent);}
+code, .mono{font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+::selection{background:var(--accent-soft);}
+
+.layout{
+  display:flex;
+  min-height:100vh;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar{
+  width:250px;
+  flex:none;
+  padding:28px 18px 40px 24px;
+  border-right:1px solid var(--line);
+  position:sticky;
+  top:0;
+  align-self:flex-start;
+  height:100vh;
+  overflow-y:auto;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  margin-bottom:22px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.brand .code{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:.08em;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+.brand .title{
+  font-family:'Fraunces', serif;
+  font-size:19px;
+  font-weight:600;
+  line-height:1.2;
+}
+.brand .term{
+  font-size:12px;
+  color:var(--ink-soft);
+}
+nav.toc{display:flex;flex-direction:column;gap:2px;}
+nav.toc .group-label{
+  font-size:11px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:16px 0 6px 10px;
+}
+nav.toc .group-label:first-child{margin-top:0;}
+nav.toc a{
+  text-decoration:none;
+  color:var(--ink-soft);
+  font-size:14.5px;
+  padding:7px 10px;
+  border-radius:7px;
+  transition:background .12s ease, color .12s ease;
+}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink);}
+nav.toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;}
+nav.toc a.sub{padding-left:22px;font-size:13.5px;}
+
+.nav-group{display:flex;flex-direction:column;}
+.nav-group .group-row{display:flex;align-items:stretch;}
+.nav-group .group-row a{flex:1;min-width:0;}
+.nav-group .group-toggle{
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:var(--ink-soft);
+  font-family:inherit;
+  padding:0;
+}
+.nav-group .group-toggle svg{width:9px;height:9px;transition:transform .18s ease;}
+.nav-group.open .group-toggle svg{transform:rotate(90deg);}
+.nav-group .sub-list{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .2s ease;
+  overflow:hidden;
+}
+.nav-group .sub-list > div{min-height:0;overflow:hidden;display:flex;flex-direction:column;}
+.nav-group.open .sub-list{grid-template-rows:1fr;}
+
+.menu-btn{display:none;}
+
+/* ---------- Main ---------- */
+main{
+  flex:1;
+  min-width:0;
+  padding:44px 48px 90px 48px;
+}
+.hero{
+  margin-bottom:44px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.hero .eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12.5px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+.hero h1{font-size:clamp(28px,4vw,40px);}
+.hero .lede{font-size:16.5px;color:var(--ink-soft);max-width:62ch;}
+.hero .meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12.5px;
+  padding:5px 11px;
+  border-radius:100px;
+  background:var(--surface-2);
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+}
+.pill.accent{background:var(--accent-soft);color:var(--accent);border-color:transparent;}
+
+section.block{
+  margin-bottom:64px;
+  scroll-margin-top:24px;
+}
+section.block > .block-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:22px;
+}
+section.block > .block-head .num{
+  font-family:'JetBrains Mono',monospace;
+  color:var(--ink-soft);
+  font-size:14px;
+}
+section.block > .block-head h2{font-size:26px;margin:0;}
+section.block > .block-head .tag{
+  margin-left:auto;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px 24px;
+  box-shadow:var(--shadow);
+}
+
+/* grading table + schedule */
+table{width:100%;border-collapse:collapse;font-size:14.5px;}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:600;
+}
+tr:last-child td{border-bottom:none;}
+td.num, th.num{font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace;}
+.table-wrap{overflow-x:auto;border-radius:14px;}
+.table-wrap table{min-width:560px;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+
+.outcome-list{display:flex;flex-direction:column;gap:10px;padding:0;margin:0;list-style:none;}
+.outcome-list li{
+  display:flex;
+  gap:12px;
+  font-size:14.5px;
+  align-items:flex-start;
+}
+.outcome-list .idx{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--accent);
+  width:20px;
+  flex:none;
+  padding-top:2px;
+}
+
+/* professor section */
+.prof-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start;}
+.prof-photo-card{
+  background:var(--accent-2-soft);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+}
+.prof-initial{
+  width:88px;height:88px;border-radius:50%;
+  background:var(--accent-2);
+  color:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:32px;font-weight:600;
+  margin:0 auto 14px auto;
+}
+.prof-photo-card .p-name{font-family:'Fraunces',serif;font-weight:600;font-size:16px;}
+.prof-photo-card .p-role{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+.badge-row{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.badge{
+  font-size:11.5px;
+  background:var(--gold-soft);
+  color:var(--gold);
+  border-radius:8px;
+  padding:6px 9px;
+  text-align:left;
+}
+
+.callout{
+  background:var(--accent-2-soft);
+  border-left:3px solid var(--accent-2);
+  border-radius:8px;
+  padding:16px 18px;
+  font-size:14.5px;
+  margin-top:18px;
+}
+.callout .callout-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--accent-2);
+  margin-bottom:6px;
+}
+
+.class-prep{
+  border-radius:10px;
+  padding:16px 18px;
+  font-size:14px;
+  margin:18px 0 26px 0;
+  border-left:3px solid var(--accent-2);
+  background:var(--accent-2-soft);
+}
+.class-prep.after{
+  border-left-color:var(--gold);
+  background:var(--gold-soft);
+}
+.class-prep .cp-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--accent-2);
+  margin-bottom:8px;
+}
+.class-prep.after .cp-label{color:var(--gold);}
+.class-prep p{font-size:14px;margin-bottom:8px;}
+.class-prep p:last-child{margin-bottom:0;}
+.class-prep ul{margin:6px 0 0 0;padding-left:18px;}
+.class-prep li{margin-bottom:5px;}
+.class-prep .cp-due{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:2px 9px;
+  margin-left:6px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+/* case cards */
+.case-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.case-card .case-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.case-card h3{font-size:18px;margin:0;}
+.case-card .module-tag{
+  font-size:11px;
+  color:var(--ink-soft);
+  font-family:'JetBrains Mono',monospace;
+  white-space:nowrap;
+}
+.status{
+  font-size:11px;
+  font-family:'JetBrains Mono',monospace;
+  padding:3px 8px;
+  border-radius:100px;
+  width:fit-content;
+}
+.status.covered{background:var(--accent-2-soft);color:var(--accent-2);}
+.status.upcoming{background:var(--surface-2);color:var(--ink-soft);}
+.case-card p{font-size:14px;color:var(--ink-soft);margin:0;}
+.case-card .qs{font-size:13px;margin-top:6px;}
+.case-card .qs li{margin-bottom:4px;}
+
+/* diagrams */
+.diagram{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.flow-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 0;}
+.flow-box{
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:13px;
+  text-align:center;
+  min-width:86px;
+}
+.flow-box.accent{background:var(--accent-soft);border-color:transparent;color:var(--accent);font-weight:600;}
+.flow-arrow{color:var(--ink-soft);font-size:16px;}
+
+.vcap-flow{display:flex;flex-direction:column;gap:10px;align-items:center;}
+.vcap-tier{
+  width:100%;
+  max-width:560px;
+  text-align:center;
+  padding:14px 18px;
+  border-radius:12px;
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:15px;
+}
+.vcap-tier.v{background:var(--accent);color:#fff;}
+.vcap-tier.c{background:var(--gold);color:#241b04;}
+.vcap-tier.ap{
+  display:flex;gap:10px;width:100%;max-width:560px;
+}
+.vcap-tier.ap > div{
+  flex:1;background:var(--accent-2);color:#fff;border-radius:12px;padding:14px;text-align:center;font-weight:600;
+}
+.vcap-arrow{color:var(--ink-soft);font-size:13px;}
+.vcap-chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px;}
+.vcap-chip{
+  font-size:12px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:5px 11px;
+  color:var(--ink-soft);
+}
+
+.matrix{
+  display:grid;
+  grid-template-columns:110px repeat(4,1fr);
+  grid-template-rows:auto repeat(4,1fr);
+  gap:6px;
+  font-size:12.5px;
+}
+.matrix .axis-label{
+  font-size:11px;
+  color:var(--ink-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.matrix .cell{
+  background:var(--surface-2);
+  border-radius:8px;
+  padding:10px 8px;
+  text-align:center;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:56px;
+}
+.matrix .cell.hi{background:var(--accent-soft);color:var(--accent);font-weight:600;}
+
+.frontier-wrap{display:flex;justify-content:center;}
+svg text{font-family:'JetBrains Mono',monospace;fill:var(--ink-soft);font-size:11px;}
+
+.two-col-note{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+.note-box{
+  background:var(--surface-2);
+  border-radius:10px;
+  padding:14px 16px;
+  font-size:13.5px;
+}
+.note-box .label{font-weight:600;color:var(--ink);margin-bottom:4px;font-size:12.5px;}
+
+.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.decision-chip{
+  background:var(--surface-2);
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:13px;
+}
+.decision-chip .k{font-weight:600;color:var(--accent);font-size:12.5px;margin-bottom:2px;}
+.decision-chip.p{border-left:3px solid var(--accent-2);}
+
+.footer-note{
+  margin-top:60px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+
+.slide-ref{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  color:var(--ink-soft);
+  background:var(--surface-2);
+  padding:3px 9px;
+  border-radius:100px;
+  border:1px solid var(--line);
+  white-space:nowrap;
+  font-weight:400;
+  letter-spacing:.02em;
+  vertical-align:middle;
+  margin-left:8px;
+}
+h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
+
+.summary-sheet{
+  background:var(--gold-soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:26px 28px;
+  margin-top:36px;
+}
+.summary-sheet .sheet-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+.summary-sheet .sheet-label .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--gold);
+}
+.summary-sheet .sheet-label span.txt{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.summary-sheet h3{font-size:19px;margin-bottom:6px;}
+.summary-sheet .sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+.formula-box{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 18px;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:18px;
+  margin-bottom:18px;
+  letter-spacing:.02em;
+}
+.formula-box .fx-note{
+  display:block;
+  font-family:'Source Sans 3',sans-serif;
+  font-size:12px;
+  color:var(--ink-soft);
+  margin-top:6px;
+  letter-spacing:normal;
+}
+.sheet-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.sheet-box{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 16px;
+  font-size:13.5px;
+}
+.sheet-box .t{font-weight:600;font-size:12.5px;margin-bottom:6px;color:var(--ink);}
+.sheet-box ul{margin:0;padding-left:18px;}
+.sheet-box li{margin-bottom:4px;}
+.sheet-box.wide{grid-column:1 / -1;}
+.takeaway{
+  margin-top:16px;
+  padding:12px 16px;
+  background:var(--surface);
+  border-left:3px solid var(--gold);
+  border-radius:8px;
+  font-size:13.5px;
+}
+@media (max-width:700px){ .sheet-grid{grid-template-columns:1fr;} }
+
+@media (max-width:900px){
+  .grid-2{grid-template-columns:1fr;}
+  .grid-3{grid-template-columns:1fr;}
+  .prof-layout{grid-template-columns:1fr;}
+  .prof-photo-card{max-width:220px;}
+  .two-col-note{grid-template-columns:1fr;}
+  .vcap-tier.ap{flex-direction:column;}
+  .matrix{grid-template-columns:70px repeat(4,1fr);font-size:11px;}
+}
+
+@media (max-width:760px){
+  .layout{display:block;}
+  .sidebar{
+    position:fixed;
+    left:0;top:0;bottom:0;
+    z-index:40;
+    background:var(--bg);
+    transform:translateX(-100%);
+    transition:transform .2s ease;
+    width:78vw;
+    max-width:300px;
+    box-shadow:0 0 40px rgba(0,0,0,.25);
+  }
+  .sidebar.open{transform:translateX(0);}
+  main{padding:64px 18px 70px 18px;}
+  .menu-btn{
+    display:flex;
+    position:fixed;
+    top:14px;left:14px;
+    z-index:50;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:8px 14px;
+    font-size:12.5px;
+    color:var(--ink);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+  }
+  .scrim{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:30;
+  }
+  .scrim.show{display:block;}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<div class="menu-btn" id="menuBtn">&#9776; Menu</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="code">RSM 1240</span>
+      <span class="title">Operations Management</span>
+      <span class="term">Fall 2026 &middot; Rotman School of Management</span>
+    </div>
+    <nav class="toc" id="toc">
+      <a href="#overview" data-target="overview">Course overview</a>
+      <a href="#professor" data-target="professor">The professor</a>
+      <div class="nav-group open" data-group="cases">
+        <div class="group-row">
+          <a href="#cases" data-target="cases">Case library</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Case library sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#case-do" data-target="case-do" class="sub">Chef Oldani &amp; D&rsquo;O &mdash; full file</a>
+          <a href="#case-scharffenberger" data-target="case-scharffenberger" class="sub">ScharffenBerger &mdash; full file</a>
+          <a href="#case-baria" data-target="case-baria" class="sub">Baria &mdash; full file</a>
+          <a href="#case-rubicon" data-target="case-rubicon" class="sub">Rubicon Global &mdash; full file</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="assignment">
+        <div class="group-row">
+          <a href="#assignment" data-target="assignment">Assignment &mdash; ScharffenBerger</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Assignment sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#assignment-flowunit" data-target="assignment-flowunit" class="sub">Flow unit &amp; mass balance</a>
+          <a href="#assignment-q1" data-target="assignment-q1" class="sub">Q1 &mdash; Capacity &amp; bottleneck</a>
+          <a href="#assignment-q2" data-target="assignment-q2" class="sub">Q2 &mdash; Ball mill decision</a>
+          <a href="#assignment-q3" data-target="assignment-q3" class="sub">Q3 &mdash; Growth plan</a>
+          <a href="#assignment-summary" data-target="assignment-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <span class="group-label">Lectures</span>
+
+      <div class="nav-group open" data-group="lecture-01">
+        <div class="group-row">
+          <a href="#lecture-01" data-target="lecture-01">Lecture 1 &mdash; Align Ops &amp; Strategy</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 1 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-01" data-target="lecture-01" class="sub">Process view</a>
+          <a href="#lecture-01-strategy" data-target="lecture-01-strategy" class="sub">Strategy &rarr; capabilities</a>
+          <a href="#lecture-01-frontier" data-target="lecture-01-frontier" class="sub">Cost&ndash;responsiveness</a>
+          <a href="#lecture-01-tools" data-target="lecture-01-tools" class="sub">Four tools</a>
+          <a href="#lecture-01-vcap" data-target="lecture-01-vcap" class="sub">VCAP framework</a>
+          <a href="#lecture-01-case" data-target="lecture-01-case" class="sub">Applying it to D&rsquo;O</a>
+          <a href="#lecture-01-summary" data-target="lecture-01-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="lecture-02">
+        <div class="group-row">
+          <a href="#lecture-02" data-target="lecture-02">Lecture 2 &mdash; Process Capacity Analysis</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 2 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-02-flowunit" data-target="lecture-02-flowunit" class="sub">Flow units &amp; diagrams</a>
+          <a href="#lecture-02-capacity" data-target="lecture-02-capacity" class="sub">Resource capacity</a>
+          <a href="#lecture-02-bottleneck" data-target="lecture-02-bottleneck" class="sub">Bottleneck &amp; T<sub>min</sub></a>
+          <a href="#lecture-02-utilization" data-target="lecture-02-utilization" class="sub">Utilization</a>
+          <a href="#lecture-02-multitype" data-target="lecture-02-multitype" class="sub">Multiple flow-unit types</a>
+          <a href="#lecture-02-summary" data-target="lecture-02-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="lecture-03">
+        <div class="group-row">
+          <a href="#lecture-03" data-target="lecture-03">Lecture 3 &mdash; Little&rsquo;s Law &amp; Variability</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 3 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-03-littleslaw" data-target="lecture-03-littleslaw" class="sub">Little&rsquo;s Law</a>
+          <a href="#lecture-03-cashcycle" data-target="lecture-03-cashcycle" class="sub">Cash-to-cash cycle</a>
+          <a href="#lecture-03-variability" data-target="lecture-03-variability" class="sub">First-order variability</a>
+          <a href="#lecture-03-summary" data-target="lecture-03-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="lecture-04">
+        <div class="group-row">
+          <a href="#lecture-04" data-target="lecture-04">Lecture 4 &mdash; Second-Order Variability</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 4 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-04-why" data-target="lecture-04-why" class="sub">Why lines form</a>
+          <a href="#lecture-04-cv" data-target="lecture-04-cv" class="sub">Measuring variability (CV)</a>
+          <a href="#lecture-04-util" data-target="lecture-04-util" class="sub">Throughput &amp; utilization</a>
+          <a href="#lecture-04-formula" data-target="lecture-04-formula" class="sub">The system-time formula</a>
+          <a href="#lecture-04-summary" data-target="lecture-04-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="lecture-05">
+        <div class="group-row">
+          <a href="#lecture-05" data-target="lecture-05">Lecture 5 &mdash; Queueing Models</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 5 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-05-probwait" data-target="lecture-05-probwait" class="sub">Probability of waiting</a>
+          <a href="#lecture-05-callcentre" data-target="lecture-05-callcentre" class="sub">Call centre examples</a>
+          <a href="#lecture-05-qmacros" data-target="lecture-05-qmacros" class="sub">QMacros &amp; walk-in clinic</a>
+          <a href="#lecture-05-excessive" data-target="lecture-05-excessive" class="sub">Probability of a long wait</a>
+          <a href="#lecture-05-safety" data-target="lecture-05-safety" class="sub">Why safety capacity</a>
+          <a href="#lecture-05-pooling" data-target="lecture-05-pooling" class="sub">Pooling wait lines</a>
+          <a href="#lecture-05-summary" data-target="lecture-05-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Course companion &middot; living document</div>
+      <h1>RSM1240: Operations Management</h1>
+      <p class="lede">A running notebook for the course: the syllabus distilled, the professor's lens, the case library, and lecture-by-lecture notes. This page grows after every class &mdash; it now covers Lectures 1&ndash;5.</p>
+      <div class="meta-row">
+        <span class="pill accent">Instructor: Vahid Roshanaei</span>
+        <span class="pill">Tue/Thu, 6:30&ndash;8:30 pm</span>
+        <span class="pill">12 sessions + midterm + final</span>
+        <span class="pill">Textbook: Cachon &amp; Terwiesch, <em>MSWD</em> 5e</span>
+      </div>
+    </div>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="block" id="overview">
+      <div class="block-head"><span class="num">01</span><h2>Course overview</h2></div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <p style="margin-bottom:0;">Operations is the set of processes by which an organization turns inputs (labor, material, knowledge, equipment) into outputs (goods and services). This course studies how business strategy demands specific operational capabilities, and how operational capabilities in turn enable or constrain strategy &mdash; then gets tactical: capacity, throughput, inventory, flow time, quality, and variability, from a single process up to a full supply chain.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin-bottom:10px;">By the end of the course, you should be able to&hellip;</h3>
+      <ul class="outcome-list" style="margin-bottom:28px;">
+        <li><span class="idx">01</span>Define and relate the fundamental process measures: throughput, capacity, inventory, and flow time.</li>
+        <li><span class="idx">02</span>Diagnose system performance and identify the main causes of distress in a process.</li>
+        <li><span class="idx">03</span>Measure variability, and calculate flow times under demand and supply variability.</li>
+        <li><span class="idx">04</span>Determine appropriate means to expand capacity, and set inventory policy parameters (order quantities, reorder points).</li>
+        <li><span class="idx">05</span>Explain systemic variability in supply chains (the bullwhip effect) and how to counter it.</li>
+        <li><span class="idx">06</span>Identify a firm's required vs. actual process capabilities, and recommend process changes to close that gap.</li>
+      </ul>
+
+      <div class="grid-2" style="margin-bottom:28px;">
+        <div class="card">
+          <h3 style="font-size:16px;">Grading</h3>
+          <div class="table-wrap">
+            <table>
+              <tr><th>Deliverable</th><th class="num">Weight</th><th>Due</th></tr>
+              <tr><td>Case 1 &mdash; ScharffenBerger (group)</td><td class="num">15%</td><td>Sep 28, 11:59pm</td></tr>
+              <tr><td>Midterm exam (individual)</td><td class="num">30%</td><td>Oct 20, in class</td></tr>
+              <tr><td>Case 2 &mdash; Baria (group)</td><td class="num">15%</td><td>Nov 9, 11:59pm</td></tr>
+              <tr><td>Final exam (individual)</td><td class="num">30%</td><td>Dec 10, in class</td></tr>
+              <tr><td>Class participation</td><td class="num">10%</td><td>Ongoing</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:16px;">Ground rules worth remembering</h3>
+          <ul class="outcome-list">
+            <li><span class="idx">&bull;</span>Midterm covers Lectures 1&ndash;5 plus the Oldani and ScharffenBerger case facts. One double-sided aid sheet.</li>
+            <li><span class="idx">&bull;</span>Final is cumulative, weighted toward the second half. Two two-sided aid sheets.</li>
+            <li><span class="idx">&bull;</span>GenAI is allowed for inspiration, never pasted directly into submissions &mdash; must be disclosed and documented if requested.</li>
+            <li><span class="idx">&bull;</span>Missing 3+ classes (25%) triggers a required conversation with the instructor about whether outcomes are still achievable.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;margin-bottom:10px;">Session map</h3>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th class="num">#</th><th>Topic</th><th>Case</th><th>Deliverable</th></tr>
+          <tr><td class="num">1</td><td>Intro to operations strategy</td><td>Chef Oldani &amp; Ristorante D&rsquo;O</td><td>&mdash;</td></tr>
+          <tr><td class="num">2</td><td>Process view, capacity &amp; utilization</td><td>ScharffenBerger</td><td>&mdash;</td></tr>
+          <tr><td class="num">3</td><td>Little's Law &amp; first-order variability</td><td>Baria (read ahead)</td><td>&mdash;</td></tr>
+          <tr><td class="num">4</td><td>Case debrief + second-order variability &amp; queues</td><td>ScharffenBerger debrief</td><td>Case 1 due</td></tr>
+          <tr><td class="num">5</td><td>Quantifying &amp; improving waiting time; dedicated vs. pooled lines</td><td>Baria</td><td>&mdash;</td></tr>
+          <tr><td class="num">6</td><td>Heterogeneous customers, sequential queues</td><td>Potty Parity</td><td>&mdash;</td></tr>
+          <tr><td class="num">7</td><td><strong>Midterm exam</strong> (Lectures 1&ndash;5)</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="num">8</td><td>Economic order quantity &amp; reorder point</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="num">9</td><td>Newsvendor model &amp; performance measures</td><td>Inventory game</td><td>&mdash;</td></tr>
+          <tr><td class="num">10</td><td>Baria debrief &mdash; capacity/timeliness trade-off</td><td>Baria debrief</td><td>Case 2 due</td></tr>
+          <tr><td class="num">11</td><td>Beer game &amp; the bullwhip effect</td><td>Beer game</td><td>&mdash;</td></tr>
+          <tr><td class="num">12</td><td>Sustainable business model design</td><td>Rubicon Global</td><td>&mdash;</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ PROFESSOR ============ -->
+    <section class="block" id="professor">
+      <div class="block-head"><span class="num">02</span><h2>The professor</h2></div>
+      <div class="prof-layout">
+        <div class="prof-photo-card">
+          <div class="prof-initial">VR</div>
+          <div class="p-name">Vahid Roshanaei</div>
+          <div class="p-role">Associate Professor, Teaching Stream<br>Operations Management &amp; Statistics</div>
+          <div class="badge-row">
+            <span class="badge">Roger Martin Excellence in Teaching Award</span>
+            <span class="badge">P&amp;Q 50 Best Undergrad Business Professors, 2025</span>
+            <span class="badge">Ph.D. Operations Research, U of T (2017)</span>
+            <span class="badge">PMP since 2010</span>
+          </div>
+        </div>
+        <div>
+          <p>Before academia, Roshanaei spent nine years in banking &amp; finance and seven in healthcare and manufacturing/service operations &mdash; so the course leans on real operating problems rather than toy examples. His research designs exact decomposition techniques for large-scale stochastic and robust optimization problems: location-allocation in supply chains, manufacturing scheduling, and healthcare operations planning (operating rooms, home care). A recurring theme in his published work: <strong>flexibility in a process is an asset to be found and exploited</strong>, not just a cost to be minimized.</p>
+          <div class="callout">
+            <div class="callout-label">Why this matters for how the course runs</div>
+            Roshanaei teaches operations as a bridge between strategy and quantitative method &mdash; the VCAP framework you'll see in Lecture 1 is exactly this bridge: strategy sets the value proposition, and everything after that (capabilities, assets, processes) is an optimization problem under real constraints. Expect case debriefs to be treated as the graded event in themselves (the entire first lecture, for instance, is the Oldani debrief), cold-calling as a real possibility, and quality of argument &mdash; relevant, fact-based, specific, logical, insightful &mdash; weighted over raw participation volume.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CASES ============ -->
+    <section class="block" id="cases">
+      <div class="block-head"><span class="num">03</span><h2>Case library</h2><span class="tag">4 cases across the term</span></div>
+      <div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+
+        <div class="case-card">
+          <div class="case-top">
+            <h3>Chef Davide Oldani &amp; Ristorante D&rsquo;O</h3>
+            <span class="module-tag">Module 1</span>
+          </div>
+          <span class="status covered">Covered &mdash; Lecture 1</span>
+          <p>A one-Michelin-star restaurant near Milan that deliberately prices like a neighbourhood trattoria (dinner ~&euro;35 vs. the ~&euro;130 category norm) while running at 100% capacity utilization, versus roughly 50% for peer Michelin restaurants. Oldani is deciding whether to clone D&rsquo;O elsewhere or launch a lower-priced sibling concept, POP by D&rsquo;O.</p>
+          <ul class="qs outcome-list">
+            <li><span class="idx">Q1</span>What are D&rsquo;O's competitive priorities, and how do its asset/process choices support them?</li>
+            <li><span class="idx">Q2</span>How successful is D&rsquo;O &mdash; what does its profitability actually look like?</li>
+            <li><span class="idx">Q3</span>What should Oldani do next, and how would he implement it?</li>
+          </ul>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top">
+            <h3>ScharffenBerger Chocolate Maker</h3>
+            <span class="module-tag">Module 2</span>
+          </div>
+          <span class="status covered">Full analysis below &mdash; Lecture 2/4</span>
+          <p>An artisanal Berkeley chocolate maker where demand has been outstripping supply for 18 straight months. COO Jim Harris is installing a new ball mill to cut conching time from 40&ndash;60 hours to about 15, and needs a capacity-expansion plan for 50/100/150% demand growth without breaking quality.</p>
+          <p style="margin-top:6px;"><strong>Course deliverable:</strong> capacity by process step, bottleneck identification, financial case for the ball mill, shift &amp; expansion plan &mdash; due Sep 28.</p>
+          <p style="margin-top:6px;"><a href="#assignment" style="color:var(--accent);font-weight:600;text-decoration:none;">Jump to the full worked analysis &rarr;</a></p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top">
+            <h3>Baria Planning Solutions: Fixing the Sales Process</h3>
+            <span class="module-tag">Module 3</span>
+          </div>
+          <span class="status upcoming">Read ahead for Lectures 4&ndash;5 &middot; full debrief Lecture 10</span>
+          <p>A spend-analysis consulting firm whose new sales-support director inherits a missed-deadline problem: win rates and renewal rates both dropped sharply in 2010. The team is organized in a hybrid model (shared functions + industry-dedicated proposal support) and staff utilization looks fine on paper &mdash; so why do deadlines keep slipping?</p>
+          <p style="margin-top:6px;">This is the vehicle for first- and second-order variability, queueing, and cross-training trade-offs later in the term.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top">
+            <h3>Rubicon Global</h3>
+            <span class="module-tag">Module 12</span>
+          </div>
+          <span class="status upcoming">Later in term</span>
+          <p>An asset-light, "Uber for trash" waste-management platform raising its next financing round in an industry historically dominated by asset-heavy incumbents (Waste Management, Republic Services) who profit from landfill tonnage. Rubicon instead earns a diversion bonus for keeping waste out of landfills.</p>
+          <p style="margin-top:6px;">Explicitly designed as a VCAP application: Lecture 1's framework is the tool the case-discussion questions ask you to use.</p>
+        </div>
+
+      </div>
+
+      <div class="callout" style="margin-top:28px;">
+        <div class="callout-label">Why these case files exist</div>
+        Everything below is a complete, cold-call-proof dump of each case's facts &mdash; background, business model, every hard number in the exhibits, the decision on the table, and the questions you're expected to answer &mdash; not just the strategic takeaway. For D&rsquo;O and ScharffenBerger, the "resolved in class" boxes point to the fuller analysis elsewhere on this page; for Baria and Rubicon Global, class hasn't happened yet, so it's facts only.
+      </div>
+
+      <!-- ===== CASE FILE: D'O ===== -->
+      <h3 id="case-do" style="font-size:17px;margin:34px 0 14px 0;">Case file: Chef Davide Oldani &amp; Ristorante D&rsquo;O <span class="slide-ref">HBS 613-080 &middot; set July 2012</span></h3>
+
+      <div class="callout">
+        <div class="callout-label">The scene</div>
+        A sweltering July afternoon, 2012. Oldani preps for another sold-out night at his one-Michelin-star restaurant outside Milan &mdash; 35 seats, an 18-month waiting list, and years since a seat sat empty at lunch or dinner. He's weighing how to "spread the POP concept": clone D&rsquo;O abroad, or open a bigger, cheaper sibling next door.
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Oldani &amp; D&rsquo;O &mdash; background</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Born 1967, Milan. A serious football injury at 16 ended a promising playing career and redirected him fully into cooking.</li>
+        <li><span class="idx">&bull;</span>Trained under three-Michelin-star Chef Gualtiero Marchesi twice: as a two-month teenage apprentice, then from 1986 as commis, reaching chef de partie (1988) and finally sous-chef (1992&ndash;1994/96).</li>
+        <li><span class="idx">&bull;</span>Also worked under Albert Roux (Le Gavroche, London), Alain Ducasse (Louis XV, Monaco), and Pierre Herm&eacute; (Fauchon, Paris) &mdash; 1989 onward.</li>
+        <li><span class="idx">&bull;</span>Ran the 300-cover Giannino restaurant in Milan 1996&ndash;2000; earned it a Michelin star after 18 months.</li>
+        <li><span class="idx">&bull;</span>2000&ndash;2003: independent consultant (Master Foods, Hotel George V) before opening his own place.</li>
+        <li><span class="idx">&bull;</span>Opened D&rsquo;O Oct 23, 2003 in his hometown Cornaredo (35 min from Milan) with a staff of 4 (himself, a sous-chef, a commis, a sommelier). First Michelin star arrived within a year (2004).</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">The POP concept &amp; how D&rsquo;O actually runs</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span><strong>POP</strong> = "popular" &mdash; Michelin-star quality at trattoria prices, deliberately reaching customers who'd never normally visit a starred restaurant.</li>
+        <li><span class="idx">&bull;</span>200 sqm, two dining rooms (25 + 10 seats = 35 total). Open 5 days/week, closed Sunday &amp; Monday (most Michelin restaurants instead close Sat/Sun).</li>
+        <li><span class="idx">&bull;</span>Three dinner time slots (7:30 / 8:30 / 9:30pm); ~half of bookings land on the 8:30 slot. A 7:30 table can be rebooked for 9:30 (two turns); an 8:30 booking blocks the table for the night.</li>
+        <li><span class="idx">&bull;</span>Lunch: only the 25-seat room opens, typically one turn; lunch reservations run ~6 weeks out, versus an 18-month wait overall.</li>
+        <li><span class="idx">&bull;</span>Average total dining time: 90 minutes. Cash only (avoids 3&ndash;6% card fees); meticulous tax bookkeeping ("every euro is accounted for").</li>
+        <li><span class="idx">&bull;</span>No cover charge, no service charge. Four seasonal menus/year, ~18 dishes each (4 apps, 8&ndash;10 mains, 4 desserts). Signature dish: caramelized onion. Historically 80&ndash;90% new dishes each season, now trending toward 40&ndash;60% new / rest "D&rsquo;O classics."</li>
+        <li><span class="idx">&bull;</span>Wine list deliberately small (180 bottles vs. ~310 at a typical one-star) at a low markup (20% vs. ~70%), with 25% of wine revenue from by-the-glass pours (vs. 5% typical) &mdash; sells far more bottles/week (205 vs. 75) at a much lower average price (&euro;22 vs. &euro;45).</li>
+        <li><span class="idx">&bull;</span>15&ndash;20 local suppliers, dealt with directly; daily fresh sourcing; no exotic/status ingredients (no caviar, no lobster); obsessively documented edible-portion percentages per ingredient to minimize waste.</li>
+        <li><span class="idx">&bull;</span>Staff grew from 4 to 14 (incl. Oldani): head chef, 2 sous-chefs, 3 chefs de partie, 3 commis, 3 dishwashers, 1 sommelier &mdash; <strong>no professional waiters</strong>; chefs rotate serving tables weekly, building a direct relationship with diners.</li>
+        <li><span class="idx">&bull;</span>Work starts 9am (not 6am like top Paris/London kitchens), kitchen closes ~10:30pm, staff get 2 days off/week + 5 weeks off in summer. Only 3 people have left since opening. Recruitment: 8 interviews total, including meeting candidates' parents, plus reading one of Oldani's books before a trial lunch.</li>
+        <li><span class="idx">&bull;</span>Oldani's own tableware designs (Assiette D&rsquo;O Land plate, Verre D&rsquo;O glass, Passpartout hybrid fork/knife/spoon) cut breakage, cleaning time, water and soap costs, and reduce table clutter.</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Exhibit 9 &mdash; D&rsquo;O vs. a typical Italian one-star Michelin restaurant</h4>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Metric</th><th class="num">D&rsquo;O</th><th class="num">Typical one-star</th></tr>
+          <tr><td>Seats</td><td class="num">35</td><td class="num">50</td></tr>
+          <tr><td>Dinner / lunch capacity (covers)</td><td class="num">52 / 25</td><td class="num">60 / 0</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>Weekly capacity utilization</td><td class="num">100%</td><td class="num">50%</td></tr>
+          <tr><td>Avg. dinner / lunch price (ex-wine)</td><td class="num">&euro;45 / &euro;20</td><td class="num">&euro;130 / n/a</td></tr>
+          <tr><td>Ingredient cost as % of food revenue</td><td class="num">31%</td><td class="num">34%</td></tr>
+          <tr><td>Total employees</td><td class="num">14</td><td class="num">36</td></tr>
+          <tr><td>Wine list / avg. bottle price</td><td class="num">180 / &euro;22</td><td class="num">310 / &euro;45</td></tr>
+          <tr><td>Bottles sold per week</td><td class="num">205</td><td class="num">75</td></tr>
+          <tr><td>Days open per year</td><td class="num">230</td><td class="num">230</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">This is the exact exhibit the Lecture 3 Little's Law example draws its "1,000 bottles average inventory, 205 sold/week &rarr; 4.88-week flow time" number from.</p>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Industry &amp; competitive context</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Global restaurant industry: &euro;1.2 trillion revenue (2010). Italy alone: 157,000 restaurants, &euro;37.6 billion revenue.</li>
+        <li><span class="idx">&bull;</span>Michelin Guide: launched 1900 (France), starred restaurants since 1926; only ~2,000 restaurants worldwide have ever held a star. 2012 counts: France 594 total (26 three-star), Italy 295 (7 three-star, up from 90 total in 1956), Japan 317, Germany 249, UK 145, US 130.</li>
+        <li><span class="idx">&bull;</span>Typical Michelin restaurant: ~50% capacity utilization; labor = 40&ndash;50% of costs; losing a star can cut sales by ~50%.</li>
+        <li><span class="idx">&bull;</span>Setting up a 60-seat restaurant in Italy: &euro;80,000&ndash;130,000 up-front.</li>
+        <li><span class="idx">&bull;</span>Failed/partial comparables Oldani was aware of: Mark Veyrat's Cozna Vera (organic-burger chain, opened France 2008, closed 2010); Claudio Sadler's "Chic&rsquo;n Quick" (a cheaper sibling next to his own two-star restaurant, &euro;19 lunch menu, still running).</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-label">The decision on the table</div>
+        Oldani is deciding how to "spread the POP concept," with two options in play. <strong>(A) Clone D&rsquo;O</strong> in a new city (New York, Dubai, London, Tokyo, Singapore, Beijing all floated by interested investors). <strong>(B) Open "POP by D&rsquo;O"</strong>: a newly available 900 sqm property in Cornaredo (4&times; D&rsquo;O's size, ~60 seats), casual communal round tables (6&ndash;8 seats), prices 10&ndash;15% below D&rsquo;O, tapas-style small plates, cast-iron hot-plate cooking (cheaper, less water/electricity/detergent), ~&euro;500,000 investment, a wider dinner window (7pm&ndash;midnight) with likely more than one table turn. Oldani frames it via an Armani analogy: D&rsquo;O as the couture line, POP as the accessible diffusion brand. The case ends undecided &mdash; cannibalization and brand-confusion risk vs. the appeal of a validated, low-risk-feeling expansion right next door.
+      </div>
+
+      <div class="class-prep" style="margin-top:16px;">
+        <div class="cp-label">Discussion questions you're expected to answer</div>
+        <ul>
+          <li><strong>Q1</strong> &mdash; What are D&rsquo;O's competitive priorities, and how do its asset and process choices support them?</li>
+          <li><strong>Q2</strong> &mdash; How successful is D&rsquo;O, really &mdash; what does its profitability actually look like?</li>
+          <li><strong>Q3</strong> &mdash; What should Oldani do next, and how would he implement it?</li>
+        </ul>
+      </div>
+
+      <div class="class-prep after" style="margin-top:16px;">
+        <div class="cp-label">Resolved in class</div>
+        <p style="margin-bottom:0;">The full VCAP-framework answer to these three questions is worked through in <a href="#lecture-01-case" style="color:var(--gold);font-weight:600;text-decoration:none;">Lecture 1 &rarr; Applying it to Ristorante D&rsquo;O</a>: value proposition (Michelin quality at trattoria prices), competencies (cost control + consistent quality, not variety), assets (small team, durable tableware), and processes (fixed slots, cash-only, chef rotation) that together explain the 100% vs. 50% utilization gap. That same VCAP lens is what the Rubicon Global case later asks you to reapply.</p>
+      </div>
+
+      <!-- ===== CASE FILE: SCHARFFENBERGER ===== -->
+      <h3 id="case-scharffenberger" style="font-size:17px;margin:40px 0 14px 0;">Case file: ScharffenBerger Chocolate Maker (A) <span class="slide-ref">HBS 606-043 &middot; set May 2005</span></h3>
+
+      <div class="callout">
+        <div class="callout-label">The scene</div>
+        May 2005. COO Jim Harris steps out of the factory floor in Berkeley, California, as his team preps for a new custom ball mill. Demand has outstripped supply for all 18 months he's been at the company; a mass-market retailer just offered a deal that alone could grow demand 30% by year-end, and his marketing manager thinks demand could triple within a few years.
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Company background</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Founded 1996 by Robert Steinberg (a family physician who, after a bout with cancer, sold his practice to pursue chocolate, training in France) and John Scharffenberger (had just sold his successful winery).</li>
+        <li><span class="idx">&bull;</span>First small batches 1997, out of rented space in South San Francisco. Moved into a 27,000-sq-ft Berkeley warehouse in May 2001, expecting a fivefold production increase.</li>
+        <li><span class="idx">&bull;</span>Jim Harris recruited end of 2003 from Kohlberg &amp; Company (a local private equity firm) to lead the business and manage growth.</li>
+        <li><span class="idx">&bull;</span>As of May 2005: 60 employees &mdash; 24 in production, 18 across five retail stores (Berkeley, San Francisco, Healdsburg CA, and two in New York), 18 in admin/management.</li>
+        <li><span class="idx">&bull;</span>One of the few U.S. makers doing true "bean to bar" production in-house, rather than buying pre-mixed chocolate liquor from large manufacturers like most competitors.</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Market &amp; product line</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Mass market: $14B, ~75%+ controlled by Hershey, Mars, and Nestl&eacute;; flat growth (1&ndash;2%/yr); milk chocolate ~70% of U.S. sales (down from ~90% in the 1980s).</li>
+        <li><span class="idx">&bull;</span>Premium segment: $1.2B, retail priced $10&ndash;$100/lb, projected 15&ndash;20%/yr growth 2000&ndash;2010, driven by dark chocolate's health halo (antioxidants) and rising retail availability. Scharffen Berger sat at the high end of price and positioning within premium.</li>
+        <li><span class="idx">&bull;</span>Chief taste competitor: European premium makers like Valrhona; also competed more broadly with Godiva and Ghirardelli/Lindt.</li>
+        <li><span class="idx">&bull;</span>Revenue: $1.1M (1999) &rarr; $10.0M (2004) &rarr; est. &gt;$15M (2005).</li>
+        <li><span class="idx">&bull;</span>Product line (by cacao %): unsweetened 99%, extra dark 82%, bittersweet 70% (most popular single product, the 3oz bar), semi-sweet/mocha/mint/nibby all 62%, milk chocolate 41%. ~80 total SKUs across sizes (5g/1oz/3oz/10oz consumer; 2kg/3kg/15kg food-service). Unsweetened + extra dark &asymp; 20% of sales; sweeter products the other 80%.</li>
+        <li><span class="idx">&bull;</span>Trader Joe's: largest customer, sells an exclusive 60% cacao 2oz bar under the Scharffen Berger brand name (TJ's insisted on keeping the name given its brand equity).</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">The production process &amp; the ball mill decision</h4>
+      <p style="font-size:13.5px;color:var(--ink-soft);">Full quantitative treatment &mdash; capacity by stage, the bottleneck, the ball mill's financial case, and the 50/100/150% growth plan &mdash; lives in the dedicated <a href="#assignment" style="color:var(--accent);font-weight:600;text-decoration:none;">Assignment section</a> above. The cold-call facts worth having loose in memory:</p>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>8-step process: Bean Cleaner &rarr; Roaster &rarr; Winnower &rarr; Melangeur &rarr; Conche (&times;2) &rarr; Tempering &rarr; Molding &rarr; Packaging.</li>
+        <li><span class="idx">&bull;</span>Conching is the long pole: 40&ndash;60 hours per 1,400 kg batch, conches staffed 24/7. Everything else turns over in under 1.25 hours or runs continuously.</li>
+        <li><span class="idx">&bull;</span>Ball mill: $300,000 custom Dutch-built machine. Cuts the combined conche + refine time to ~15 hours (10hr conche + 5hr ball mill), instead of 40&ndash;60 hours in the conche alone. Confirmed via four rounds of blind taste tests &mdash; no quality loss, possibly slightly improved texture/flavor.</li>
+        <li><span class="idx">&bull;</span>Team's own internal analysis flagged the melangeur as the likely next bottleneck once the ball mill is in; a used replacement melangeur was already located for ~$50,000.</li>
+        <li><span class="idx">&bull;</span>Each completed 1,400kg conche batch worth &gt;$30,000 in sales; industry-average contribution margin ~40%.</li>
+        <li><span class="idx">&bull;</span>Current max monthly capacity &asymp;40,000 kg (~29 conches); when Harris arrived capacity was only ~18 conches/month at 1 shift, 5 days &mdash; raised to 26&ndash;29 purely through added shifts, no new equipment.</li>
+      </ul>
+
+      <div class="class-prep after" style="margin-top:16px;">
+        <div class="cp-label">Resolved in class / in the assignment</div>
+        <p style="margin-bottom:0;">Bottleneck (conche, 29.3 batches/month), the ball mill's payback (&asymp;1.4 months), the new bottleneck after installation (melangeur), and the full 50/100/150% shift-and-capex plan are all worked in detail in the <a href="#assignment" style="color:var(--gold);font-weight:600;text-decoration:none;">Assignment section</a>, including the flow-unit derivation the instructor specifically requires you to justify rather than assume.</p>
+      </div>
+
+      <!-- ===== CASE FILE: BARIA ===== -->
+      <h3 id="case-baria" style="font-size:17px;margin:40px 0 14px 0;">Case file: Baria Planning Solutions &mdash; Fixing the Sales Process <span class="slide-ref">HBS 4568 &middot; set Feb 2011</span></h3>
+      <div class="callout" style="background:var(--surface-2);border-left:3px solid var(--ink-soft);">
+        <div class="callout-label">Tools now available, debrief still ahead</div>
+        Lectures 4 and 5 both ask you to read this case with a fresh perspective on first- and second-order variability, and the tools to do it are now on this page: <a href="#lecture-04" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 4</a> (CV, utilization, the system-time formula) and <a href="#lecture-05" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 5</a> (QMacros, pooling). The full debrief is Lecture 10 and the written case is due Nov 9, so there is no "resolved in class" summary yet. Everything below is case-fact prep.
+      </div>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The scene</div>
+        Christy Connor, newly hired Director of North America Sales Support at Baria Planning Solutions (BPS), reads a 4:23am email from her boss Brandon Ali, President of North American Sales: 2010's win rate came in at 15.5% against a 17.5% forecast, and renewal rates slipped from ~91&ndash;92% historically to 84%. He wants a proposal, quantifying staffing/utilization/cost, by next week.</div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Company &amp; industry background</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>BPS: publicly traded, $95M annual sales, founded 1997. Does "spend analysis" &mdash; software + data analysis + project management + consulting to cut clients' procurement costs and improve supplier performance. Held ~18% market share by 2010 in a market now crowded by SAP and Accenture.</li>
+        <li><span class="idx">&bull;</span>Grew via acquisition: government-sector firm (2007), then a manufacturing-focused firm and a retail-focused firm (2008) &mdash; each with different tech platforms, processes, even fiscal year-ends. Integration mostly done by end of 2009.</li>
+        <li><span class="idx">&bull;</span>North American Sales has three groups: <strong>Sales</strong> (Chuck Dee; 4 industry units &mdash; Energy, Government, Manufacturing, Retail &amp; Other), <strong>Sales Operations</strong> (Jane Albright; competitive intel, win-loss analysis, training, staffing, comp plans), and <strong>Sales Support</strong> (Connor's new team).</li>
+        <li><span class="idx">&bull;</span>Sales Support runs a <strong>hybrid structure</strong>: Data Engineering, Data Analysis, and Pricing are shared across all industries; only Proposal Support is dedicated by industry. Dee wants the whole team industry-dedicated (he blames shared-team "lack of ownership" for missed deadlines); Albright designed the hybrid model specifically to balance staffing efficiency against industry expertise, and successfully defended it before.</li>
+        <li><span class="idx">&bull;</span>Cross-training was tried and largely failed: Data Engineers &harr; Data Analysts can cross-train (cost &asymp;1 month salary/benefits per person); Proposal Support can cross-train across industries (cost &asymp;3 weeks salary/benefits, but Dee opposes it); Pricing staff can't be effectively cross-trained at all. Cross-trained staff also need &ge;3 months in a role to become productive.</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">The solution-selling process &amp; the four sales-support functions</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Four opportunity types: <strong>New Sale</strong> (new customer), <strong>Renewal</strong> (existing customer, contract renewal), <strong>Expansion</strong> (more services to an existing customer, off-cycle), <strong>Pilot</strong> (short trial engagement, often feeds the New Sale pipeline).</li>
+        <li><span class="idx">&bull;</span>Four sequential support functions per opportunity: <strong>1. Data Engineering</strong> (collect &amp; clean prospect data) &rarr; <strong>2. Data Analysis</strong> (run BPS software, find savings opportunities) &rarr; <strong>3. Proposal Support</strong> (validate/quantify opportunities, build the proposal, help pitch) &rarr; <strong>4. Pricing</strong> (build the pricing proposal, incl. risk-sharing options).</li>
+        <li><span class="idx">&bull;</span>Renewals specifically: planning starts ~5 weeks before the renewal date, presentation ~2&ndash;3 weeks after that, leaving 2&ndash;3 weeks for analysis. Mean process times for a renewal: 8 / 12 / 22 / 4 hours across the four functions &mdash; seemingly ample time on paper.</li>
+        <li><span class="idx">&bull;</span>Company risk rule of thumb for staff utilization: &lt;70% = low risk, 70&ndash;85% = medium risk, 85&ndash;100% = high risk, &gt;100% = already over capacity.</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Exhibit 1 &mdash; forecast vs. actual 2010 results</h4>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Type</th><th class="num">Opportunities (orig. &rarr; latest)</th><th class="num">Win rate (orig. &rarr; latest)</th></tr>
+          <tr><td>New Sale</td><td class="num">250 &rarr; 271</td><td class="num">17.5% &rarr; 15.5%</td></tr>
+          <tr><td>Renewal</td><td class="num">117 &rarr; 117</td><td class="num">90.0% &rarr; 83.8%</td></tr>
+          <tr><td>Expansion</td><td class="num">60 &rarr; 53</td><td class="num">90.0% &rarr; 90.0%</td></tr>
+          <tr><td>Pilot</td><td class="num">80 &rarr; 103</td><td class="num">25.0% &rarr; 22.0%</td></tr>
+          <tr style="font-weight:600;"><td>Total revenue (3&ndash;yr contracts)</td><td class="num" colspan="2">$124.9M forecast &rarr; $113.0M actual</td></tr>
+        </table>
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Exhibit 7 &mdash; 2010 full-year utilization by function</h4>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Function</th><th class="num">Requests</th><th class="num">Mean time (hr)</th><th class="num">Headcount</th><th class="num">Utilization</th><th>Risk</th></tr>
+          <tr><td>1 &ndash; Data Engineering</td><td class="num">544</td><td class="num">20</td><td class="num">8</td><td class="num">75.8%</td><td>Medium</td></tr>
+          <tr><td>2 &ndash; Data Analysis</td><td class="num">544</td><td class="num">18</td><td class="num">7</td><td class="num">79.4%</td><td>Medium</td></tr>
+          <tr><td>3 &ndash; Proposal Support (Energy)</td><td class="num">135</td><td class="num">32</td><td class="num">3</td><td class="num">81.2%</td><td>Medium</td></tr>
+          <tr><td>3 &ndash; Proposal Support (Government)</td><td class="num">104</td><td class="num">32</td><td class="num">3</td><td class="num">62.5%</td><td>Low</td></tr>
+          <tr><td>3 &ndash; Proposal Support (Manufacturing)</td><td class="num">211</td><td class="num">32</td><td class="num">5</td><td class="num">76.1%</td><td>Medium</td></tr>
+          <tr><td>3 &ndash; Proposal Support (Retail &amp; Other)</td><td class="num">94</td><td class="num">32</td><td class="num">2</td><td class="num">84.8%</td><td>Medium</td></tr>
+          <tr><td>4 &ndash; Pricing</td><td class="num">544</td><td class="num">7</td><td class="num">3</td><td class="num">67.7%</td><td>Low</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">1,760 available work hours/year per person is the assumption behind every utilization figure above. On paper, nothing looks over capacity by the company's own rule of thumb &mdash; which is exactly the puzzle Connor has to solve: if average utilization looks fine, why do deadlines keep slipping?</p>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The decision on the table</div>
+        Connor is due to give Ali a proposal within a week. Options on her list: hire more staff, abandon the hybrid structure for Dee's fully industry-dedicated model, streamline or abandon solution-selling altogether, try new cross-training approaches &mdash; or find that the real problem isn't average utilization at all but the <strong>variability</strong> of demand within a quarter (Exhibit 5 shows requests fluctuating quarter to quarter and by sector) colliding with tight, inflexible deadlines. That variability-vs-average-utilization gap is exactly what Lectures 3, 5, and 6 (Little's Law, first/second-order variability, queueing) exist to let you diagnose properly.
+      </div>
+
+      <div class="class-prep" style="margin-top:16px;">
+        <div class="cp-label">What to walk in ready to discuss</div>
+        <ul>
+          <li>Why can utilization look "medium/low risk" on average while the team still misses deadlines constantly? (Hint: averages hide variability &mdash; this is the whole point of the variability lectures still to come.)</li>
+          <li>Is the hybrid organization (Dee's complaint) actually the problem, or is it demand variability regardless of structure?</li>
+          <li>What would cross-training actually buy the team, given its real costs and the 3-month ramp-up constraint?</li>
+          <li>Quantify the staffing, utilization, and cost implications of at least one alternative plan, as Ali explicitly asked for.</li>
+        </ul>
+      </div>
+
+      <!-- ===== CASE FILE: RUBICON GLOBAL ===== -->
+      <h3 id="case-rubicon" style="font-size:17px;margin:40px 0 14px 0;">Case file: Rubicon Global <span class="slide-ref">HBS 816-015 &middot; set late Nov 2014</span></h3>
+      <div class="callout" style="background:var(--surface-2);border-left:3px solid var(--ink-soft);">
+        <div class="callout-label">Not yet covered in class</div>
+        Queued for Lecture 12 (final session), explicitly as a VCAP application case &mdash; the same framework built in Lecture 1 and applied to D&rsquo;O. No in-class resolution exists yet.
+      </div>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The scene</div>
+        Co-founders Nate Morris and Lane Moore walk into a board meeting hoping to close terms on a new financing round (targeted for early 2015). Rubicon has raised roughly $5M+ since 2008, validated its model, and now needs to decide how much to raise, from whom, on what terms &mdash; to chase a mission of transforming the $64B U.S. waste industry.
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Founder &amp; company background</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Nate Morris: born 1980, Lexington, Kentucky. Politically ambitious from a young age (grandfather was a union leader); George Washington University (Scottish Rite Scholar), congressional internships, worked in the Bush White House, fundraising role on Bush's 2004 re-election campaign; later a Woodrow Wilson School graduate program at Princeton.</li>
+        <li><span class="idx">&bull;</span>2008: introduced by high-school friend Marc Spiegel (family in the garbage-hauling trade for a century) to the Oakleaf business model &mdash; an asset-light waste broker with 2,500+ haulers, sold for $655M to New Mountain Capital (having raised $30M from Charterhouse Capital in 2003). Morris and Spiegel believed Oakleaf's model was inefficient because it lacked a technology platform.</li>
+        <li><span class="idx">&bull;</span>Rubicon launched 2008; Morris maxed out personal credit cards for the initial website and legal fees. First major customer: a national pizza chain, landed via a Kentucky real-estate-broker connection (Henry "Hank" Dudgeon III, who then joined as co-founder/Director of Business Development). Pitch: simplified contract management/invoicing, transparency into waste destination, and creative reuse (e.g., selling waste pizza dough to ethanol producers).</li>
+        <li><span class="idx">&bull;</span>Raised $1M from Lane Moore's QuarterMoore Capital to build out software; Moore had earlier founded and sold "Bagster" (a "dumpster in a bag" product) to Waste Management in 2009.</li>
+        <li><span class="idx">&bull;</span>February 2012: $5M Series-A led by Peter Kellner (Richmond Global), with strategic investors including Bill Gatton, Rotunda Capital Partners, and the Brown-Forman family office (Jack Daniels/Korbel).</li>
+        <li><span class="idx">&bull;</span>By spring 2014: 22,000 customer locations serviced through a network of 10,000 haulers/processors (up from 7,000 locations three years earlier, without materially growing headcount). Nate Morris named to Fortune's 2014 "40 Under 40." Oscar Salazar (Uber co-founder) reportedly told Morris "Rubicon could be bigger than Uber."</li>
+        <li><span class="idx">&bull;</span>Rubicon completed B Corporation certification in 2012 (B Lab had certified 950 companies across 30+ countries by 2014, including Patagonia, Seventh Generation, Sungevity).</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Business model</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Positioned as "an Uber for trash" (New York Times) &mdash; a cloud-based, asset-light, multi-sided platform connecting four groups: customers who need waste removed, recyclers, independent haulers, and landfills. Rubicon owns no trucks, no landfills.</li>
+        <li><span class="idx">&bull;</span>Contrasts directly with incumbents Waste Management (NYSE: WM) and Republic Services (NYSE: RSG), who own trucks and landfills and profit from maximizing landfill tonnage (landfill/transfer EBIT was &gt;30% of total EBIT at major players; WM's minimum required IRR was 12% for collection/landfill projects vs. 15% for recycling &mdash; incentives literally favor landfilling over recycling).</li>
+        <li><span class="idx">&bull;</span>Three revenue streams: a fee based on waste composition/volume, a software/management fee (invoicing, reporting), and a <strong>diversion bonus</strong> tied to tonnage kept out of landfills. Contracts typically 2&ndash;3 years.</li>
+        <li><span class="idx">&bull;</span>Worked example (Exhibit 12): a 1,700-location customer paying $10M/year traditionally; Rubicon found $96/ton average recycling value versus disposal fees, saving the customer 20% on waste fees, split 50/50 with Rubicon.</li>
+        <li><span class="idx">&bull;</span>R&amp;D arm "Rubicon X" was developing dumpster sensors (automatic pickup alerts) and an on-demand mobile app (Uber-style on-demand hauling).</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Market sizing</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>U.S. waste industry: $64B annual revenue (2013); WM + Republic Services controlled &gt;35% combined; ~18,000 smaller players fight over the rest.</li>
+        <li><span class="idx">&bull;</span>11 billion tons of solid waste collected globally in 2013; 780 million tons in the U.S. alone. Only 34% of U.S. garbage was recycled.</li>
+        <li><span class="idx">&bull;</span>Untapped adjacent markets flagged in the case: SME segment (6M+ U.S. locations, largely ignored by big players as too costly to serve); municipal/residential waste ($12B market); hazardous/medical waste ($3B+ market).</li>
+      </ul>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The decision on the table</div>
+        How much to raise, from whom, and on what terms &mdash; and, underneath that, a strategic fork: focus on deepening the existing large-national-account segment (needs continued tech/network/customer-acquisition investment) versus aggressively expanding into SME, residential, and industrial/hazardous waste simultaneously (needs materially more capital, and the on-demand app alone was ~a year from launch). Morris also weighs investor <em>fit</em> (capital plus mission alignment) against simply maximizing the size of the round. The case ends without a numeric ask on the table &mdash; that's the class's job to construct.
+      </div>
+
+      <div class="class-prep" style="margin-top:16px;">
+        <div class="cp-label">What to walk in ready to discuss (VCAP lens)</div>
+        <ul>
+          <li>Value proposition: what is Rubicon actually promising each of its four platform sides (customers, haulers, recyclers, landfills)?</li>
+          <li>Competencies: what must Rubicon do exceptionally well that WM/Republic structurally can't or won't (given their landfill-tonnage incentives)?</li>
+          <li>Assets &amp; processes: how does "owning no trucks and no landfills" change what has to be built instead (software, data, hauler network density)?</li>
+          <li>Be ready to size the round yourself: focus vs. expand, and what each path costs and requires.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ============ ASSIGNMENT: SCHARFFENBERGER ============ -->
+    <section class="block" id="assignment">
+      <div class="block-head"><span class="num">04</span><h2>Assignment &mdash; ScharffenBerger Chocolate Maker</h2><span class="tag">Case 1 &middot; 15% of final grade &middot; due Sep 28</span></div>
+
+      <div class="class-prep">
+        <div class="cp-label">How to use this section</div>
+        <p>This is a full worked solution to the three graded questions, built entirely from the case's own numbers (HBS 9-606-043) plus the instructor's stated simplifying assumptions. It is written to teach the method, not just hand you the answer &mdash; every number below is derived, not asserted, and the derivation reuses the exact tools from <a href="#lecture-02" style="color:var(--accent);text-decoration:none;font-weight:600;">Lecture 2</a>: flow units, dimensional analysis with loss, <span class="mono" style="font-family:'JetBrains Mono',monospace;">p = 1/&mu;</span>, bottleneck identification, and utilization.</p>
+        <ul>
+          <li>Read the <a href="#assignment-flowunit" style="color:var(--ink);">flow-unit derivation</a> first &mdash; everything downstream depends on it, and it's the one step the instructor explicitly said cannot be skipped or asserted from the case text alone.</li>
+          <li>Each question ends with an <strong>operational implications</strong> callout, since that's a separate graded component in all three parts.</li>
+          <li>A submission-ready Word document (executive summary, statement of contributions, figures) is a separate deliverable built from this same analysis &mdash; this page is the reasoning and teaching layer behind it.</li>
+        </ul>
+      </div>
+
+      <div class="callout" style="margin-top:20px;">
+        <div class="callout-label">The setup, in one paragraph</div>
+        Scharffen Berger runs an 8-step chocolate-making process &mdash; bean cleaner &rarr; roaster &rarr; winnower &rarr; melangeur &rarr; conche (&times;2) &rarr; tempering &rarr; molding &rarr; packaging &mdash; and has been demand-constrained for 18 straight months. COO Jim Harris has just approved a $300,000 ball mill that cuts conching time from 40&ndash;60 hours to a combined 15 (10 hours in the conche + 5 in the ball mill), and now needs a shift &amp; capacity plan that scales to 50%, 100%, and 150% demand growth by early 2006 &mdash; without letting quality slip, since taste, not price, is the entire value proposition.
+      </div>
+
+      <!-- ===== FLOW UNIT ===== -->
+      <h3 id="assignment-flowunit" style="font-size:16px;margin:30px 0 12px 0;">Step 0: choosing and justifying the flow unit <span class="slide-ref">Case, Exhibits 4&ndash;5</span></h3>
+      <p>The instructor is explicit that you <strong>cannot</strong> just declare "the flow unit is 1,400 kg of 62% cacao chocolate" because that's the recipe the case happens to describe in the most detail. Scharffen Berger runs six different recipes (99%, 82%, 70%, 62%, 60% Trader Joe's, 40% milk) through the same conches, and the case tells us conche time depends on cacao content: less sugar (higher cacao %) means less material and a shorter conche (99% unsweetened &asymp; 40 hrs); more sugar (lower cacao %) means more material and a longer one (62% semisweet &asymp; 50 hrs). A single-recipe flow unit hides that variation. The fix, exactly as in the <a href="#lecture-02-multitype" style="color:var(--accent);text-decoration:none;font-weight:600;">Valley Forge multi-flow-unit example</a>, is a <strong>synthetic, volume-weighted flow unit</strong> built from an assumed product mix.</p>
+
+      <div class="two-col-note" style="margin-top:16px;">
+        <div class="note-box">
+          <div class="label">Assumption 1 &mdash; product mix</div>
+          The case doesn't give an exact production split by recipe, but it gives three hard anchors: unsweetened + extra-dark together are &asymp;20% of sales; the Trader Joe's 60% blend alone is &ldquo;over 20% of total sales&rdquo;; and the 70% bittersweet bar is the single most popular product. A mix consistent with all three:
+        </div>
+        <div class="note-box">
+          <div class="label">Assumption 2 &mdash; conche time vs. cacao %</div>
+          Two real data points from the case (99%&rarr;40 hrs, 62%&rarr;50 hrs) plus the instructor's stated 40&ndash;60 hr range let us fit a two-segment linear model rather than guessing: conche time rises as cacao % falls, faster below 62% than above it.
+        </div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <tr><th>Product</th><th class="num">Cacao %</th><th class="num">Assumed mix share</th><th class="num">Conche time (hr)</th></tr>
+          <tr><td>Unsweetened</td><td class="num">99%</td><td class="num">10%</td><td class="num">40.0</td></tr>
+          <tr><td>Extra dark</td><td class="num">82%</td><td class="num">10%</td><td class="num">44.6</td></tr>
+          <tr><td>Bittersweet (most popular bar)</td><td class="num">70%</td><td class="num">25%</td><td class="num">47.8</td></tr>
+          <tr><td>Semisweet / mocha / mint / nibby</td><td class="num">62%</td><td class="num">25%</td><td class="num">50.0<span class="slide-ref" style="margin-left:6px;">case-stated</span></td></tr>
+          <tr><td>Trader Joe's exclusive blend</td><td class="num">60%</td><td class="num">20%</td><td class="num">50.9</td></tr>
+          <tr><td>Milk chocolate</td><td class="num">40%</td><td class="num">10%</td><td class="num">60.0</td></tr>
+          <tr style="font-weight:600;"><td>Weighted average</td><td class="num">67.1%</td><td class="num">100%</td><td class="num">49.1</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">Conche-time model: for cacao % above 62, time = 40 + (99&minus;%)&times;(10/37); below 62, time = 50 + (62&minus;%)&times;(10/22) &mdash; anchored to the case's own 40-hr and 50-hr data points, extended to the instructor's stated 60-hr ceiling at the lowest-cacao recipe. This is the derivation the instructor is asking you to show your work on &mdash; state your mix assumption plainly and the rest follows mechanically.</p>
+
+      <div class="formula-box" style="margin-top:20px;">
+        Synthetic flow unit = 1,400 kg batch &middot; 67.1% average cacao &middot; 49.1 hr average conche time
+        <span class="fx-note">This weighted batch, not any single named recipe, is what flows through the rest of the calculation.</span>
+      </div>
+
+      <p style="margin-top:6px;">Every stage upstream of the conche handles a different physical form of the same material (whole beans &rarr; clean beans &rarr; roasted beans &rarr; nibs &rarr; ground paste), so converting each stage's rate into "synthetic batches per month" requires a mass-balance chain &mdash; the same loss-adjustment logic from <a href="#lecture-02-flowunit" style="color:var(--accent);text-decoration:none;font-weight:600;">Lecture 2, Slide 7</a> (don't assume 1-for-1 across a lossy step).</p>
+
+      <div class="diagram" style="margin-top:14px;">
+        <div class="flow-row">
+          <div class="flow-box">Raw beans<br><strong>1,322.4 kg</strong></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="font-size:11px;color:var(--ink-soft);">Bean Cleaner<br>&times;0.96</div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box">Clean/roasted beans<br><strong>1,269.5 kg</strong></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="font-size:11px;color:var(--ink-soft);">Winnower<br>&times;0.74</div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box">Nibs<br><strong>939.4 kg</strong></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box accent">+ 460.6 kg sugar/vanilla/lecithin<br>&darr;<br>1,400 kg conche batch</div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">Reading backward from the 67.1%-cacao synthetic batch: 939.4 kg of nibs are needed (67.1% &times; 1,400 kg); those require 1,269.5 kg of roasted/clean beans (939.4 &divide; 74% winnower yield); which require 1,322.4 kg of raw beans (1,269.5 &divide; 96% bean-cleaner yield). Roasting itself is assumed mass-neutral (the case gives no roasting loss figure).</p>
+
+      <!-- ===== Q1 ===== -->
+      <h3 id="assignment-q1" style="font-size:16px;margin:32px 0 12px 0;">Q1 (20%) &mdash; Capacity of each process step &amp; the bottleneck <span class="slide-ref">Case, pp. 3&ndash;5</span></h3>
+      <p>Using <span class="mono" style="font-family:'JetBrains Mono',monospace;">capacity = m &times; &mu;</span> at each stage under its <em>current</em> shift schedule, then converting through the mass-balance chain above into synthetic batches/month (30-day month, matching the case's own convention: 2 conches &times; 24 hr/day &times; 7 days &divide; 49.1 hr/batch &asymp; 29.3 batches &mdash; almost exactly the case's stated &ldquo;&asymp;40,000 kg, 29 conches&rdquo; current maximum, which is a strong check that the flow-unit assumptions above are reasonable):</p>
+
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <tr><th>Stage</th><th>Current schedule</th><th class="num">Rate</th><th class="num">Batches/month</th><th class="num">kg/month</th><th class="num">Utilization*</th></tr>
+          <tr><td>Bean Cleaner</td><td>1 shift, 7d/wk</td><td class="num">800 kg beans/hr</td><td class="num">145.2</td><td class="num">203,300</td><td class="num">20.2%</td></tr>
+          <tr><td>Roaster</td><td>1 shift, 7d/wk</td><td class="num">200 kg/hr</td><td class="num">37.8</td><td class="num">52,920</td><td class="num">77.5%</td></tr>
+          <tr><td>Winnower</td><td>1 shift, 7d/wk</td><td class="num">450 kg/hr</td><td class="num">85.1</td><td class="num">119,140</td><td class="num">34.4%</td></tr>
+          <tr><td>Melangeur</td><td>2 shifts, 7d/wk</td><td class="num">92 kg nibs/hr</td><td class="num">47.0</td><td class="num">65,800</td><td class="num">62.3%</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>Conche (&times;2)</td><td>24 hr/day, 7d/wk</td><td class="num">49.1 hr/batch</td><td class="num">29.3</td><td class="num">41,020</td><td class="num">100% &mdash; bottleneck</td></tr>
+          <tr><td>Tempering</td><td>2 shifts, 7d/wk</td><td class="num">140 kg/hr</td><td class="num">48.0</td><td class="num">67,200</td><td class="num">61.0%</td></tr>
+          <tr><td>Molding</td><td>2 shifts, 7d/wk</td><td class="num">140 kg/hr</td><td class="num">48.0</td><td class="num">67,200</td><td class="num">61.0%</td></tr>
+          <tr><td>Packaging</td><td>35% in-house, 1 shift/6d; 65% co-packed</td><td class="num">&mdash;</td><td class="num">not binding</td><td class="num">&mdash;</td><td class="num">n/a</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">*Utilization = process throughput (29.3 batches/mo, set by the bottleneck) &divide; each stage's own capacity &mdash; the exact template from <a href="#lecture-02-utilization" style="color:var(--accent);text-decoration:none;font-weight:600;">Lecture 2, Slide 23</a>. Packaging isn't quantified because the case gives headcount, not a rate, and because management's own outsourcing strategy (65% to co-packers with spare capacity) deliberately decouples it from the constraint &mdash; a case where the right answer is to recognize a stage was designed not to bind, rather than to force a number onto it.</p>
+
+      <div class="decision-grid" style="margin-top:16px;">
+        <div class="decision-chip"><div class="k">Answer</div>The bottleneck is the <strong>conche stage</strong>: 29.3 batches/month &asymp; 41,000 kg/month, matching the case's own reported current capacity (&ldquo;&asymp;40,000 kg, 29 conches&rdquo;) almost exactly.</div>
+        <div class="decision-chip"><div class="k">Why here, not elsewhere</div>Every other stage runs at 8&ndash;16 hr/day; conches run 24/7 and still take 40&ndash;60 hours per 1,400 kg batch &mdash; a dwell time two to three orders of magnitude longer than any other step.</div>
+        <div class="decision-chip"><div class="k">Second-tightest stage</div>The roaster (77.5% utilized) is the closest runner-up, purely because it's still parked at 1 shift/day while melangeur, tempering and molding already run 2.</div>
+      </div>
+
+      <div class="callout" style="margin-top:18px;">
+        <div class="callout-label">Operational implications &mdash; Q1</div>
+        Conching is the bottleneck partly by physics (long batch dwell time) and partly by product mix: the lower-cacao, higher-sugar recipes Harris is chasing for growth (Trader Joe's 60%, milk chocolate 40%) sit at the slow end of the 40&ndash;60 hr range. That creates a real strategy-vs-capacity tension the report should name explicitly: leaning further into private-label/mass-market volume (the growth Harris wants) pushes the weighted-average conche time up and the bottleneck's throughput down, at the same time as demand is rising &mdash; the two forces compound rather than cancel.
+      </div>
+
+      <!-- ===== Q2 ===== -->
+      <h3 id="assignment-q2" style="font-size:16px;margin:32px 0 12px 0;">Q2 (30%) &mdash; Was the ball mill the right call, and what's the next bottleneck? <span class="slide-ref">Case, p. 6</span></h3>
+      <p>The ball mill doesn't touch any stage except conching: it replaces the 40&ndash;60 hr conche cycle with a 10-hr conche pass plus a 5-hr ball-mill pass on a new machine, run as a separate downstream sub-step.</p>
+
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <tr><th>Stage</th><th class="num">Cycle time</th><th class="num">Units</th><th class="num">Batches/month</th></tr>
+          <tr><td>Conche (post-ball-mill)</td><td class="num">10 hr/batch</td><td class="num">2, 24/7</td><td class="num">144.0</td></tr>
+          <tr><td>Ball mill</td><td class="num">5 hr/batch</td><td class="num">1, 24/7</td><td class="num">144.0</td></tr>
+        </table>
+      </div>
+      <p style="margin-top:8px;">Conche-stage capacity jumps roughly five-fold (29.3 &rarr; 144 batches/month) once cycle time drops from a 49.1-hr weighted average to 10 hours. That's the number that matters for the financial case &mdash; but it is <strong>not</strong> the number that determines the new system-wide capacity, which is the entire point of bottleneck analysis from <a href="#lecture-02-bottleneck" style="color:var(--accent);text-decoration:none;font-weight:600;">Lecture 2</a>: process capacity equals the slowest stage, not the most-improved one.</p>
+
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <tr><th>Stage</th><th class="num">Capacity if pushed to 24/7 (3 shifts)</th><th>Requires new capital?</th></tr>
+          <tr><td>Bean Cleaner</td><td class="num">435.7 batches/mo</td><td>No &mdash; labor only</td></tr>
+          <tr><td>Roaster</td><td class="num">113.4 batches/mo</td><td>No &mdash; labor only</td></tr>
+          <tr><td>Winnower</td><td class="num">255.2 batches/mo</td><td>No &mdash; labor only</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>Melangeur (still 1 unit)</td><td class="num">70.5 batches/mo</td><td>Capped &mdash; second unit needed to go higher</td></tr>
+          <tr><td>Conche + Ball Mill</td><td class="num">144.0 batches/mo</td><td>Already installed</td></tr>
+          <tr><td>Tempering / Molding</td><td class="num">72.0 batches/mo</td><td>No &mdash; labor only</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">Adding shifts at bean cleaner, roaster, winnower, tempering and molding is "free" capacity (labor cost only, no capex) &mdash; Harris already proved this works when he grew conche output from 18 to 26&ndash;29 batches/month with zero new equipment. The melangeur is different: it's a single physical machine, so its capacity ceiling (70.5 batches/mo even at 3 shifts) is fixed until a second unit is bought.</p>
+
+      <div class="decision-grid" style="margin-top:16px;">
+        <div class="decision-chip"><div class="k">Next bottleneck</div>The <strong>melangeur</strong> &mdash; at its current 2-shift schedule (47.0 batches/mo), it now sits below every other stage including the upgraded conche+ball-mill combo (144.0). This is exactly what the case's own internal analysis flagged.</div>
+        <div class="decision-chip"><div class="k">Incremental capacity unlocked</div>47.0 &minus; 29.3 = <strong>17.7 batches/month</strong>, bounded by the melangeur, not by the ball mill's own much larger raw capability.</div>
+      </div>
+
+      <div class="formula-box" style="margin-top:20px;">
+        Payback &asymp; $300,000 &divide; (17.7 batches/mo &times; $30,000/batch &times; 40% margin) &asymp; $300,000 &divide; $212,400/mo &asymp; <strong>1.4 months</strong>
+        <span class="fx-note">Using Harris's own case figures: &gt;$30,000 sales value per completed conche batch, ~40% industry-average contribution margin.</span>
+      </div>
+
+      <div class="two-col-note">
+        <div class="note-box">
+          <div class="label">Was it the correct decision?</div>
+          Yes, and not close. Even bounded by the melangeur constraint (the conservative case &mdash; the ball mill's own raw capacity increase is far larger), incremental contribution is roughly $2.5M/year against a $300,000 one-time cost: payback under two months. It also beat the alternative the team considered (a third conche at the old 40&ndash;60 hr cycle time), which would have added capacity at a far worse cost-per-batch since it doesn't shorten cycle time at all. Four rounds of blind taste-testing confirmed quality was preserved (case notes it may have slightly <em>improved</em> texture).
+        </div>
+        <div class="note-box">
+          <div class="label">The catch</div>
+          The ball mill doesn't solve the shortage &mdash; it relocates it. Unless Harris moves on the $50,000 used melangeur in parallel with (not after) commissioning the ball mill, the firm trades a conche-side shortage for a melangeur-side one and the "demand keeps outstripping supply" problem persists, just one stage downstream.
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:18px;">
+        <div class="callout-label">Operational implications &mdash; Q2</div>
+        A second melangeur is itself a quality decision, not just a capacity one: nibs are ground here, and grind consistency shapes mouthfeel as much as conching does. Any new or used unit should go through the same taste-test protocol used to qualify the ball mill before it's trusted with full production volume &mdash; skipping that step to chase capacity would repeat the exact mistake Harris was careful to avoid with the ball mill itself.
+      </div>
+
+      <!-- ===== Q3 ===== -->
+      <h3 id="assignment-q3" style="font-size:16px;margin:32px 0 12px 0;">Q3 (50%) &mdash; Operating plan for 50% / 100% / 150% demand growth <span class="slide-ref">Case, p. 7</span></h3>
+      <p>Baseline demand is taken as the current bottleneck throughput, 29.3 batches/month (41,020 kg/month, &asymp;492,000 kg/year) &mdash; the case states demand has exceeded supply for 18 months, so current output is the tightest available proxy for "current level."</p>
+
+      <div class="table-wrap" style="margin-top:14px;">
+        <table>
+          <tr><th>Scenario</th><th class="num">Batches/month needed</th><th class="num">kg/month</th><th class="num">kg/year</th></tr>
+          <tr><td>Baseline</td><td class="num">29.3</td><td class="num">41,020</td><td class="num">492,240</td></tr>
+          <tr><td>+50% growth</td><td class="num">44.0</td><td class="num">61,530</td><td class="num">738,360</td></tr>
+          <tr><td>+100% growth</td><td class="num">58.7</td><td class="num">82,040</td><td class="num">984,480</td></tr>
+          <tr><td>+150% growth</td><td class="num">73.3</td><td class="num">102,550</td><td class="num">1,230,600</td></tr>
+        </table>
+      </div>
+
+      <p style="margin-top:14px;">Working incrementally &mdash; one shift at a time, per <a href="#lecture-02" style="color:var(--accent);text-decoration:none;font-weight:600;">Lecture 2's</a> own case-prep guidance &mdash; against each stage's shift-level capacity table:</p>
+
+      <div class="table-wrap" style="margin-top:10px;">
+        <table>
+          <tr><th>Stage</th><th class="num">1 shift</th><th class="num">2 shifts</th><th class="num">3 shifts</th></tr>
+          <tr><td>Bean Cleaner</td><td class="num">145.2</td><td class="num">290.4</td><td class="num">435.7</td></tr>
+          <tr><td>Roaster</td><td class="num">37.8</td><td class="num">75.5</td><td class="num">113.4</td></tr>
+          <tr><td>Winnower</td><td class="num">85.1</td><td class="num">170.2</td><td class="num">255.2</td></tr>
+          <tr><td>Melangeur (per unit)</td><td class="num">23.5</td><td class="num">47.0</td><td class="num">70.5</td></tr>
+          <tr><td>Conche + Ball Mill</td><td class="num" colspan="3">144.0 (fixed at 24/7)</td></tr>
+          <tr><td>Tempering / Molding</td><td class="num">24.0</td><td class="num">48.0</td><td class="num">72.0</td></tr>
+        </table>
+      </div>
+
+      <div class="sheet-grid" style="margin-top:18px;">
+        <div class="sheet-box">
+          <div class="t">+50% growth (44.0 batches/mo needed)</div>
+          <ul>
+            <li>Roaster: 1&rarr;2 shifts (75.5) &mdash; was the tightest non-conche stage</li>
+            <li>Melangeur: stay at 2 shifts (47.0, comfortable margin)</li>
+            <li>Tempering/Molding: stay at 2 shifts (48.0, adequate)</li>
+            <li>Bean Cleaner, Winnower, Conche+Ball Mill: unchanged</li>
+            <li><strong>No new capital beyond the ball mill already committed</strong></li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <div class="t">+100% growth (58.7 batches/mo needed)</div>
+          <ul>
+            <li>Roaster: stay at 2 shifts (75.5, sufficient)</li>
+            <li>Melangeur: buy the 2nd used melangeur now ($50,000) rather than run one unit at permanent 3-shift overtime &mdash; 2 units &times; 2 shifts = 94.0, well clear</li>
+            <li>Tempering/Molding: 2&rarr;3 shifts (72.0)</li>
+            <li>Bean Cleaner, Winnower, Conche+Ball Mill: unchanged</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <div class="t">+150% growth (73.3 batches/mo needed)</div>
+          <ul>
+            <li>Melangeur: 2nd unit is now <strong>mandatory</strong>, not optional &mdash; even one unit at 3 shifts (70.5) falls short alone; 2 units &times; 2 shifts = 94.0 clears it</li>
+            <li>Tempering/Molding at 3 shifts (72.0) falls marginally short of 73.3 &mdash; route the ~1.3 batch/mo (~1,800 kg/mo) overflow to third-party co-packers as bulk liquid chocolate, the option Harris was already evaluating</li>
+            <li>Roaster: 2 shifts (75.5) sufficient; consider 3 (113.4) as cheap safety margin given how tight tempering/molding already is</li>
+            <li>Bean Cleaner, Winnower: unchanged</li>
+          </ul>
+        </div>
+        <div class="sheet-box wide">
+          <div class="t">Shift schedule summary</div>
+          <div class="table-wrap" style="margin-top:6px;">
+            <table>
+              <tr><th>Stage</th><th class="num">Baseline</th><th class="num">+50%</th><th class="num">+100%</th><th class="num">+150%</th></tr>
+              <tr><td>Bean Cleaner</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>Roaster</td><td class="num">1</td><td class="num">2</td><td class="num">2</td><td class="num">2&ndash;3</td></tr>
+              <tr><td>Winnower</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>Melangeur</td><td class="num">2 (1 unit)</td><td class="num">2 (1 unit)</td><td class="num">2 (2 units)</td><td class="num">2 (2 units)</td></tr>
+              <tr><td>Conche + Ball Mill</td><td class="num">24/7</td><td class="num">24/7</td><td class="num">24/7</td><td class="num">24/7</td></tr>
+              <tr><td>Tempering / Molding</td><td class="num">2</td><td class="num">2</td><td class="num">3</td><td class="num">3 + co-pack overflow</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:18px;">
+        <div class="callout-label">Operational implications &mdash; Q3</div>
+        The 50% and 100% scenarios are qualitatively easy: added shifts plus one already-identified $50,000 purchase clear both with room to spare, and neither requires touching quality-sensitive processes beyond the melangeur taste-test already flagged in Q2. The 150% scenario is different in kind, not just degree &mdash; it requires accepting either co-packer quality/logistics risk (shipping liquid chocolate for someone else to temper) or further capital spending, and should be staged rather than committed to in one move: secure the second melangeur first, pilot the co-packer liquid-chocolate transfer at small scale, then scale it &mdash; directly echoing Harris's own closing worry in the case that "too much too soon could be as disastrous as too little too late."
+      </div>
+
+      <div class="summary-sheet" id="assignment-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page case review</span></div>
+        <h3>ScharffenBerger, cover to cover</h3>
+        <div class="sub">Everything needed to defend this analysis cold in a debrief or on the midterm.</div>
+        <div class="formula-box">
+          Bottleneck now: Conche, 29.3 batches/mo (&asymp;41,000 kg) &middot; After ball mill: Melangeur, 47.0 batches/mo
+        </div>
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Flow unit</div>
+            <ul>
+              <li>Synthetic 1,400 kg batch, 67.1% weighted cacao</li>
+              <li>Justified via mix assumption + conche-time-vs-cacao% model, not asserted</li>
+              <li>Mass balance: 1,322 kg raw beans &rarr; 1,270 kg roasted/clean &rarr; 939 kg nibs &rarr; 1,400 kg batch</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Q1 &mdash; current bottleneck</div>
+            <ul>
+              <li>Conche: 2 units, 24/7, 49.1 hr/batch avg &rarr; 29.3 batches/mo</li>
+              <li>Matches case's own "&asymp;40,000 kg / 29 conches" &mdash; validates the model</li>
+              <li>Roaster (77.5% utilized) is the runner-up constraint</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Q2 &mdash; ball mill</div>
+            <ul>
+              <li>10 hr conche + 5 hr ball mill &rarr; conche-stage capacity &asymp;144 batches/mo</li>
+              <li>Payback &asymp;1.4 months on $300,000 &mdash; clearly correct call</li>
+              <li>New bottleneck: melangeur (1 unit, 47.0 batches/mo)</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Q3 &mdash; growth plan</div>
+            <ul>
+              <li>+50%/+100%: shifts + one $50,000 melangeur cover it</li>
+              <li>+150%: 2nd melangeur mandatory + small co-pack overflow on tempering/molding</li>
+              <li>Bean cleaner &amp; winnower never bind at any scenario tested</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">If asked to defend one number</div>
+            The 29.3-batches/month current bottleneck figure is the load-bearing one &mdash; it's independently derived from first principles (shift schedule &times; mass balance) and lands within 1% of the case's own stated maximum capacity. That agreement is what makes the rest of the analysis (which all builds on the same flow-unit and mass-balance logic) trustworthy.
+          </div>
+        </div>
+        <div class="takeaway"><strong>Takeaway:</strong> every stage of this case is the same lesson from Lecture 2 applied under real, messier data: fix a defensible flow unit first, respect mass balance through lossy conversions, and remember that fixing a bottleneck only ever relocates the constraint &mdash; it never removes the need to keep asking "and now what's the new one?"</div>
+      </div>
+    </section>
+
+    <!-- ============ LECTURE 1 ============ -->
+    <section class="block" id="lecture-01">
+      <div class="block-head"><span class="num">05</span><h2>Lecture 1 &mdash; Align Operations With Strategy</h2><span class="tag">Session 1 &middot; Slides 1&ndash;11</span></div>
+
+      <p>The argument across this lecture: strategy only matters once it's translated into how a process actually runs. Everything below builds toward one framework &mdash; VCAP &mdash; for making that translation explicit. The lecture's own visual outline (<span class="slide-ref">Slide 2</span>) frames it as four stops: managing operations, process performance, causes of distress, and addressing distress.</p>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class &mdash; reading</div>
+        <p>Read the <strong>Ristorante D&rsquo;O</strong> case and its three discussion questions: (1) D&rsquo;O's competitive priorities and how its asset/process choices support them; (2) how successful/profitable D&rsquo;O actually is; (3) what Oldani should do next and how he'd implement it.</p>
+        <p style="margin-bottom:0;">The <em>entire</em> lecture is dedicated to debriefing this case against those three questions &mdash; there's no separate slide content to prep beyond it. Worked through in full below in <a href="#lecture-01-case">Applying it to Ristorante D&rsquo;O</a>.</p>
+      </div>
+
+      <h3 style="font-size:16px;margin:26px 0 12px 0;">The process view <span class="slide-ref">Slide 3</span></h3>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box">Inputs<br><span style="color:var(--ink-soft);font-size:11.5px;">flow unit, labor, capital</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box accent">Transformation<br><span style="font-weight:400;font-size:11.5px;">network of activities &amp; buffers</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Outputs<br><span style="color:var(--ink-soft);font-size:11.5px;">goods &amp; services</span></div>
+        </div>
+        <div class="flow-row" style="padding-top:0;">
+          <div class="flow-box" style="background:transparent;border-style:dashed;">Operations management sits above the transformation, and receives feedback from outputs for control.</div>
+        </div>
+      </div>
+
+      <h3 id="lecture-01-strategy" style="font-size:16px;margin:30px 0 12px 0;">Linking strategy to operations <span class="slide-ref">Slide 4</span></h3>
+      <p>Three layers, each answering a different question:</p>
+      <div class="grid-3" style="margin-bottom:8px;">
+        <div class="note-box">
+          <div class="label">1. Strategic position</div>
+          How do we compete? What's the value proposition &mdash; <strong>P</strong>rice, <strong>T</strong>imeliness, <strong>Q</strong>uality, <strong>V</strong>ariety?
+        </div>
+        <div class="note-box">
+          <div class="label">2. Process capabilities</div>
+          Given that position, what must operations do very well &mdash; <strong>C</strong>ost, flow <strong>T</strong>ime, <strong>Q</strong>uality processes, <strong>F</strong>lexibility?
+        </div>
+        <div class="note-box">
+          <div class="label">3. Process structure &amp; policies</div>
+          How do we build those capabilities cost-effectively &mdash; process design, operating policies?
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--ink-soft);">A <strong>focused business strategy</strong> targets a narrow value proposition; a <strong>focused process</strong> targets narrow capabilities. Trying to be excellent at every priority for every customer usually means being mediocre at the one priority your target customer actually cares about.</p>
+
+      <h3 id="lecture-01-frontier" style="font-size:16px;margin:30px 0 12px 0;">The cost&ndash;responsiveness frontier <span class="slide-ref">Slide 5</span></h3>
+      <div class="diagram frontier-wrap">
+        <svg width="420" height="230" viewBox="0 0 420 230">
+          <line x1="60" y1="20" x2="60" y2="190" stroke="var(--line)" stroke-width="1.5"/>
+          <line x1="60" y1="190" x2="390" y2="190" stroke="var(--line)" stroke-width="1.5"/>
+          <text x="30" y="30" transform="rotate(-90 30 30)">Responsiveness</text>
+          <text x="330" y="210">Cost efficiency &rarr;</text>
+          <path d="M 65 40 Q 140 45 200 100 Q 260 155 380 185" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M 65 25 Q 150 30 220 85 Q 290 145 385 178" fill="none" stroke="var(--accent-2)" stroke-width="2.5"/>
+          <circle cx="215" cy="120" r="4" fill="var(--accent)"/>
+          <line x1="215" y1="120" x2="215" y2="95" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="215" y1="120" x2="255" y2="120" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--accent)"/></marker></defs>
+          <text x="30" y="185">Low</text>
+          <text x="30" y="35">High</text>
+          <text x="55" y="205">High</text>
+          <text x="365" y="205">Low</text>
+        </svg>
+      </div>
+      <p style="font-size:14px;color:var(--ink-soft);">Moving along the existing frontier (solid line) trades cost for responsiveness. Better technology or process design pushes the whole frontier outward (dashed), buying more of both at once &mdash; the harder, rarer win.</p>
+
+      <h3 id="lecture-01-tools" style="font-size:16px;margin:30px 0 12px 0;">Four tools to tailor operations to strategy <span class="slide-ref">Slide 6</span></h3>
+      <p>Two get most of the airtime in this lecture:</p>
+
+      <h4 style="font-size:14.5px;margin-bottom:8px;">Product&ndash;process matrix <span class="slide-ref">Slide 7</span></h4>
+      <div class="diagram">
+        <div class="matrix">
+          <div></div>
+          <div class="axis-label">Low variety<br>high volume</div>
+          <div class="axis-label"></div>
+          <div class="axis-label"></div>
+          <div class="axis-label">High variety<br>low volume</div>
+
+          <div class="axis-label" style="writing-mode:vertical-rl;">High flexibility</div>
+          <div class="cell hi">Job shop<br><span style="color:var(--ink-soft);">custom mfg.</span></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+
+          <div class="axis-label"></div>
+          <div class="cell"></div>
+          <div class="cell hi">Batch<br><span style="color:var(--ink-soft);">classroom teaching</span></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+
+          <div class="axis-label"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell hi">Line flow<br><span style="color:var(--ink-soft);">auto assembly</span></div>
+          <div class="cell"></div>
+
+          <div class="axis-label" style="writing-mode:vertical-rl;">Low flexibility</div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell hi">Continuous flow<br><span style="color:var(--ink-soft);">oil refinery</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:14px;margin-bottom:0;">Off the diagonal in either direction costs money: too much flexibility for your volume burns <strong>opportunity cost</strong>; too little flexibility for your variety burns <strong>out-of-pocket cost</strong>.</p>
+      </div>
+
+      <h4 style="font-size:14.5px;margin:22px 0 8px 0;">Strategic operational audit <span class="slide-ref">Slide 8</span></h4>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box">Existing assets &amp; processes</div>
+          <span class="flow-arrow">&harr;</span>
+          <div class="flow-box">Needed assets &amp; processes</div>
+        </div>
+        <div class="flow-row" style="padding-top:0;">
+          <div class="flow-box">Existing competencies</div>
+          <span class="flow-arrow">&harr;</span>
+          <div class="flow-box">Needed competencies</div>
+        </div>
+        <div class="flow-row" style="padding-top:0;">
+          <div class="flow-box accent">Deliverable value proposition</div>
+          <span class="flow-arrow">&harr;</span>
+          <div class="flow-box accent">Value proposition</div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);margin:14px 0 0 0;text-align:center;">Bottom-up (what we have) meets top-down (what strategy demands) &mdash; the gaps at each level are the strategy gap, competency gap, and assets/process gap.</p>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);">The other two tools &mdash; the <strong>balanced scorecard</strong> (financial, market, internal-business, and learning-&amp;-growth views) <span class="slide-ref">Slide 9</span> and the VCAP framework &mdash; get their own space below.</p>
+
+      <h3 id="lecture-01-vcap" style="font-size:16px;margin:30px 0 12px 0;">The VCAP framework <span class="slide-ref">Slides 10&ndash;11</span></h3>
+      <p><strong>V = C &times; (A + P)</strong> &mdash; value comes from competencies, and competencies are built through assets and processes. Three questions drive it:</p>
+      <div class="diagram">
+        <div class="vcap-flow">
+          <div class="vcap-tier v">Value Proposition</div>
+          <span class="vcap-arrow">&darr; what must operations do particularly well?</span>
+          <div class="vcap-tier c">Competencies &mdash; cost, quality, flexibility, responsiveness</div>
+          <span class="vcap-arrow">&darr; how do we build them?</span>
+          <div class="vcap-tier ap">
+            <div>Assets</div>
+            <div>Processes</div>
+          </div>
+        </div>
+        <div class="vcap-chip-row">
+          <span class="vcap-chip">Sizing</span>
+          <span class="vcap-chip">Timing</span>
+          <span class="vcap-chip">Type</span>
+          <span class="vcap-chip">Location</span>
+          <span class="vcap-chip">Supply</span>
+          <span class="vcap-chip">Technology</span>
+          <span class="vcap-chip">Demand</span>
+          <span class="vcap-chip">Innovation</span>
+          <span class="vcap-chip">Risk</span>
+        </div>
+      </div>
+      <div class="decision-grid" style="margin-top:16px;">
+        <div class="decision-chip"><div class="k">i. Capabilities</div>For each customer segment: how should cost, flow time, quality, and flexibility be prioritized (required), and how is the firm doing on each today (existing)?</div>
+        <div class="decision-chip p"><div class="k">ii. Assets</div>How do we invest in and develop the assets that support these capabilities?</div>
+        <div class="decision-chip p"><div class="k">iii. Processes</div>How do we configure processes &mdash; policies, structure &mdash; to support the same capabilities?</div>
+      </div>
+
+      <h3 id="lecture-01-case" style="font-size:16px;margin:30px 0 12px 0;">Applying it to Ristorante D&rsquo;O <span class="slide-ref">Case, not slides</span></h3>
+      <div class="two-col-note">
+        <div class="note-box">
+          <div class="label">Value proposition</div>
+          Michelin-star quality at trattoria prices ("POP" cuisine) &mdash; price and quality prioritized together, deliberately narrow (35 seats, one seasonal menu, no menu flexibility for individual diners).
+        </div>
+        <div class="note-box">
+          <div class="label">Competencies</div>
+          Cost control (ingredient cost ~31% of revenue vs. ~34% at peers) and consistent quality at high utilization &mdash; not variety or customization.
+        </div>
+        <div class="note-box">
+          <div class="label">Assets</div>
+          Small dedicated kitchen team (14 staff vs. 36 at a comparable one-star), Oldani's own durable tableware designed to cut breakage &amp; cleaning cost, no professional waitstaff.
+        </div>
+        <div class="note-box">
+          <div class="label">Processes</div>
+          Three fixed reservation slots (vs. open seating), cash-only, chefs rotate front-of-house, seasonal-local sourcing that minimizes waste &mdash; the result is 100% capacity utilization vs. ~50% industry norm.
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:14px;">This is the same lens the Rubicon Global case discussion questions ask you to apply later in the term &mdash; worth returning to this section when that case comes up.</p>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class &mdash; reading</div>
+        <p style="margin-bottom:0;">Read MSWD Ch. 1, 2.6, and 6 (an alternative to Ch. 1/2.6 is the recorded lecture video posted for this session). The textbook itself isn't in the course folder, so this is a pointer rather than a worked summary &mdash; Ch. 1 lays out process-thinking fundamentals, and 2.6/6 extend into the strategy&ndash;capacity link that the VCAP framework above already covers in full.</p>
+      </div>
+
+      <div class="summary-sheet" id="lecture-01-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 1 at a glance</h3>
+        <p class="sub">Everything on this page in the form you'd want it the night before an exam.</p>
+
+        <div class="formula-box">
+          V = C &times; (A + P)
+          <span class="fx-note">Value = Competencies &times; (Assets + Processes). Slides 10&ndash;11.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Business strategy priorities (PTQV)</div>
+            <ul>
+              <li><strong>P</strong>rice</li>
+              <li><strong>T</strong>imeliness</li>
+              <li><strong>Q</strong>uality</li>
+              <li><strong>V</strong>ariety</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Operations capabilities (CTQF)</div>
+            <ul>
+              <li><strong>C</strong>ost</li>
+              <li>Flow <strong>T</strong>ime</li>
+              <li><strong>Q</strong>uality processes</li>
+              <li><strong>F</strong>lexibility</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">The 3 VCAP questions</div>
+            <ul>
+              <li><strong>Capabilities:</strong> for this customer segment, how should cost/flow time/quality/flexibility be prioritized (required), and how are we doing on each today (existing)?</li>
+              <li><strong>Assets:</strong> how do we invest in and develop assets to build these capabilities?</li>
+              <li><strong>Processes:</strong> how do we configure processes and policies to build the same capabilities?</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Product&ndash;process matrix rule</div>
+            <ul>
+              <li>High volume + low variety &rarr; line/continuous flow</li>
+              <li>Low volume + high variety &rarr; job shop/batch</li>
+              <li>Above the diagonal (too flexible) &rarr; <strong>opportunity cost</strong></li>
+              <li>Below the diagonal (too rigid) &rarr; <strong>out-of-pocket cost</strong></li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Strategic operational audit &mdash; 3 gaps</div>
+            <ul>
+              <li><strong>Strategy gap:</strong> value proposition vs. deliverable value proposition</li>
+              <li><strong>Competency gap:</strong> needed vs. existing competencies</li>
+              <li><strong>Assets/process gap:</strong> needed vs. existing assets &amp; processes</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Cost&ndash;responsiveness frontier</div>
+            Moving <em>along</em> the current frontier trades cost for responsiveness. Moving the <em>whole frontier</em> outward (better tech/process design) is the only way to gain both at once &mdash; rarer, and worth more.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> a focused business strategy (narrow, consistent value proposition) needs a focused process (narrow, consistent capabilities). Mismatched priorities across the V&rarr;C&rarr;A/P chain, or a process sitting off the product-process diagonal, are the two things this lecture wants you to be able to diagnose.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LECTURE 2 ============ -->
+    <section class="block" id="lecture-02">
+      <div class="block-head"><span class="num">06</span><h2>Lecture 2 &mdash; Process Capacity Analysis</h2><span class="tag">Session 2 &middot; Slides 1&ndash;33</span></div>
+
+      <p>Same visual outline as Lecture 1, one level more technical <span class="slide-ref">Slide 2</span>: process performance (flow time, throughput, capacity) &rarr; causes of distress &rarr; addressing distress. This lecture builds the vocabulary and formulas for the first box. Three questions frame it <span class="slide-ref">Slide 3</span>: how many units/customers do I process per period, how quickly, and how does capacity relate to each activity's flow time?</p>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class &mdash; reading</div>
+        <p style="margin-bottom:0;">Read the <strong>ScharffenBerger Chocolate Maker</strong> case (see the case library above): COO Jim Harris is deciding whether the ball mill investment was correct and how to scale capacity for 50/100/150% demand growth without hurting quality. The lecture spends its last 15&ndash;20 minutes walking through the case before groups start their own analysis &mdash; the toolkit built below (flow units, bottleneck, utilization, synthetic flow unit) is exactly what that analysis needs.</p>
+      </div>
+
+      <h3 id="lecture-02-flowunit" style="font-size:16px;margin:26px 0 12px 0;">Process flow diagrams &amp; the flow unit <span class="slide-ref">Slides 4, 8&ndash;9</span></h3>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box accent">Activity<br><span style="font-weight:400;font-size:11.5px;">e.g. &ldquo;Pack&rdquo; &mdash; a box</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Material flow<br><span style="color:var(--ink-soft);font-size:11.5px;">solid arrow</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Inventory / buffer<br><span style="color:var(--ink-soft);font-size:11.5px;">triangle, e.g. work-in-process</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Information flow<br><span style="color:var(--ink-soft);font-size:11.5px;">dashed arrow</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);margin:10px 0 0 0;">Process boundaries mark where the process being analyzed starts and ends (e.g., where a supplier's job ends and yours begins) &mdash; drawing them explicitly avoids arguing about scope later.</p>
+      </div>
+
+      <p style="margin-top:18px;">Every capacity calculation depends on first fixing a <strong>flow unit</strong> &mdash; a natural unit of output or input (a litre of ice cream, a batch, a claim, a customer) <span class="slide-ref">Slides 5&ndash;6</span>. Everything else in the process gets converted into that unit by dimensional analysis:</p>
+      <div class="diagram" style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:14px;">
+        <div>50 litres custard &frasl; 45 min &times; 60 min&frasl;hr &times; 1 litre ice cream&frasl;0.5 litre custard &times; 1 batch&frasl;100 litres ice cream = <strong style="color:var(--accent);">4&frasl;3 batch/hr</strong></div>
+        <p style="font-size:12px;color:var(--ink-soft);margin:10px 0 0 0;font-family:'Source Sans 3',sans-serif;">Chain the conversion factors until the units cancel down to flow units per time. <span class="slide-ref">Slide 5</span></p>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);">When a step has <strong>loss</strong> (e.g., 5% of ice cream is &ldquo;lost&rdquo; before packaging), convert input units to output units directly: 1 kg produced = 0.95 kg packaged &mdash; don't silently assume 1-for-1. <span class="slide-ref">Slide 7</span></p>
+
+      <h3 id="lecture-02-capacity" style="font-size:16px;margin:30px 0 12px 0;">Resource capacity: <span class="mono" style="font-family:'JetBrains Mono',monospace;">p = 1/&mu;</span> <span class="slide-ref">Slides 10&ndash;15</span></h3>
+      <div class="grid-2" style="margin-bottom:8px;">
+        <div class="note-box">
+          <div class="label">p &mdash; process time</div>
+          Average time to process one flow unit at a resource (e.g., 45 min per batch).
+        </div>
+        <div class="note-box">
+          <div class="label">&mu; &mdash; capacity rate</div>
+          Average flow units produced per unit time. <strong>p = 1/&mu;</strong> always.
+        </div>
+      </div>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box">Cook Custard<br><span style="color:var(--ink-soft);font-size:11.5px;">p = &frac34; hr/batch &rarr; &mu; = 4&frasl;3 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Cool<br><span style="color:var(--ink-soft);font-size:11.5px;">&frac34; hr &rarr; 4&frasl;3 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Freeze<br><span style="color:var(--ink-soft);font-size:11.5px;">1 hr &rarr; 1 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Pack<br><span style="color:var(--ink-soft);font-size:11.5px;">&frac23; hr &rarr; 3&frasl;2 b/hr</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);text-align:center;margin:10px 0 0 0;">Ice cream line, single resource per stage. <span class="slide-ref">Slides 11, 13</span></p>
+      </div>
+      <div class="two-col-note" style="margin-top:14px;">
+        <div class="note-box">
+          <div class="label">Resources in parallel</div>
+          Capacity adds: 2 freezers at 1 b/hr each = 2 b/hr. <span class="slide-ref">Slide 12</span>
+        </div>
+        <div class="note-box">
+          <div class="label">Workstation capacity</div>
+          If resources aren't shared across stations: <strong>capacity = m &times; &mu;</strong>, where m = number of parallel resources at that stage. <span class="slide-ref">Slide 15</span>
+        </div>
+      </div>
+
+      <h3 id="lecture-02-bottleneck" style="font-size:16px;margin:30px 0 12px 0;">The bottleneck &amp; minimum flow time <span class="slide-ref">Slides 16, 24</span></h3>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box">Cooker &times;2<br><span style="color:var(--ink-soft);font-size:11.5px;">8&frasl;3 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Cooler &times;2<br><span style="color:var(--ink-soft);font-size:11.5px;">8&frasl;3 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Freezer &times;2<br><span style="color:var(--ink-soft);font-size:11.5px;">2 b/hr</span></div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box accent">Packer &times;1<br><span style="font-weight:400;font-size:11.5px;">3&frasl;2 b/hr &larr; bottleneck</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);text-align:center;margin:10px 0 0 0;">r<sub>B</sub> = min{8&frasl;3, 8&frasl;3, 2, 3&frasl;2} = <strong>3&frasl;2 batches/hr</strong> &mdash; the process can never produce faster than its slowest stage.</p>
+      </div>
+      <div class="decision-grid" style="margin-top:16px;">
+        <div class="decision-chip"><div class="k">Bottleneck, r<sub>B</sub></div>The subprocess (or parallel group) with the lowest capacity. It alone sets process capacity.</div>
+        <div class="decision-chip p"><div class="k">Minimum flow time, T<sub>min</sub></div>Time for one unit through an <em>empty</em> system = sum of every subprocess's processing time: &frac34;+&frac34;+1+&frac23; = 3&frac16; hr (3 hr 10 min).</div>
+        <div class="decision-chip p"><div class="k">Adding non-bottleneck capacity</div>Adding cookers/coolers/freezers here changes nothing: capacity and T<sub>min</sub> are both unchanged &mdash; only the bottleneck moves the needle. <span class="slide-ref">Slide 17</span></div>
+        <div class="decision-chip p"><div class="k">Speeding up non-bottleneck steps</div>Doesn't raise capacity, but does lower T<sub>min</sub> &mdash; a faster, more pleasant flow unit experience even with unchanged throughput. <span class="slide-ref">Slide 19</span></div>
+      </div>
+
+      <h3 id="lecture-02-utilization" style="font-size:16px;margin:30px 0 12px 0;">Utilization &amp; implied utilization <span class="slide-ref">Slides 20&ndash;23</span></h3>
+      <div class="sheet-grid" style="margin-bottom:8px;">
+        <div class="sheet-box"><div class="t">Throughput rate</div>min{demand rate, capacity rate} &mdash; also called flow rate, output rate, exiting rate.</div>
+        <div class="sheet-box"><div class="t">Process utilization</div>Throughput &divide; process capacity.</div>
+        <div class="sheet-box"><div class="t">Resource utilization</div>That resource's throughput &divide; its own capacity.</div>
+        <div class="sheet-box"><div class="t">Implied utilization</div>Demand &divide; capacity &mdash; can exceed 100%, which reads as a <strong>capacity deficit</strong>.</div>
+      </div>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Resource</th><th class="num">Unit process time</th><th class="num">Capacity/unit</th><th class="num"># units</th><th class="num">Total capacity</th><th class="num">Utilization*</th></tr>
+          <tr><td>Cooker</td><td class="num">&frac34; hr</td><td class="num">4&frasl;3 b/hr</td><td class="num">2</td><td class="num">8&frasl;3 b/hr</td><td class="num">57%</td></tr>
+          <tr><td>Cooler</td><td class="num">&frac34; hr</td><td class="num">4&frasl;3 b/hr</td><td class="num">2</td><td class="num">8&frasl;3 b/hr</td><td class="num">57%</td></tr>
+          <tr><td>Freezer</td><td class="num">1 hr</td><td class="num">1 b/hr</td><td class="num">2</td><td class="num">2 b/hr</td><td class="num">75%</td></tr>
+          <tr><td>Packer</td><td class="num">2&frasl;3 hr</td><td class="num">3&frasl;2 b/hr</td><td class="num">1</td><td class="num">3&frasl;2 b/hr</td><td class="num">100%</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">*Process capacity = 3&frasl;2 b/hr (the bottleneck, packing); utilization = process throughput &divide; each row's own capacity. <span class="slide-ref">Slide 23</span> &mdash; this is the template to reuse for the ScharffenBerger case.</p>
+
+      <h3 id="lecture-02-multitype" style="font-size:16px;margin:30px 0 12px 0;">Multi-stage processes with multiple flow-unit types &mdash; Valley Forge <span class="slide-ref">Slides 25&ndash;29</span></h3>
+      <p>When customers/jobs aren't uniform, build a <strong>synthetic (weighted-average) flow unit</strong> from the customer mix before computing capacity. Valley Forge Income Tax Advice sees four client groups with very different processing times:</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Group</th><th class="num">Mix</th><th class="num">Filing</th><th class="num">Initial mtg.</th><th class="num">Preparation</th><th class="num">Review</th><th class="num">Writing</th></tr>
+          <tr><td>1 &mdash; new, easy</td><td class="num">15%</td><td class="num">20</td><td class="num">30</td><td class="num">120</td><td class="num">20</td><td class="num">50</td></tr>
+          <tr><td>2 &mdash; new, complex</td><td class="num">5%</td><td class="num">40</td><td class="num">90</td><td class="num">300</td><td class="num">60</td><td class="num">80</td></tr>
+          <tr><td>3 &mdash; repeat, easy</td><td class="num">50%</td><td class="num">20</td><td class="num">&mdash;</td><td class="num">80</td><td class="num">5</td><td class="num">30</td></tr>
+          <tr><td>4 &mdash; repeat, complex</td><td class="num">30%</td><td class="num">40</td><td class="num">&mdash;</td><td class="num">200</td><td class="num">30</td><td class="num">60</td></tr>
+          <tr><td><strong>Synthetic flow unit</strong></td><td class="num">100%</td><td class="num"><strong>27</strong></td><td class="num"><strong>9</strong></td><td class="num"><strong>133</strong></td><td class="num"><strong>17.5</strong></td><td class="num"><strong>44.5</strong></td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">Minutes, weighted by mix share. Three resources each own a subset of activities: <strong>admin. support</strong> (filing + writing = 27+44.5 = 71.5 min), <strong>senior accountant</strong> (initial meeting + review = 9+17.5 = 26.5 min), <strong>junior accountant</strong> (preparation = 133 min). At 8 hrs/day &times; 20 days/month:</p>
+      <div class="table-wrap card" style="padding:0;margin-top:10px;">
+        <table>
+          <tr><th>Resource</th><th class="num">Unit load</th><th class="num">Capacity/month</th><th class="num">Process capacity</th><th class="num">Utilization*</th></tr>
+          <tr><td>Admin. support</td><td class="num">71.5 min</td><td class="num">134 clients</td><td class="num" rowspan="3" style="vertical-align:middle;"><strong>72/month</strong></td><td class="num">37%</td></tr>
+          <tr><td>Senior accountant</td><td class="num">26.5 min</td><td class="num">362 clients</td><td class="num">14%</td></tr>
+          <tr><td>Junior accountant (bottleneck)</td><td class="num">133 min</td><td class="num">72 clients</td><td class="num">69%</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">*At 50 clients/month demand. The junior accountant (tax preparation) is the bottleneck at 72 clients/month &mdash; everyone else has slack. This is exactly the move the ScharffenBerger case wants: don't default to one chocolate type as the flow unit without first checking how mix and processing time interact across the conching stages.</p>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class &mdash; reading &amp; deliverable</div>
+        <p>Read MSWD Ch. 2.1&ndash;2.4 and 3 (the lecture's own closing slide flags the same range, plus Ch. 2.3 specifically as prep for Lecture 3's Little's Law). No textbook access here, so treat this as a pointer &mdash; the chapter range covers exactly the process-view, capacity, and processing-time material worked through above.</p>
+        <p style="margin-bottom:0;">Submit the <strong>ScharffenBerger case report</strong><span class="cp-due">Due Sep 28, 11:59pm &middot; Quercus</span> and plan to attend the Lecture 4 debrief session for it.</p>
+      </div>
+
+      <div class="summary-sheet" id="lecture-02-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 2 at a glance</h3>
+        <p class="sub">The five formulas that answer nearly every capacity question this course throws at you.</p>
+
+        <div class="formula-box">
+          p = 1/&mu; &nbsp;&middot;&nbsp; r<sub>B</sub> = min(capacity) &nbsp;&middot;&nbsp; T<sub>min</sub> = &Sigma;p<sub>i</sub>
+          <span class="fx-note">Process time&harr;rate, bottleneck capacity, minimum flow time. Slides 10, 16, 24.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Building a flow unit</div>
+            <ul>
+              <li>Choose a natural output/input unit</li>
+              <li>Express every other quantity per flow unit</li>
+              <li>Convert every resource's rate via dimensional analysis</li>
+              <li>Adjust for loss: input units &ne; output units</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Capacity rules</div>
+            <ul>
+              <li>Single resource: &mu; = 1/p</li>
+              <li>Parallel resources: capacity = m &times; &mu;</li>
+              <li>Series (multi-stage): capacity = min over all stages</li>
+              <li>Bottleneck = the stage achieving that minimum</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Utilization family</div>
+            <ul>
+              <li><strong>Throughput</strong> = min(demand, capacity)</li>
+              <li><strong>Utilization</strong> = throughput &divide; capacity (&le; 100% by construction)</li>
+              <li><strong>Implied utilization</strong> = demand &divide; capacity (can exceed 100% &rarr; capacity deficit)</li>
+              <li>The subprocess with the <em>highest</em> utilization is the bottleneck</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Two traps this lecture wants you to avoid</div>
+            <ul>
+              <li>Adding capacity anywhere except the bottleneck changes neither process capacity nor T<sub>min</sub></li>
+              <li>Speeding up a non-bottleneck step lowers T<sub>min</sub> (nicer experience) but not throughput</li>
+              <li>With a mixed customer/product base, build a weighted synthetic flow unit before computing capacity &mdash; don't just pick the "typical" item</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> find every stage's capacity in a common flow unit, take the minimum to get r<sub>B</sub> and process capacity, sum the processing times to get T<sub>min</sub>, then compare demand to r<sub>B</sub> to get throughput and (implied) utilization. This exact sequence is the ScharffenBerger case.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LECTURE 3 ============ -->
+    <section class="block" id="lecture-03">
+      <div class="block-head"><span class="num">07</span><h2>Lecture 3 &mdash; Little&rsquo;s Law &amp; First-Order Variability</h2><span class="tag">Session 3 &middot; Slides 1&ndash;39</span></div>
+
+      <p>This lecture adds the third leg of the process-performance stool &mdash; <strong>inventory</strong> &mdash; and the identity that ties it to throughput and flow time together, then pivots to the first of the two "causes of distress" the course studies: variability <span class="slide-ref">Slide 3</span>.</p>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class &mdash; reading</div>
+        <p style="margin-bottom:0;">Read the <strong>Baria Planning Solutions</strong> case (see the case library above): a spend-analysis consulting firm whose sales-support director inherits a missed-deadline problem despite utilization looking fine on paper. It isn't discussed in this lecture &mdash; it's the second group case, debriefed in Lecture 10 &mdash; but Little's Law and first-order variability below are exactly the background needed to eventually analyze it.</p>
+      </div>
+
+      <h3 id="lecture-03-littleslaw" style="font-size:16px;margin:26px 0 12px 0;">Little&rsquo;s Law <span class="slide-ref">Slides 5, 9, 11</span></h3>
+      <div class="grid-3" style="margin-bottom:8px;">
+        <div class="note-box"><div class="label">Inventory, I</div>Average number of flow units in the process at any time.</div>
+        <div class="note-box"><div class="label">Throughput, R</div>Average number of flow units exiting per unit time.</div>
+        <div class="note-box"><div class="label">Flow time, T</div>Average time a flow unit spends in the process.</div>
+      </div>
+      <div class="diagram" style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--accent);font-weight:600;">I = R &times; T</div>
+        <p style="font-size:13px;color:var(--ink-soft);margin:8px 0 0 0;">Rate &times; time = distance. Worked from the Presbyterian Hospital radiology log <span class="slide-ref">Slides 6&ndash;10</span>: 11 patients over an 11-hour day &rarr; throughput = 1 patient/hr; total flow time 22.83 hrs &rarr; average flow time 2.076 hrs; and by Little's Law average inventory = 1 &times; 2.076 = 2.076 patients &mdash; the same number arrived at either from raw timestamps or from the rate/time relationship.</p>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);"><strong>&ldquo;Buy 2, get 1 free&rdquo;:</strong> know any two of I, R, T and the third is determined. And it holds <em>always</em> &mdash; independent of queue discipline (FCFS, LIFO, random) and even under randomness in arrivals/processing (the subject of Lectures 4&ndash;6). Discipline changes an individual customer's flow time and the inventory mix, never the throughput rate. <span class="slide-ref">Slide 11</span></p>
+
+      <p style="margin-top:16px;">Four more worked examples, same identity, different domains <span class="slide-ref">Slides 12&ndash;13</span>:</p>
+      <div class="sheet-grid">
+        <div class="sheet-box"><div class="t">Customer flow &mdash; Taco Bell</div>1,500 cust./15-hr day, 75 in the restaurant on average &rarr; T = 75/(1500/15) = <strong>0.75 hr</strong> per customer.</div>
+        <div class="sheet-box"><div class="t">Job flow &mdash; Travelers Insurance</div>10,000 claims/yr (50 wks), 3-week processing time &rarr; I = (10000/50)&times;3 = <strong>600 claims</strong> in process.</div>
+        <div class="sheet-box"><div class="t">Material flow &mdash; Wendy's</div>104 inventory turns/yr &rarr; T = 52/104 = &frac12; week; 2,500 lb raw meat on hand &rarr; R = 2500/&frac12; = <strong>5,000 lb/week</strong> processed.</div>
+        <div class="sheet-box"><div class="t">Cash flow &mdash; Motorola</div>$300M/yr sales, $45M average receivables &rarr; T = 45/300 = 0.15 yr = <strong>7.8 weeks</strong> billing-to-collection.</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:12px;"><strong>Test Your Knowledge:</strong> Ristorante D&rsquo;O carries 1,000 bottles of wine on average and sells 205/week &rarr; flow time = 1000/205 = <strong>4.88 weeks</strong> per bottle. <span class="slide-ref">Slide 14</span> &middot; A coffee shop makes one coffee every 30 sec (= 2/min throughput at capacity) with 6 customers in the system on average &rarr; system time = 6/2 = <strong>3 minutes</strong>. <span class="slide-ref">Slide 15</span></p>
+
+      <h3 id="lecture-03-cashcycle" style="font-size:16px;margin:30px 0 12px 0;">Little&rsquo;s Law on the balance sheet: the cash-to-cash cycle <span class="slide-ref">Slides 16&ndash;23</span></h3>
+      <p>Little's Law applies to money exactly as it does to patients or ice cream &mdash; MBPF Inc. (prefab garages) illustrates it against its own financial statements: Net Sales $250.0M, COGS $175.8M, Payables $11.9M, Inventories $50.6M, Receivables $27.9M.</p>
+      <div class="diagram">
+        <div class="flow-row">
+          <div class="flow-box">Receive inventory</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Pay suppliers</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Deliver inventory</div>
+          <span class="flow-arrow">&rarr;</span>
+          <div class="flow-box">Receive payment</div>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);text-align:center;margin:10px 0 0 0;"><strong>Cost-to-cash</strong> = FT<sub>inventory</sub> + FT<sub>receivables</sub> (receive inventory &rarr; receive payment). <strong>Cash-to-cash</strong> = cost-to-cash &minus; FT<sub>payables</sub> (pay suppliers &rarr; receive payment) &mdash; the gap that actually has to be financed.</p>
+      </div>
+      <div class="sheet-grid" style="margin-top:12px;">
+        <div class="sheet-box"><div class="t">Flow time, payables</div>11.9/175.8 = 0.067 yr = <strong>25 days</strong> (turnover 14.77&times;)</div>
+        <div class="sheet-box"><div class="t">Flow time, inventory</div>50.6/175.8 = 0.288 yr = <strong>105 days</strong> (turnover 3.47&times;)</div>
+        <div class="sheet-box"><div class="t">Flow time, receivables</div>27.9/250 = 0.112 yr = <strong>41 days</strong> (turnover 8.96&times;)</div>
+        <div class="sheet-box"><div class="t">Cash-to-cash cycle</div>105+41&minus;25 = <strong>121 days</strong> between paying suppliers and being paid by customers.</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:12px;">A <strong>negative</strong> cash-to-cash cycle (HP Inc.: 42+31&minus;103 = &minus;30 days) means suppliers are effectively financing the business &mdash; customers and even some inventory turn over before payables come due. Among the supply-chain leaders on Slide 23, HP, Inditex, Unilever, and PepsiCo run negative; Diageo runs +331 days on the other extreme, largely from very long inventory aging (373 days, aging spirits).</p>
+
+      <h3 id="lecture-03-variability" style="font-size:16px;margin:30px 0 12px 0;">Causes of distress: first- vs. second-order variability <span class="slide-ref">Slides 26&ndash;29</span></h3>
+      <div class="two-col-note">
+        <div class="note-box">
+          <div class="label">First-order variability</div>
+          <strong>Knowable</strong> changes in the mean of demand or supply &mdash; e.g., mean pumpkin demand predictably rises near Halloween. Amazon's and Walmart's revenue both show strong, predictable quarterly seasonality.
+        </div>
+        <div class="note-box">
+          <div class="label">Second-order variability</div>
+          <strong>Unknowable</strong> randomness around that mean &mdash; the exact daily pumpkin demand, or year-to-year crop yield. Covered starting Lecture 4.
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:12px;"><strong>First-order first:</strong> both types exist simultaneously and both cause distress even when perfectly known in advance, but you must address the predictable shift in the mean before spending effort on the unpredictable noise around it. <span class="slide-ref">Slide 29</span></p>
+
+      <h3 style="font-size:15px;margin:24px 0 10px 0;">What happens when average demand exceeds average capacity <span class="slide-ref">Slide 31</span></h3>
+      <div class="two-col-note">
+        <div class="note-box"><div class="label">Short term</div>Customers wait (queue grows), are blocked (can't join the queue), balk (decline to join), or defect/renege (leave before being served).</div>
+        <div class="note-box"><div class="label">Long term</div>Management invests to expand capacity, customers permanently move to competitors, or quality degrades &mdash; each opening a market opportunity for someone else.</div>
+      </div>
+
+      <h3 style="font-size:15px;margin:24px 0 10px 0;">Matching capacity to seasonal demand <span class="slide-ref">Slides 30, 34&ndash;35</span></h3>
+      <div class="sheet-grid">
+        <div class="sheet-box"><div class="t">Chase strategy</div>Set capacity (regular + overtime + subcontract) to the <em>peak</em> rate; produce to order. No inventory risk, but pay for idle peak capacity in the off-season.</div>
+        <div class="sheet-box"><div class="t">Level strategy</div>Set capacity at the <em>average</em> demand rate; build inventory in the low season to sell in the high season (assumes regular capacity alone can cover the average).</div>
+        <div class="sheet-box wide"><div class="t">Hybrid strategy</div>Build some inventory ahead of peak, then produce-to-order for the remainder of the peak &mdash; the realistic middle ground most firms actually run, trading inventory carrying cost against capacity investment.</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:12px;"><strong>Test Your Knowledge:</strong> weekly capacity fixed at either 40 or 100 units; demand is 40 units/week for 40 weeks then 120 units/week for the final 12. Capacity shortfall in peak = 12&times;(120&minus;100) = 240 units; inventory can build at (100&minus;40) = 60 units/week in the off-season &rarr; switch to 100-unit production <strong>240/60 = 4 weeks before peak starts</strong> (start of week 37), reaching a maximum pre-built inventory of 4&times;60 = <strong>240 units</strong>. Total production (36&times;40 + 16&times;100 = 3,040) exactly matches total annual demand (40&times;40 + 12&times;120 = 3,040). <span class="slide-ref">Slides 36&ndash;37</span></p>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class &mdash; reading</div>
+        <p style="margin-bottom:0;">Read MSWD Ch. 9 (or the Note on Queueing) &mdash; no textbook access here, so this is a pointer rather than a summary. Lecture 4 opens with the ScharffenBerger debrief (report due beforehand, flagged under Lecture 2 above) and then moves into second-order variability and why queues build &mdash; the direct sequel to the first-order variability covered above.</p>
+      </div>
+
+      <div class="summary-sheet" id="lecture-03-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 3 at a glance</h3>
+        <p class="sub">Little's Law, the cash-to-cash cycle, and the first-order-first principle &mdash; the three ideas most likely to show up as a calculation question.</p>
+
+        <div class="formula-box">
+          I = R &times; T
+          <span class="fx-note">Inventory = Throughput &times; Flow Time. Holds always, any queue discipline, with or without randomness. Slides 5, 9, 11.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Little's Law, rearranged</div>
+            <ul>
+              <li>Flow time T = I &divide; R</li>
+              <li>Inventory I = R &times; T</li>
+              <li>Throughput R = I &divide; T</li>
+              <li>Know any 2 &rarr; the 3rd is determined ("buy 2, get 1 free")</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Cash-to-cash cycle</div>
+            <ul>
+              <li>FT<sub>x</sub> = (balance sheet item x) &divide; (COGS or Net Sales, as appropriate)</li>
+              <li>Cost-to-cash = FT<sub>inventory</sub> + FT<sub>receivables</sub></li>
+              <li>Cash-to-cash = Cost-to-cash &minus; FT<sub>payables</sub></li>
+              <li>Negative cash-to-cash = suppliers are financing you</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Variability &amp; distress</div>
+            <ul>
+              <li><strong>First-order</strong> variability = knowable shift in the mean (address this first)</li>
+              <li><strong>Second-order</strong> variability = unknowable randomness around the mean (Lectures 4&ndash;6)</li>
+              <li>Demand &gt; capacity, short run: wait / blocked / balk / defect</li>
+              <li>Demand &gt; capacity, long run: expand capacity, lose customers, or quality degrades</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Seasonal capacity strategies</div>
+            <ul>
+              <li><strong>Chase:</strong> capacity = peak demand, produce-to-order, no inventory</li>
+              <li><strong>Level:</strong> capacity = average demand, build inventory ahead of peak</li>
+              <li><strong>Hybrid:</strong> partial pre-build + partial produce-to-order</li>
+              <li>Optimal switch timing = capacity shortfall &divide; inventory build-up rate</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> Little's Law (I = R&times;T) is the one identity you can apply to literally any system &mdash; patients, dollars, wine bottles &mdash; as long as the units of I, R, and T are internally consistent. Pair it with "first-order first": fix the predictable seasonal mismatch between demand and capacity before ever touching randomness.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LECTURE 4 ============ -->
+    <section class="block" id="lecture-04">
+      <div class="block-head"><span class="num">08</span><h2>Lecture 4: Second-Order Variability</h2><span class="tag">Session 4 &middot; Sep 29 &amp; Oct 1 &middot; Slides 1-24</span></div>
+
+      <p>Lecture 4 has two halves. The first hour is the ScharffenBerger debrief (worked in full in the <a href="#assignment" style="color:var(--accent);font-weight:600;text-decoration:none;">Assignment section</a>, since the deck has no slides for it). The second hour moves to the second "cause of distress": <strong>second-order variability</strong>, the unpredictable randomness around the average, and why it makes queues form even when capacity looks sufficient. The stated goal: by the end, distinguish first- from second-order variability in the Baria case and quantify how much of each is present <span class="slide-ref">Slides 2-4</span>.</p>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class: preparation</div>
+        <ul>
+          <li>Submit the ScharffenBerger report <span class="cp-due">Due Sep 28, 11:59pm</span> and prepare for the case debrief session.</li>
+          <li>Read the <strong>Baria</strong> case (<a href="#case-baria" style="color:var(--accent-2);font-weight:600;">case file above</a>) and download <strong>QMacros</strong> (Excel add-in on Quercus; the licence in the folder expires Dec 31, 2026).</li>
+          <li>MSWD Chapter 9.1 to 9.6. Optional: the <em>Note on Queueing Models</em> (summarized under <a href="#lecture-05-qmacros" style="color:var(--accent-2);font-weight:600;">Lecture 5</a>).</li>
+        </ul>
+      </div>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">Supplementary reading in the folder</div>
+        <em>Inventory Levels Are Up. Here&rsquo;s What That Could Mean</em> (Deloitte, in the WSJ, Oct 2024) is the real-world version of this lecture&rsquo;s first-order vs. second-order split. Inventory building into year-end is <strong>first-order</strong> (predictable seasonal stocking). Needing extra stock to hold a 95% service level when demand for an item is erratic is <strong>second-order</strong>. It also frames the CFO view (cash tied up in inventory, margins) against the procurement view (serving the end client), describes the pandemic swing from just-in-time to just-in-case, and points to DIO, inventory turns, and GMROI as tracking metrics. Those link straight back to Little&rsquo;s Law and the cash-to-cash cycle in <a href="#lecture-03" style="color:var(--accent-2);font-weight:600;">Lecture 3</a>.
+      </div>
+
+      <h3 id="lecture-04-why" style="font-size:16px;margin:30px 0 12px 0;">Why lines form: the physician&rsquo;s office <span class="slide-ref">Slides 5-11</span></h3>
+      <p>One example, three versions. Patients arrive on average every 5 minutes (12 per hour).</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Version</th><th class="num">Service time</th><th class="num">Capacity</th><th class="num">Utilization</th><th>What happens</th></tr>
+          <tr><td>A. Not enough capacity</td><td class="num">10 min</td><td class="num">6 / hr</td><td class="num">12 &divide; 6 = 200% (implied)</td><td>The line grows without bound. Patients wait longer and longer <span class="slide-ref">Slide 5</span></td></tr>
+          <tr><td>B. Enough capacity, perfectly regular</td><td class="num">4 min</td><td class="num">15 / hr</td><td class="num">12 &divide; 15 = 80%</td><td>Patient <em>i</em> arrives at 5(<em>i</em>-1) min and is done 4 min later, so nobody ever waits <span class="slide-ref">Slides 6-8</span></td></tr>
+          <tr><td>C. Enough capacity, realistic randomness</td><td class="num">4 min on average</td><td class="num">15 / hr</td><td class="num">80%</td><td>Some patients arrive close together or take longer. Overlaps create a line even at 80% utilization <span class="slide-ref">Slides 9-10</span></td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">Utilization in B can be read two ways, and they agree: throughput 12 &divide; capacity 15 = 0.80, or service time 4 &divide; average interarrival time 5 = 0.80. <span class="slide-ref">Slide 8</span></p>
+
+      <div class="decision-grid" style="margin-top:14px;">
+        <div class="decision-chip"><div class="k">Lines form for certain</div>when average demand exceeds capacity (version A).</div>
+        <div class="decision-chip"><div class="k">Lines form even so</div>when capacity is enough on average. Second-order variability is the reason (version C).</div>
+        <div class="decision-chip p"><div class="k">Second-order variability</div>is the standard deviation, the uncertainty around the average performance. &ldquo;Variability is the bane of operations.&rdquo; <span class="slide-ref">Slide 11</span></div>
+      </div>
+
+      <h3 id="lecture-04-cv" style="font-size:16px;margin:30px 0 12px 0;">Measuring variability: the coefficient of variation <span class="slide-ref">Slides 12-17</span></h3>
+      <p>Variability comes from two sides, and each gets its own CV (standard deviation &divide; mean, a unit-free number):</p>
+      <div class="two-col-note">
+        <div class="note-box">
+          <div class="label">Demand (arrival) variability</div>
+          CV<sub>a</sub> = &sigma;<sub>a</sub> &divide; a, where &sigma;<sub>a</sub> is the standard deviation of the time between arrivals and a is the average interarrival time. Arrival rate &lambda; = 1/a.
+        </div>
+        <div class="note-box">
+          <div class="label">Supply (service) variability</div>
+          CV<sub>p</sub> = &sigma;<sub>p</sub> &divide; p, where &sigma;<sub>p</sub> is the standard deviation of the time to serve and p is the average service time. Capacity rate &mu; = 1/p.
+        </div>
+      </div>
+
+      <div class="sheet-grid" style="margin-top:14px;">
+        <div class="sheet-box">
+          <div class="t">Service CV<sub>p</sub> <span class="slide-ref">Slide 13</span></div>
+          <ul>
+            <li><strong>Below 1:</strong> uniform, repetitive work (Jiffy Lube, Shouldice Hospital, simple wills)</li>
+            <li><strong>About 1:</strong> customer-specific jobs (custom design, car dealer service, general surgery, family law)</li>
+            <li><strong>Above 1:</strong> jobs with several parts done at once (omni-channel marketing, auto restoration, emergency surgery, corporate law)</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <div class="t">Arrival CV<sub>a</sub> <span class="slide-ref">Slide 14</span></div>
+          <ul>
+            <li><strong>Equal to 1:</strong> independent arrivals, e.g. walk-ins. This is what &ldquo;random&rdquo; means</li>
+            <li><strong>Below 1:</strong> arrivals follow a schedule, e.g. doctor&rsquo;s appointments</li>
+            <li><strong>Above 1:</strong> possible with clustered arrivals, e.g. tour groups at the CN Tower</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="table-wrap card" style="padding:0;margin-top:14px;">
+        <table>
+          <tr><th>Distribution shape <span class="slide-ref">Slide 15</span></th><th class="num">Mean</th><th class="num">Std. dev.</th><th class="num">CV</th></tr>
+          <tr><td>Low variability</td><td class="num">3.0</td><td class="num">1.1</td><td class="num">0.36</td></tr>
+          <tr><td>Moderate variability</td><td class="num">1.7</td><td class="num">1.55</td><td class="num">0.9</td></tr>
+          <tr><td>High variability</td><td class="num">1.5</td><td class="num">2.1</td><td class="num">1.4</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">Higher CV means more variability. Because CV divides by the mean, it compares shapes with different scales, e.g. a mean of 1.5 against a mean of 3.0.</p>
+
+      <h3 id="lecture-04-util" style="font-size:16px;margin:30px 0 12px 0;">Throughput, utilization, and safety capacity <span class="slide-ref">Slides 17-19</span></h3>
+      <div class="sheet-grid">
+        <div class="sheet-box"><div class="t">Throughput rate</div>min{&lambda;, &mu;}. Stable queueing models need &lambda; &lt; &mu;. Example: &lambda; = 10/hr, &mu; = 12/hr gives throughput 10/hr, <em>assuming</em> nobody is blocked, balks, or defects. Otherwise throughput is lower.</div>
+        <div class="sheet-box"><div class="t">Utilization, &rho;</div>&rho; = throughput &divide; capacity = &lambda; &divide; (m&times;&mu;) = p &divide; (m&times;a), with m = number of servers. It is the % of time each server is working.</div>
+        <div class="sheet-box"><div class="t">Worked example</div>10 customers/hr, 3 servers at 4/hr each: &rho; = 10 &divide; (3&times;4) = 10/12 = <strong>83.3%</strong>.</div>
+        <div class="sheet-box"><div class="t">Safety capacity</div>100% &minus; utilization = 16.7% in the example above. The slack that absorbs variability.</div>
+      </div>
+
+      <h3 id="lecture-04-formula" style="font-size:16px;margin:30px 0 12px 0;">The system-time formula <span class="slide-ref">Slide 20</span></h3>
+      <p>The slide gives the approximation the rest of the unit runs on. Average system time is wait plus service, and the wait is the product of three effects:</p>
+      <div class="formula-box">
+        Wait = (p/m) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;) / 2] &times; [&rho;<sup>&radic;(2(m+1)) &minus; 1</sup> / (1 &minus; &rho;)]
+        <span class="fx-note">System time = Wait + p. The three terms: service time per server, variation effect, dependency effect.</span>
+      </div>
+      <div class="grid-3" style="margin-bottom:8px;">
+        <div class="note-box"><div class="label">Service time per server, p/m</div>More servers shorten it, and so do faster ones.</div>
+        <div class="note-box"><div class="label">Variation effect</div>The average of the <em>squared</em> arrival and service CVs. Only this combined number matters, not which side is the variable one.</div>
+        <div class="note-box"><div class="label">Dependency effect</div>Probability a customer waits &divide; safety capacity. It explodes as utilization nears 100%.</div>
+      </div>
+
+      <div class="class-prep" style="margin-top:14px;">
+        <div class="cp-label"><span>&#9679;</span> In-class checks and their answers</div>
+        <ul>
+          <li><strong>Does the formula assume homogeneous resources?</strong> Yes <span class="slide-ref">Slide 21</span>. It assumes demand is split equally across the m servers.</li>
+          <li><strong>Single server, equal utilization and equal average times. System 1 has CV<sub>a</sub> = 1 and CV<sub>p</sub> = 0.5. System 2 has CV<sub>a</sub> = 0.5 and CV<sub>p</sub> = 1. Which waits longer?</strong> Neither, they are identical <span class="slide-ref">Slide 22</span>. Both give (1 + 0.25) &divide; 2 = 0.625, because the formula uses the average of the squared CVs.</li>
+        </ul>
+      </div>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class: reading and next steps</div>
+        <p>Read MSWD 2.3. Lessons the lecture closes on <span class="slide-ref">Slide 23</span>: both services and manufacturing face first- and second-order variability; <strong>address first-order variability first</strong>; lines form even with enough capacity; system time is wait plus service; and second-order variability combined with high utilization intensifies waiting.</p>
+        <p style="margin-bottom:0;">For Lecture 5: install QMacros and read its instructions, re-read Baria with only first- and second-order variability in mind, and note the Baria assignment questions (posted on Quercus and in the course outline) <span class="cp-due">Case 2 due Nov 9, 11:59pm</span></p>
+      </div>
+
+      <div class="summary-sheet" id="lecture-04-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 4 at a glance</h3>
+        <p class="sub">Why queues exist at all, and the vocabulary to measure them.</p>
+
+        <div class="formula-box">
+          CV = &sigma; / mean &nbsp;&middot;&nbsp; &rho; = &lambda; / (m&times;&mu;) &nbsp;&middot;&nbsp; Safety capacity = 1 &minus; &rho;
+          <span class="fx-note">CV<sub>a</sub> uses interarrival times, CV<sub>p</sub> uses service times. Slides 12, 17, 19.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Why lines form</div>
+            <ul>
+              <li>Implied utilization above 100%: the line grows forever</li>
+              <li>Utilization below 100%, but randomness: a line forms anyway</li>
+              <li>Second-order variability = std. dev. around the average</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Typical CV values</div>
+            <ul>
+              <li>Random walk-in arrivals: CV<sub>a</sub> = 1</li>
+              <li>Scheduled arrivals: CV<sub>a</sub> &lt; 1</li>
+              <li>Uniform work: CV<sub>p</sub> &lt; 1; custom work: about 1; parallel multi-part work: &gt; 1</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Wait and system time (approximation)</div>
+            <ul>
+              <li>Wait = (p/m) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2] &times; [&rho;<sup>&radic;(2(m+1)) &minus; 1</sup>/(1 &minus; &rho;)]</li>
+              <li>System time = Wait + p</li>
+              <li>Swapping CV<sub>a</sub> and CV<sub>p</sub> changes nothing. Only the sum of squares matters</li>
+              <li>Formula assumes identical servers sharing demand equally</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> fix first-order variability (the predictable shift in the mean) before worrying about second-order noise, then remember that randomness plus high utilization is what produces waiting. Capacity above average demand is necessary but not sufficient.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LECTURE 5 ============ -->
+    <section class="block" id="lecture-05">
+      <div class="block-head"><span class="num">09</span><h2>Lecture 5: Queueing Models, Measuring Timeliness</h2><span class="tag">Session 5 &middot; Oct 6 &amp; 8 &middot; Slides 1-36</span></div>
+
+      <p>Lecture 4 named the drivers (variability and high utilization). Lecture 5 puts numbers on them: how long customers wait, how many are in line, how likely a very long wait is, and what changes when servers share one line. The agenda <span class="slide-ref">Slide 5</span>: simple queueing models, the trade-offs they expose, and the effect of process architecture (multiple single lines vs. one pooled line). Everything ties back to Little&rsquo;s Law <span class="slide-ref">Slide 6</span>:</p>
+      <div class="diagram" style="text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--accent);font-weight:600;">System time = Wait + Service time &nbsp;&middot;&nbsp; In queue = &lambda; &times; Wait &nbsp;&middot;&nbsp; In system = &lambda; &times; System time</div>
+      </div>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class: preparation</div>
+        <p style="margin-bottom:0;">Review the Baria case questions, download QMacros, and read MSWD 9.9 and 9.10 (or the <em>Note on Queueing Models</em>). The folder also holds a calculations workbook with one sheet per example below (Call_Centre_1 and 2, Walkin_Clinic variants, Starbucks lines). Every number in this section was cross-checked against it.</p>
+      </div>
+
+      <h3 id="lecture-05-probwait" style="font-size:16px;margin:30px 0 12px 0;">Probability of waiting <span class="slide-ref">Slides 7-13, 18</span></h3>
+      <p>Definitions carry over from Lecture 4 (&lambda;, &mu;, CV<sub>a</sub>, CV<sub>p</sub>, &rho; = &lambda;/(m&mu;), safety capacity = 100% &minus; &rho;). What is new is the probability that an arriving customer has to wait at all, which is the probability that <em>all</em> servers are busy:</p>
+      <div class="formula-box">
+        P(wait) &asymp; &rho;<sup>&radic;(2(m+1)) &minus; 1</sup>
+        <span class="fx-note">With one server it equals &rho;. With several servers it is lower than &rho;, because some server is often free.</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);">Example <span class="slide-ref">Slide 11</span>: m = 2 servers, each busy 83% of the time gives P(wait) = 0.83<sup>&radic;6 &minus; 1</sup> = <strong>76%</strong>. In general, with blocking, balking, or defection, exact values need the full queueing equations (that is what QMacros solves).</p>
+
+      <div class="class-prep" style="margin-top:14px;">
+        <div class="cp-label"><span>&#9679;</span> In-class check: what does the dependency effect depend on?</div>
+        <p style="margin-bottom:0;">Both safety capacity and the probability of waiting <span class="slide-ref">Slide 18</span>. The shortcut &ldquo;safety capacity = 100% &minus; P(wait)&rdquo; holds only when m = 1, not for several servers.</p>
+      </div>
+
+      <h3 id="lecture-05-callcentre" style="font-size:16px;margin:30px 0 12px 0;">Call centre: same capacity, ten servers instead of one <span class="slide-ref">Slides 15-17</span></h3>
+      <p>Both versions take 100 calls/hr, use total capacity of 120 calls/hr, have CV<sub>a</sub> = 1 and CV<sub>p</sub> = 0.5 (so the squared-CV average is 0.625), and run at 83.3% utilization.</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">1 fast operator</th><th class="num">10 slower operators</th></tr>
+          <tr><td>Service rate per server</td><td class="num">120 / hr</td><td class="num">12 / hr</td></tr>
+          <tr><td>Service time p</td><td class="num">0.5 min</td><td class="num">5 min</td></tr>
+          <tr><td>P(wait)</td><td class="num">0.833</td><td class="num">0.510</td></tr>
+          <tr><td>Dependency effect (P(wait) &divide; safety capacity)</td><td class="num">5.00</td><td class="num">3.06</td></tr>
+          <tr><td>Average wait</td><td class="num">1.56 min (slide: 1.6)</td><td class="num">0.96 min (slide: 1)</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>Average system time</td><td class="num">2.06 min (slide: 2.1)</td><td class="num">5.96 min (slide: 6)</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">Wait for one server = 0.5 &times; 0.625 &times; (0.833 &divide; 0.167) = 1.56 min. For ten servers = (5 &divide; 10) &times; 0.625 &times; (0.51 &divide; 0.167) = 0.96 min. Splitting the work across ten servers cuts waiting but multiplies the service time tenfold, so total time in the system rises from 2 to 6 minutes. This is why the formula adds p back in.</p>
+
+      <h3 id="lecture-05-qmacros" style="font-size:16px;margin:30px 0 12px 0;">QMacros and the walk-in clinic <span class="slide-ref">Slides 19-22</span></h3>
+      <div class="sheet-grid">
+        <div class="sheet-box"><div class="t">M/M/s</div>Poisson (&ldquo;memoryless&rdquo;) arrivals and exponential service, so CV<sub>a</sub> = CV<sub>p</sub> = 1, with s servers. Exact results. No blocking or balking.</div>
+        <div class="sheet-box"><div class="t">G/G/s</div>General distributions: you enter CV<sub>a</sub> and CV<sub>p</sub>. Approximate results, since exact ones exist only in special cases.</div>
+        <div class="sheet-box"><div class="t">M/M/s/N</div>As M/M/s, but at most N customers fit in the system. Arrivals who find it full are blocked and leave.</div>
+        <div class="sheet-box"><div class="t">M/M/s Impatient (in the Note)</div>Customers balk (refuse to join) or renege (leave after waiting). Not on the slides, but in the Note on Queueing Models.</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:12px;">From the Note: the exponential distribution has CV = 1 and is memoryless, and a Poisson process is one where interarrival times are independent exponentials. If the load factor reaches 1.0 or more in M/M/s or G/G/s, queue length and wait go to infinity (while throughput equals capacity). Server utilization can never exceed 1.0, but load factor can. The Note&rsquo;s relationships hold for every model: nr in system = throughput &times; time in system, nr in queue = throughput &times; wait, system time = wait + 1/&mu;.</p>
+
+      <h4 style="font-size:14.5px;margin:22px 0 8px 0;">Walk-in clinic <span class="slide-ref">Slides 20-22</span></h4>
+      <p style="font-size:14px;">10.8 patients/hr arrive; one nurse handles 12/hr. Std. dev. of interarrival time 5.5 min, of service time 3.5 min. So a = 5.55 min, p = 5 min, CV<sub>a</sub> = 0.99, CV<sub>p</sub> = 0.7, &rho; = 0.9.</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">1 nurse (12/hr)</th><th class="num">2 nurses (6/hr each, &sigma;<sub>p</sub> = 7 min)</th></tr>
+          <tr><td>Utilization</td><td class="num">90%</td><td class="num">90%</td></tr>
+          <tr><td>Average wait (QMacros)</td><td class="num">32.9 min</td><td class="num">31.3 min</td></tr>
+          <tr><td>Average system time (QMacros)</td><td class="num">37.9 min</td><td class="num">41.3 min</td></tr>
+          <tr><td>Average number in queue / in system</td><td class="num">5.93 / 6.83</td><td class="num">5.64 / 7.44</td></tr>
+          <tr><td>P(no wait)</td><td class="num">0.101</td><td class="num">0.149</td></tr>
+          <tr style="color:var(--ink-soft);"><td>Hand formula (workbook): wait / system</td><td class="num">33.1 / 38.1 min</td><td class="num">31.5 / 41.5 min</td></tr>
+        </table>
+      </div>
+      <div class="decision-grid" style="margin-top:14px;">
+        <div class="decision-chip"><div class="k">Little&rsquo;s Law check</div>Line length = &lambda; &times; wait = 10.8 &times; 32.95 &divide; 60 = <strong>5.93 patients</strong> <span class="slide-ref">Slide 21</span>.</div>
+        <div class="decision-chip p"><div class="k">Takeaway</div>Two half-speed nurses at the same total capacity wait slightly less (31 vs. 33 min) but patients spend longer in the clinic (41 vs. 38 min), because each visit takes 10 minutes instead of 5.</div>
+        <div class="decision-chip p"><div class="k">Formula vs. QMacros</div>The hand formula is an approximation. It lands within about a minute of QMacros, so use it for quick work and QMacros when precision matters.</div>
+      </div>
+
+      <h3 id="lecture-05-excessive" style="font-size:16px;margin:30px 0 12px 0;">The probability of a long wait <span class="slide-ref">Slides 23-24</span></h3>
+      <p>The average hides the tail. Wait time is random, and an exponential distribution is a good approximation:</p>
+      <div class="formula-box">
+        P(wait &le; t) = 1 &minus; e<sup>&minus;t / average wait</sup>
+        <span class="fx-note">Same form for system time with the average system time.</span>
+      </div>
+      <div class="sheet-grid">
+        <div class="sheet-box"><div class="t">Slide 23 example</div>Average wait 33.75 min. P(wait &le; 60 min) = 1 &minus; e<sup>&minus;60/33.75</sup> = 0.83, so <strong>17%</strong> of customers wait more than an hour.</div>
+        <div class="sheet-box"><div class="t">Slide 24 (QMacros, M/M/1)</div>&lambda; = 10.8, &mu; = 12, average wait 0.75 hr (45 min). P(wait &le; 1 hr) = 0.73, so about <strong>27%</strong> wait longer than an hour. P(wait &le; 2 hr) = 0.92 per the slide.</div>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">Rounding note: the slide reads the two-hour figure as 8% (1 &minus; 0.92). Computing directly from the formula gives 1 &minus; e<sup>&minus;2/0.75</sup> = 0.93, so 6.9% (the workbook shows 6.9%), and 26.4% for the one-hour case. The slide&rsquo;s own rounded 0.73 and 0.92 are what it states, so keep both in mind if an exam answer is checked against the slide.</p>
+
+      <h3 id="lecture-05-safety" style="font-size:16px;margin:30px 0 12px 0;">Why safety capacity matters <span class="slide-ref">Slides 25-27</span></h3>
+      <p>Wait is proportional to the probability of waiting and inversely proportional to safety capacity <span class="slide-ref">Slide 25</span>. So as demand rises toward capacity, the wait does not grow in step, it explodes. Take the clinic (p = 5 min, one server) and vary utilization from 0 to 100%, comparing two levels of average squared variability:</p>
+      <div class="diagram frontier-wrap">
+        <svg width="440" height="250" viewBox="0 0 440 250" role="img" aria-label="Average system time in minutes versus utilization for two variability levels">
+          <line x1="50" y1="20" x2="50" y2="190" stroke="var(--line)" stroke-width="1.5"/>
+          <line x1="50" y1="190" x2="410" y2="190" stroke="var(--line)" stroke-width="1.5"/>
+          <text x="46" y="194" text-anchor="end">0</text>
+          <text x="46" y="148" text-anchor="end">20</text>
+          <text x="46" y="105" text-anchor="end">40</text>
+          <text x="46" y="63" text-anchor="end">60</text>
+          <text x="46" y="24" text-anchor="end">80</text>
+          <line x1="50" y1="147.5" x2="410" y2="147.5" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <line x1="50" y1="105" x2="410" y2="105" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <line x1="50" y1="62.5" x2="410" y2="62.5" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="50" y="206" text-anchor="middle">0%</text>
+          <text x="225" y="206" text-anchor="middle">50%</text>
+          <text x="400" y="206" text-anchor="middle">100%</text>
+          <text x="230" y="228" text-anchor="middle">Utilization (% of time busy)</text>
+          <text x="14" y="120" transform="rotate(-90 14 120)" text-anchor="middle">Minutes in system</text>
+          <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="50,179.4 85,178.5 120,177.4 155,176 190,174.1 225,171.4 260,167.5 295,160.8 330,147.5 347.5,134.2 365,107.7 382.5,28"/>
+          <polyline fill="none" stroke="var(--accent-2)" stroke-width="2.5" points="50,179.4 85,179.1 120,178.7 155,178.2 190,177.6 225,176.7 260,175.4 295,173.2 330,168.8 347.5,164.3 365,155.5 382.5,128.9"/>
+          <circle cx="365" cy="107.7" r="4" fill="var(--accent)"/>
+          <text x="355" y="100" text-anchor="end">90%: 38.75 min</text>
+          <text x="300" y="45" fill="var(--accent)" style="fill:var(--accent);">avg CV&sup2; = 0.75</text>
+          <text x="300" y="146" style="fill:var(--accent-2);">avg CV&sup2; = 0.25</text>
+        </svg>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">At 90% utilization with CV<sub>a</sub> = 1 and CV<sub>p</sub> = 0.707, the average squared CV is 0.75 and system time is 5 &times; 0.75 &times; 9 + 5 = 38.75 min (the slide prints 38.6). At 95% it is already 76 min. With low variability (0.25) the same 90% costs only 16 min. Two levers, then: hold more safety capacity, or cut variability.</p>
+
+      <h3 id="lecture-05-pooling" style="font-size:16px;margin:30px 0 12px 0;">Pooling: one line for several servers <span class="slide-ref">Slides 28-32</span></h3>
+      <p>A coffee shop has two identical servers, each serving up to 50 customers/hr. 95 customers/hr arrive and both CVs equal 1. Compare two architectures with the same people, same capacity, and same 95% utilization:</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">Two dedicated lines (2 &times; M/M/1)</th><th class="num">One pooled line (M/M/2)</th></tr>
+          <tr><td>Arrivals per line</td><td class="num">47.5 / hr each</td><td class="num">95 / hr</td></tr>
+          <tr><td>P(wait)</td><td class="num">0.95</td><td class="num">0.93 (P(no wait) = 0.074)</td></tr>
+          <tr><td>Average wait</td><td class="num">22.8 min</td><td class="num">11.1 min</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>Average system time</td><td class="num">24 min (0.40 hr)</td><td class="num">12.3 min (0.205 hr)</td></tr>
+          <tr><td>Average number in system (total)</td><td class="num">38 (19 per line)</td><td class="num">19.5</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">Pooling cuts the time in the system by about half at no extra staffing. The mechanism is the p/m term: with one line feeding two servers the service-time-per-server factor halves (0.02 hr to 0.01 hr), while the dependency effect barely moves (19 to 18.6). Little&rsquo;s Law confirms the headcount: 95/hr &times; 0.205 hr = 19.5.</p>
+
+      <div class="two-col-note">
+        <div class="note-box">
+          <div class="label">What pooling does <span class="slide-ref">Slide 31</span></div>
+          It shifts the cost-responsiveness frontier outward (see <a href="#lecture-01-frontier" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 1</a>): lower waits at the same utilization and cost, instead of trading one for the other by adding or removing staff.
+        </div>
+        <div class="note-box">
+          <div class="label">Limits of pooling <span class="slide-ref">Slide 32</span></div>
+          Needs flexible, homogeneous servers. Complicates the workflow. Can raise service-time variability. Breaks the customer relationship, e.g. continuity of care in home healthcare.
+        </div>
+      </div>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class: what is next</div>
+        <p style="margin-bottom:0;">Lecture 6 continues the process-architecture thread <span class="slide-ref">Slide 33</span>: dedicated vs. pooled lines (continued), specialization vs. generalists in a sequence of queues, limiting access (blocking), and scheduling demand. Before then, rely on the instructor&rsquo;s Excel workbook if QMacros misbehaves. The Baria questions go up on Quercus after this lecture <span class="cp-due">Case 2 due Nov 9, 11:59pm</span>. The midterm on Oct 20 covers Lectures 1 to 5, so this is the last lecture inside its scope.</p>
+      </div>
+
+      <div class="summary-sheet" id="lecture-05-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 5 at a glance</h3>
+        <p class="sub">The formula set for quantifying a queue, and the one architectural lever (pooling).</p>
+
+        <div class="formula-box">
+          Wait = (p/m) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2] &times; [&rho;<sup>&radic;(2(m+1)) &minus; 1</sup>/(1 &minus; &rho;)] &nbsp;&middot;&nbsp; T = Wait + p
+          <span class="fx-note">Hand-calculation workhorse. Use QMacros (G/G/s) for exact results. Slides 12, 15, 20.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Recipe for any single-stage queue</div>
+            <ul>
+              <li>a = 1/&lambda;, p = 1/&mu;, &rho; = &lambda;/(m&mu;)</li>
+              <li>CV<sub>a</sub> = &sigma;<sub>a</sub>/a, CV<sub>p</sub> = &sigma;<sub>p</sub>/p</li>
+              <li>P(wait) = &rho;<sup>&radic;(2(m+1)) &minus; 1</sup></li>
+              <li>Wait, then system time = wait + p</li>
+              <li>Little&rsquo;s Law for line length: I<sub>q</sub> = &lambda; &times; wait</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Numbers worth remembering</div>
+            <ul>
+              <li>Call centre, 1 server: 1.56 wait, 2.06 system (min)</li>
+              <li>Call centre, 10 servers: 0.96 wait, 5.96 system (min)</li>
+              <li>Walk-in clinic, 1 nurse: 33 min wait, 38 min system</li>
+              <li>Coffee shop: 24 min dedicated vs. 12.3 min pooled</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Long waits and safety capacity</div>
+            <ul>
+              <li>P(wait &le; t) = 1 &minus; e<sup>&minus;t/average wait</sup> (exponential approximation, exact for CV<sub>a</sub> = CV<sub>p</sub> = 1)</li>
+              <li>Waiting time grows without bound as utilization approaches 100%, and faster when variability is high</li>
+              <li>Dependency effect = P(wait) &divide; safety capacity; safety capacity = 1 &minus; P(wait) only when m = 1</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Pooling in one line</div>
+            Same servers, one shared line: system time roughly halves in the coffee-shop case. It requires interchangeable servers and gives up customer continuity.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> three levers move waiting time: variability (the CV term), utilization (the 1/(1 &minus; &rho;) term), and the number and speed of servers (the p/m and P(wait) terms). Pooling works through the last one. Check the units, since p, a, and the final answer must share one time unit.
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      This notebook updates after each class. Next up: Lecture 6 &mdash; specialization vs. generalists (sequential queues), blocking, and scheduling demand.
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  // mobile sidebar
+  var sidebar = document.getElementById('sidebar');
+  var menuBtn = document.getElementById('menuBtn');
+  var scrim = document.getElementById('scrim');
+  function closeMenu(){ sidebar.classList.remove('open'); scrim.classList.remove('show'); }
+  function openMenu(){ sidebar.classList.add('open'); scrim.classList.add('show'); }
+  if(menuBtn){ menuBtn.addEventListener('click', function(){ sidebar.classList.contains('open') ? closeMenu() : openMenu(); }); }
+  if(scrim){ scrim.addEventListener('click', closeMenu); }
+  document.querySelectorAll('nav.toc a').forEach(function(a){
+    a.addEventListener('click', function(){ if(window.innerWidth <= 760){ closeMenu(); } });
+  });
+
+  // collapsible lecture groups in the nav
+  var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
+  function saveGroupState(){
+    try{
+      var openNames = navGroups.filter(function(g){ return g.classList.contains('open'); }).map(function(g){ return g.getAttribute('data-group'); });
+      localStorage.setItem('rsm1240-nav-open', JSON.stringify(openNames));
+    }catch(e){}
+  }
+  navGroups.forEach(function(group){
+    var btn = group.querySelector('.group-toggle');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      group.classList.toggle('open');
+      saveGroupState();
+    });
+  });
+  try{
+    var savedOpen = JSON.parse(localStorage.getItem('rsm1240-nav-open'));
+    if(Array.isArray(savedOpen)){
+      navGroups.forEach(function(group){
+        group.classList.toggle('open', savedOpen.indexOf(group.getAttribute('data-group')) !== -1);
+      });
+    }
+  }catch(e){}
+
+  // active link highlight
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var sections = links.map(function(a){ return document.getElementById(a.getAttribute('data-target')); }).filter(Boolean);
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var current = null;
+    sections.forEach(function(s){ if(s.offsetTop <= pos){ current = s.id; } });
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('data-target') === current);
+    });
+    var activeLink = links.find(function(a){ return a.classList.contains('active'); });
+    if(activeLink){
+      var owningGroup = activeLink.closest('.nav-group');
+      if(owningGroup && !owningGroup.classList.contains('open')){
+        owningGroup.classList.add('open');
+        saveGroupState();
+      }
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+})();
+</script>
+
+</body></html>

@@ -135,6 +135,32 @@ nav.toc a.sub{padding-left:22px;font-size:13.5px;}
 
 .menu-btn{display:none;}
 
+/* ---------- Collapsible sidebar (desktop) ---------- */
+.collapse-btn{
+  position:absolute;top:14px;right:12px;
+  width:28px;height:28px;border-radius:7px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;
+  padding:0;
+}
+.collapse-btn:hover{color:var(--accent);border-color:var(--accent);}
+.sidebar{position:sticky;}
+.nav-open{
+  display:none;position:fixed;top:14px;left:14px;z-index:35;
+  align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
+  border-radius:100px;padding:8px 14px;font-size:12.5px;font-family:inherit;color:var(--ink);
+  box-shadow:var(--shadow);cursor:pointer;
+}
+@media (min-width:761px){
+  body.nav-collapsed .sidebar{display:none;}
+  body.nav-collapsed .nav-open{display:flex;}
+  body.nav-collapsed main{padding-left:72px;}
+}
+@media (max-width:760px){
+  .collapse-btn{display:none;}
+}
+
+
 /* ---------- Main ---------- */
 main{
   flex:1;
@@ -604,10 +630,12 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
 
 <div class="menu-btn" id="menuBtn">&#9776; Menu</div>
 <div class="scrim" id="scrim"></div>
+<button type="button" class="nav-open" id="navOpen" aria-label="Show navigation">&#9776; Contents</button>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <div class="brand" style="position:relative;">
+      <button type="button" class="collapse-btn" id="navCollapse" aria-label="Hide navigation" title="Hide navigation">&laquo;</button>
       <span class="code">RSM 1240</span>
       <span class="title">Operations Management</span>
       <span class="term">Fall 2026 &middot; Rotman School of Management</span>
@@ -2350,6 +2378,17 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
   document.querySelectorAll('nav.toc a').forEach(function(a){
     a.addEventListener('click', function(){ if(window.innerWidth <= 760){ closeMenu(); } });
   });
+
+  // collapsible sidebar (desktop)
+  var navCollapse = document.getElementById('navCollapse');
+  var navOpen = document.getElementById('navOpen');
+  function setCollapsed(on){
+    document.body.classList.toggle('nav-collapsed', on);
+    try{ localStorage.setItem('rsm1240-nav-collapsed', on ? '1' : '0'); }catch(e){}
+  }
+  if(navCollapse){ navCollapse.addEventListener('click', function(){ setCollapsed(true); }); }
+  if(navOpen){ navOpen.addEventListener('click', function(){ setCollapsed(false); }); }
+  try{ if(localStorage.getItem('rsm1240-nav-collapsed') === '1'){ document.body.classList.add('nav-collapsed'); } }catch(e){}
 
   // collapsible lecture groups in the nav
   var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));

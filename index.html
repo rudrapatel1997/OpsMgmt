@@ -653,6 +653,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <a href="#case-scharffenberger" data-target="case-scharffenberger" class="sub">ScharffenBerger &mdash; full file</a>
           <a href="#case-baria" data-target="case-baria" class="sub">Baria &mdash; full file</a>
           <a href="#case-rubicon" data-target="case-rubicon" class="sub">Rubicon Global &mdash; full file</a>
+          <a href="#case-pottyparity" data-target="case-pottyparity" class="sub">Potty Parity &mdash; full file</a>
         </div></div>
       </div>
 
@@ -745,6 +746,20 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <a href="#lecture-05-summary" data-target="lecture-05-summary" class="sub">1-page exam summary</a>
         </div></div>
       </div>
+
+      <div class="nav-group open" data-group="lecture-06">
+        <div class="group-row">
+          <a href="#lecture-06" data-target="lecture-06">Lecture 6 &mdash; Advanced Queueing</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Lecture 6 sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#lecture-06-sequential" data-target="lecture-06-sequential" class="sub">Sequential servers</a>
+          <a href="#lecture-06-hetero" data-target="lecture-06-hetero" class="sub">Heterogeneous customers</a>
+          <a href="#lecture-06-blocking" data-target="lecture-06-blocking" class="sub">Blocking</a>
+          <a href="#lecture-06-scheduling" data-target="lecture-06-scheduling" class="sub">Scheduling rules</a>
+          <a href="#lecture-06-summary" data-target="lecture-06-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
     </nav>
   </aside>
 
@@ -752,7 +767,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
     <div class="hero">
       <div class="eyebrow">Course companion &middot; living document</div>
       <h1>RSM1240: Operations Management</h1>
-      <p class="lede">A running notebook for the course: the syllabus distilled, the professor's lens, the case library, and lecture-by-lecture notes. This page grows after every class &mdash; it now covers Lectures 1&ndash;5.</p>
+      <p class="lede">A running notebook for the course: the syllabus distilled, the professor's lens, the case library, and lecture-by-lecture notes. This page grows after every class &mdash; it now covers Lectures 1&ndash;6.</p>
       <div class="meta-row">
         <span class="pill accent">Instructor: Vahid Roshanaei</span>
         <span class="pill">Tue/Thu, 6:30&ndash;8:30 pm</span>
@@ -786,7 +801,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
             <table>
               <tr><th>Deliverable</th><th class="num">Weight</th><th>Due</th></tr>
               <tr><td>Case 1 &mdash; ScharffenBerger (group)</td><td class="num">15%</td><td>Sep 28, 11:59pm</td></tr>
-              <tr><td>Midterm exam (individual)</td><td class="num">30%</td><td>Oct 20, in class</td></tr>
+              <tr><td>Midterm exam (individual)</td><td class="num">30%</td><td>Oct 20, 6:30-8:30 pm</td></tr>
               <tr><td>Case 2 &mdash; Baria (group)</td><td class="num">15%</td><td>Nov 9, 11:59pm</td></tr>
               <tr><td>Final exam (individual)</td><td class="num">30%</td><td>Dec 10, in class</td></tr>
               <tr><td>Class participation</td><td class="num">10%</td><td>Ongoing</td></tr>
@@ -797,10 +812,43 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <h3 style="font-size:16px;">Ground rules worth remembering</h3>
           <ul class="outcome-list">
             <li><span class="idx">&bull;</span>Midterm covers Lectures 1&ndash;5 plus the Oldani and ScharffenBerger case facts. One double-sided aid sheet.</li>
+            <li><span class="idx">&bull;</span>Midterm review session: Sat Oct 17, 9:45 am to about 3:00 pm (livestreamed and recorded), covering Lectures 1&ndash;5. Midterm: Tue Oct 20.</li>
             <li><span class="idx">&bull;</span>Final is cumulative, weighted toward the second half. Two two-sided aid sheets.</li>
             <li><span class="idx">&bull;</span>GenAI is allowed for inspiration, never pasted directly into submissions &mdash; must be disclosed and documented if requested.</li>
             <li><span class="idx">&bull;</span>Missing 3+ classes (25%) triggers a required conversation with the instructor about whether outcomes are still achievable.</li>
           </ul>
+        </div>
+      </div>
+
+      <h3 id="midterm" style="font-size:16px;margin:0 0 10px 0;">Midterm: Tuesday Oct 20, 6:30 to 8:30 pm</h3>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:-4px;">From the instructor&rsquo;s exam-logistics note (Problem set x Midterm folder). Review session: Sat Oct 17, 9:45 am to about 3:00 pm, livestreamed and recorded.</p>
+      <div class="sheet-grid" style="margin-bottom:28px;">
+        <div class="sheet-box">
+          <div class="t">Coverage and format</div>
+          <ul>
+            <li>All topics in the first five lectures</li>
+            <li>Multiple-choice questions plus <strong>3 numerical questions</strong></li>
+            <li>Numerical 1: <strong>process analysis</strong> (<a href="#lecture-02" style="color:var(--accent);font-weight:600;">Lecture 2</a>)</li>
+            <li>Numerical 2: <strong>first-order variability and the choice of production strategy</strong>, Lecture 3 slides 32-37 (<a href="#lecture-03-variability" style="color:var(--accent);font-weight:600;">chase, level, hybrid</a>)</li>
+            <li>Numerical 3: <strong>second-order variability and simple queueing models</strong> (<a href="#lecture-04" style="color:var(--accent);font-weight:600;">Lecture 4</a> and <a href="#lecture-05" style="color:var(--accent);font-weight:600;">Lecture 5</a>)</li>
+            <li>Time tip: cap the time on each MCQ, then move to the numerical questions</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <div class="t">Aids and logistics</div>
+          <ul>
+            <li>One <strong>double-sided</strong> A4 or letter aid sheet (one sheet, notes on both sides, not two one-sided sheets)</li>
+            <li>One non-programmable calculator</li>
+            <li>Arrive at least 15 minutes early</li>
+            <li>Hand in everything: question paper, blue booklet, aid sheet, scrap paper. Photograph your aid sheet beforehand</li>
+            <li>Late arrivals get no extra time, and anyone more than 30 minutes late cannot write</li>
+            <li>All devices (phone, smartwatch, headphones) off and stored away</li>
+            <li>Accommodated absences move the midterm weight to the final</li>
+          </ul>
+        </div>
+        <div class="sheet-box wide">
+          <div class="t">What is not mentioned</div>
+          The note does not list the ScharffenBerger or Oldani case facts that the syllabus ground rules include, and Lecture 6 is outside the stated coverage. The folder also holds four practice problem sets, an instructor formula sheet, and a practice-problem note. I have not summarized those here.
         </div>
       </div>
 
@@ -813,7 +861,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <tr><td class="num">3</td><td>Little's Law &amp; first-order variability</td><td>Baria (read ahead)</td><td>&mdash;</td></tr>
           <tr><td class="num">4</td><td>Case debrief + second-order variability &amp; queues</td><td>ScharffenBerger debrief</td><td>Case 1 due</td></tr>
           <tr><td class="num">5</td><td>Quantifying &amp; improving waiting time; dedicated vs. pooled lines</td><td>Baria</td><td>&mdash;</td></tr>
-          <tr><td class="num">6</td><td>Heterogeneous customers, sequential queues</td><td>Potty Parity</td><td>&mdash;</td></tr>
+          <tr><td class="num">6</td><td>Sequential queues, heterogeneous customers, blocking, scheduling</td><td>Potty Parity</td><td>&mdash;</td></tr>
           <tr><td class="num">7</td><td><strong>Midterm exam</strong> (Lectures 1&ndash;5)</td><td>&mdash;</td><td>&mdash;</td></tr>
           <tr><td class="num">8</td><td>Economic order quantity &amp; reorder point</td><td>&mdash;</td><td>&mdash;</td></tr>
           <tr><td class="num">9</td><td>Newsvendor model &amp; performance measures</td><td>Inventory game</td><td>&mdash;</td></tr>
@@ -851,7 +899,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
 
     <!-- ============ CASES ============ -->
     <section class="block" id="cases">
-      <div class="block-head"><span class="num">03</span><h2>Case library</h2><span class="tag">4 cases across the term</span></div>
+      <div class="block-head"><span class="num">03</span><h2>Case library</h2><span class="tag">5 cases across the term</span></div>
       <div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
 
         <div class="case-card">
@@ -884,7 +932,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
             <h3>Baria Planning Solutions: Fixing the Sales Process</h3>
             <span class="module-tag">Module 3</span>
           </div>
-          <span class="status upcoming">Read ahead for Lectures 4&ndash;5 &middot; full debrief Lecture 10</span>
+          <span class="status upcoming">Tools complete after Lecture 6 &middot; debrief Lecture 10</span>
           <p>A spend-analysis consulting firm whose new sales-support director inherits a missed-deadline problem: win rates and renewal rates both dropped sharply in 2010. The team is organized in a hybrid model (shared functions + industry-dedicated proposal support) and staff utilization looks fine on paper &mdash; so why do deadlines keep slipping?</p>
           <p style="margin-top:6px;">This is the vehicle for first- and second-order variability, queueing, and cross-training trade-offs later in the term.</p>
         </div>
@@ -897,6 +945,17 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <span class="status upcoming">Later in term</span>
           <p>An asset-light, "Uber for trash" waste-management platform raising its next financing round in an industry historically dominated by asset-heavy incumbents (Waste Management, Republic Services) who profit from landfill tonnage. Rubicon instead earns a diversion bonus for keeping waste out of landfills.</p>
           <p style="margin-top:6px;">Explicitly designed as a VCAP application: Lecture 1's framework is the tool the case-discussion questions ask you to use.</p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top">
+            <h3>Potty Parity: Stadium Restroom Design</h3>
+            <span class="module-tag">Module 6</span>
+          </div>
+          <span class="status covered">Read for Lecture 6 &middot; facts only</span>
+          <p>A Toronto stadium operations manager faces long restroom waits for women and LGBTQ+ fans. Equal square footage and equal toilet counts have not produced equal waits. With no room to expand, he must choose between adding stalls, converting urinals, and unisex or all-gender facilities, using queueing analysis and a fairness measure.</p>
+          <p style="margin-top:6px;">The application case for heterogeneous customers, pooling, and unisex flexibility.</p>
+          <p style="margin-top:6px;"><a href="#case-pottyparity" style="color:var(--accent);font-weight:600;text-decoration:none;">Jump to the case file &rarr;</a></p>
         </div>
 
       </div>
@@ -1031,7 +1090,7 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
       <h3 id="case-baria" style="font-size:17px;margin:40px 0 14px 0;">Case file: Baria Planning Solutions &mdash; Fixing the Sales Process <span class="slide-ref">HBS 4568 &middot; set Feb 2011</span></h3>
       <div class="callout" style="background:var(--surface-2);border-left:3px solid var(--ink-soft);">
         <div class="callout-label">Tools now available, debrief still ahead</div>
-        Lectures 4 and 5 both ask you to read this case with a fresh perspective on first- and second-order variability, and the tools to do it are now on this page: <a href="#lecture-04" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 4</a> (CV, utilization, the system-time formula) and <a href="#lecture-05" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 5</a> (QMacros, pooling). The full debrief is Lecture 10 and the written case is due Nov 9, so there is no "resolved in class" summary yet. Everything below is case-fact prep.
+        Lectures 4 and 5 both ask you to read this case with a fresh perspective on first- and second-order variability, and the tools to do it are now on this page: <a href="#lecture-04" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 4</a> (CV, utilization, the system-time formula) and <a href="#lecture-05" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 5</a> (QMacros, pooling) and <a href="#lecture-06" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 6</a> (sequential servers, heterogeneous customers, blocking). The deck for Lecture 6 states that after it you have every tool needed to answer all the Baria questions. The full debrief is Lecture 10 and the written case is due Nov 9, so there is no "resolved in class" summary yet. Everything below is case-fact prep.
       </div>
 
       <div class="callout" style="margin-top:14px;">
@@ -1148,6 +1207,85 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <li>Competencies: what must Rubicon do exceptionally well that WM/Republic structurally can't or won't (given their landfill-tonnage incentives)?</li>
           <li>Assets &amp; processes: how does "owning no trucks and no landfills" change what has to be built instead (software, data, hauler network density)?</li>
           <li>Be ready to size the round yourself: focus vs. expand, and what each path costs and requires.</li>
+        </ul>
+      </div>
+
+      <!-- ===== CASE FILE: POTTY PARITY ===== -->
+      <h3 id="case-pottyparity" style="font-size:17px;margin:40px 0 14px 0;">Case file: Potty Parity, Stadium Restroom Design <span class="slide-ref">INFORMS Trans. on Education 26(1), 2025 &middot; set Sept 2023</span></h3>
+      <div class="callout" style="background:var(--surface-2);border-left:3px solid var(--ink-soft);">
+        <div class="callout-label">Read for Lecture 6, no solution in the folder</div>
+        This case was assigned before Lecture 6, and that lecture supplies its tools (heterogeneous classes, pooled servers, unisex stalls as flexibility). The folder has no worked solution or instructor debrief, so below are the facts, the data, and a derived setup. The recommendation is yours to build.
+      </div>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The scene</div>
+        Carlos Villalpando, operations manager of Rotman Football Stadium in Toronto, faces a wave of complaints after the Toronto Warriors beat the Alberta Bisons 24 to 14 in September 2023. Women and LGBTQ+ fans report restroom waits well beyond 30 minutes (one attendee reported health consequences), some transgender attendees avoided restrooms entirely, and a friend&rsquo;s 15-minute-intermission experience at a Broadway show is cited as the same problem elsewhere.
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Facts of the current system</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>Four restroom complexes, one per corner of the building. Each men&rsquo;s room has <strong>2 toilet stalls + 6 urinal stalls</strong>; each women&rsquo;s room has <strong>6 toilet stalls</strong>.</li>
+        <li><span class="idx">&bull;</span>The stadium followed the plumbing code of nearly 20 years ago, which equalized <em>square footage</em>. The code was later updated to equal numbers of toilet units, which still ignores that women are more likely to accompany children or the elderly.</li>
+        <li><span class="idx">&bull;</span>The proportion of female patrons has grown, and so has the preference for unisex restrooms. The stadium is old, so there is <strong>no space to expand</strong>, but men&rsquo;s and women&rsquo;s rooms are adjacent, which allows restructuring.</li>
+        <li><span class="idx">&bull;</span>Options considered: retrofit for accessibility, add stalls to the women&rsquo;s room, convert men&rsquo;s toilets to women&rsquo;s, create unisex toilets, convert some urinal stalls to unisex toilets, or convert fully to all-gender facilities with a shared entrance. All are assumed feasible to build. Renovation is expensive.</li>
+        <li><span class="idx">&bull;</span>The team also wants a fairness measure, converting wait times into fairness scores, and debates inclusivity (full all-gender) against fan comfort (a compromise with variety, even at longer waits).</li>
+      </ul>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Table 1: service process parameters <span class="slide-ref">as extracted from the PDF</span></h4>
+      <div class="table-wrap">
+        <table>
+          <tr><th rowspan="2"></th><th class="num" rowspan="2">Arrival rate</th><th class="num" colspan="3">User preference</th><th class="num" colspan="3">Class 1 (urination)</th><th class="num" colspan="3">Class 2 (defecation)</th></tr>
+          <tr><th class="num">Gender-seg.</th><th class="num">No pref.</th><th class="num">Unisex</th><th class="num">Prob.</th><th class="num">Mean (min)</th><th class="num">Std. dev.</th><th class="num">Prob.</th><th class="num">Mean (min)</th><th class="num">Std. dev.</th></tr>
+          <tr><td>Women</td><td class="num">3.2</td><td class="num">0.70</td><td class="num">0.21</td><td class="num">0.09</td><td class="num">0.95</td><td class="num">1.67</td><td class="num">1.2</td><td class="num">0.05</td><td class="num">5.2</td><td class="num">3.2</td></tr>
+          <tr><td>Men</td><td class="num">3.2</td><td class="num">0.70</td><td class="num">0.21</td><td class="num">0.09</td><td class="num">0.95</td><td class="num">0.83</td><td class="num">0.7</td><td class="num">0.05</td><td class="num">5.2</td><td class="num">3.2</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">The extracted text does not print the arrival-rate unit or the preference columns&rsquo; headers in full. Preference columns read GS (gender-segregated) / NP (no preference) / U (unisex). <strong>Assumption:</strong> the arrival rate is per minute and the service times are in minutes. Check the unit against the original PDF before using it in a calculation.</p>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Survey: experience rating (0 to 5) by wait time and restroom type</h4>
+      <p style="font-size:13.5px;color:var(--ink-soft);">My reading of the extracted columns: each cell pair is the rating of a gender-segregated stall vs. a unisex stall, for users who prefer gender-segregated (GS), have no preference (NP), or prefer unisex (U). A GS-preferring woman rates 5 under 5 minutes in a GS restroom and 4 in a unisex one. Unisex-preferring users rate unisex higher at every wait time.</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Wait time</th><th class="num">Women: GS pref. (GS / Uni)</th><th class="num">Women: NP</th><th class="num">Women: U pref.</th><th class="num">Men: GS pref.</th><th class="num">Men: NP</th><th class="num">Men: U pref.</th></tr>
+          <tr><td>0 to 5 min</td><td class="num">5 / 4</td><td class="num">5 / 5</td><td class="num">3 / 5</td><td class="num">5 / 4</td><td class="num">5 / 5</td><td class="num">3 / 5</td></tr>
+          <tr><td>5 to 10 min</td><td class="num">4 / 3</td><td class="num">4 / 4</td><td class="num">2 / 4</td><td class="num">4 / 3</td><td class="num">4 / 4</td><td class="num">2 / 4</td></tr>
+          <tr><td>10 to 20 min</td><td class="num">3 / 2</td><td class="num">2 / 2</td><td class="num">1 / 3</td><td class="num">3 / 2</td><td class="num">2 / 2</td><td class="num">1 / 3</td></tr>
+          <tr><td>20 to 40 min</td><td class="num">1 / 1</td><td class="num">1 / 1</td><td class="num">0 / 2</td><td class="num">2 / 0</td><td class="num">1 / 1</td><td class="num">0 / 2</td></tr>
+          <tr><td>40 to 60 min</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 1</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 1</td></tr>
+        </table>
+      </div>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Derived setup (my calculation, not from the case)</h4>
+      <p style="font-size:14px;">Using the aggregation formula from <a href="#lecture-06-hetero" style="color:var(--accent);font-weight:600;text-decoration:none;">Lecture 6</a> to merge each user&rsquo;s two service classes (probabilities 0.95 and 0.05):</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">Mean service p<sub>all</sub></th><th class="num">Std. dev. &sigma;<sub>all</sub></th><th class="num">CV<sub>p</sub></th></tr>
+          <tr><td>Women</td><td class="num">1.85 min</td><td class="num">1.57 min</td><td class="num">0.85</td></tr>
+          <tr><td>Men</td><td class="num">1.05 min</td><td class="num">1.37 min</td><td class="num">1.31</td></tr>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;">Women: p = 0.95(1.67) + 0.05(5.2) = 1.85. Men: p = 0.95(0.83) + 0.05(5.2) = 1.05. The same visit mix gives women almost twice the average service time, which, with equal arrival rates and only 6 toilet stalls against the men&rsquo;s 8 fixtures, is the mechanism behind the long women&rsquo;s waits. Merging the genders into one unisex pool would add the (p<sub>i</sub> &minus; p<sub>all</sub>)&sup2; variance term from Lecture 6. Fixture counts and the decision model are yours to set up.</p>
+
+      <h4 style="font-size:14.5px;margin:20px 0 8px 0;">Formula appendix in the case</h4>
+      <ul class="outcome-list">
+        <li><span class="idx">&bull;</span>&tau; = &lambda;/(s&mu;) = p/(s&middot;a) &lt; 1, or the system explodes.</li>
+        <li><span class="idx">&bull;</span>T<sub>q</sub> = (p/s) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2] &times; [&tau;<sup>&radic;(2(s+1)) &minus; 1</sup>/(1 &minus; &tau;)]: the same Pollaczek-Khinchine approximation as Lecture 4 and 5.</li>
+        <li><span class="idx">&bull;</span>P(T<sub>q</sub> &gt; t) = e<sup>&minus;t/T<sub>q</sub></sup>, safety capacity = 1 &minus; &tau;, T = T<sub>q</sub> + p, and Little&rsquo;s Law for I<sub>q</sub> and I.</li>
+        <li><span class="idx">&bull;</span>&sigma;<sub>all</sub> aggregation for heterogeneous classes (Lecture 6, slide 18).</li>
+      </ul>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">The decision on the table</div>
+        &ldquo;Based on the data provided and the proposed design alternatives, what would you recommend to Carlos as the best renovation plan for the stadium?&rdquo; The case stresses unisex toilets, acceptable wait times, and fairness across user groups.
+      </div>
+
+      <div class="class-prep" style="margin-top:16px;">
+        <div class="cp-label">What to walk in ready to discuss</div>
+        <ul>
+          <li>Which queueing model describes a restroom bank: servers, arrival process, CV of arrivals and of service, and why the two classes of use matter?</li>
+          <li>How do unisex stalls change the picture: pooling effect on waits against the extra variability from merging heterogeneous users?</li>
+          <li>How would you convert waits into a fairness measure that also reflects user preference (use the rating tables)?</li>
+          <li>What wait target is acceptable, and what does each renovation option cost in fixtures and in who still waits too long?</li>
         </ul>
       </div>
 
@@ -2359,8 +2497,208 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
       </div>
     </section>
 
+    <!-- ============ LECTURE 6 ============ -->
+    <section class="block" id="lecture-06">
+      <div class="block-head"><span class="num">10</span><h2>Lecture 6: Advanced Queueing Models</h2><span class="tag">Session 6 &middot; Slides 1-37</span></div>
+
+      <p>Lectures 4 and 5 assumed five things: customers are homogeneous, the buffer is unlimited, customers are patient, service is first-come-first-served, and each customer is served in one stage by one of several parallel servers. Lecture 6 relaxes the last three assumptions in turn: work split across <strong>sequential servers</strong>, <strong>heterogeneous customers</strong> with dedicated vs. pooled servers, and <strong>blocking</strong> when space is limited. It closes with scheduling rules. Two of the three trade-offs introduced a new formula <span class="slide-ref">Slide 4</span>.</p>
+
+      <div class="callout" style="margin-top:14px;">
+        <div class="callout-label">Exam scope</div>
+        The midterm (Tue Oct 20) covers Lectures 1 to 5, so this lecture is for the final. Within it, the deck marks <em>scheduling with priorities</em> (the WSPT rule) as not included in the final exam <span class="slide-ref">Slide 4</span>. The folder has no new note for the midterm itself; see the reminder at the end of this section.
+      </div>
+
+      <div class="class-prep">
+        <div class="cp-label"><span>&#9679;</span> Before class: preparation</div>
+        <p style="margin-bottom:0;">Read the <strong>Potty Parity</strong> case (<a href="#case-pottyparity" style="color:var(--accent-2);font-weight:600;">case file below</a>). It is the application case for this lecture: two heterogeneous classes of users, several servers, and a design choice between gender-segregated and unisex service.</p>
+      </div>
+
+      <h3 id="lecture-06-sequential" style="font-size:16px;margin:30px 0 12px 0;">Specialization vs. generalists: a sequence of queues <span class="slide-ref">Slides 6-16</span></h3>
+      <p>Starbucks again, 95 customers/hr. Instead of two generalists who each take the payment and make the drink, one server takes payment and the other makes the drink. Each task is half the work, so a specialist can serve 100 customers/hr (generalists: 50/hr doing both).</p>
+
+      <div class="formula-box">
+        CV<sub>a2</sub>&sup2; = &rho;<sub>1</sub>&sup2; &times; CV<sub>p1</sub>&sup2; + (1 &minus; &rho;<sub>1</sub>&sup2;) &times; CV<sub>a1</sub>&sup2;
+        <span class="fx-note">Propagation of variability. Arrivals to station 2 are the departures of station 1, so a<sub>2</sub> = a<sub>1</sub> = 1/&lambda;. A busy station 1 passes on its service variability; an idle one passes on its arrival variability. Slide 7.</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);">Then compute four quantities: wait and system time at stage 1, wait and system time at stage 2 (using CV<sub>a2</sub> from the formula above), and add: <strong>T = T<sub>q1</sub> + p<sub>1</sub> + T<sub>q2</sub> + p<sub>2</sub></strong> <span class="slide-ref">Slide 8</span>. Station 2 never affects station 1.</p>
+
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Scenario <span class="slide-ref">Slides 9-15</span></th><th class="num">Per-server rate</th><th class="num">CV<sub>a1</sub> / CV<sub>p</sub></th><th class="num">Utilization</th><th class="num">Total system time</th></tr>
+          <tr><td>1. Restructure only</td><td class="num">100/hr</td><td class="num">1 / 1</td><td class="num">95%</td><td class="num">0.2 + 0.2 = 0.4 hr (<strong>24 min</strong>)</td></tr>
+          <tr><td>2. 5% speed-up from specialization</td><td class="num">105/hr</td><td class="num">1 / 1</td><td class="num">90.5%</td><td class="num">0.1 + 0.1 = 0.2 hr (<strong>12 min</strong>)</td></tr>
+          <tr><td>3. Variability cut (CV<sub>p</sub> = 0.5, no speed-up)</td><td class="num">100/hr</td><td class="num">1 / 0.5</td><td class="num">95%</td><td class="num">0.129 + 0.064 = 0.193 hr (<strong>11.6 min</strong>)</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">Scenarios 1 and 2 have CV<sub>a2</sub> = 1, so each server is an independent M/M/1 and the times simply add. Scenario 3 needs the propagation formula: CV<sub>a2</sub>&sup2; = 0.95&sup2;(0.5&sup2;) + (1 &minus; 0.95&sup2;)(1&sup2;) = 0.323, so CV<sub>a2</sub> = 0.568. Stage 1 is G/G/1 with wait 0.119 hr, stage 2 is G/G/1 with arrival CV 0.568. I rechecked all three: 24, 12.0, and 11.59 min.</p>
+
+      <div class="decision-grid" style="margin-top:14px;">
+        <div class="decision-chip"><div class="k">Comparison with Lecture 5</div>Two generalists sharing one pooled line took 12.3 min. A 5% speed-up (12 min) matches that, and variability reduction alone (11.6 min) beats it.</div>
+        <div class="decision-chip p"><div class="k">Why scenario 2 helps</div>Faster service lowers utilization and raises safety capacity. It does not change variability <span class="slide-ref">Slide 12</span>.</div>
+        <div class="decision-chip p"><div class="k">When generalists win</div>When specialization brings no service benefit. Sequential servers pay off only if specialization cuts p or the CVs, especially at the first server <span class="slide-ref">Slide 16</span>.</div>
+      </div>
+
+      <div class="class-prep" style="margin-top:14px;">
+        <div class="cp-label"><span>&#9679;</span> Home practice and answer</div>
+        <p style="margin-bottom:0;">Two stations in sequence, one server each. &lambda; = 10/hr, &mu; = 12/hr at both, CV<sub>a1</sub> = 1.25, CV<sub>p</sub> = 0.7 at both. Station 1: &rho; = 0.833, wait + service = 0.51 hr. CV<sub>a2</sub>&sup2; = 0.833&sup2;(0.7&sup2;) + (1 &minus; 0.833&sup2;)(1.25&sup2;) = 0.81, so CV<sub>a2</sub> &asymp; 0.9, and station 2 takes 0.354 hr. Total = <strong>0.864 hr</strong> <span class="slide-ref">Slide 37</span>. Rounding note: carrying CV<sub>a2</sub> unrounded (0.904) gives 0.356 and a total of 0.867 hr, so expect small differences depending on rounding.</p>
+      </div>
+
+      <h3 id="lecture-06-hetero" style="font-size:16px;margin:30px 0 12px 0;">Heterogeneous customers: pooled vs. dedicated servers <span class="slide-ref">Slides 17-22</span></h3>
+      <p>Loblaws has two kinds of shoppers arriving randomly (CV<sub>a</sub> = 1): large orders and small orders. A pooled line mixes them and creates a new source of variability, because the service-time mix differs from either class. The new formula <span class="slide-ref">Slide 18</span>:</p>
+      <div class="formula-box">
+        p<sub>all</sub> = (N<sub>1</sub>p<sub>1</sub> + N<sub>2</sub>p<sub>2</sub>) / N &nbsp;&middot;&nbsp; &sigma;<sub>all</sub> = &radic;{ [N<sub>1</sub>(&sigma;<sub>1</sub>&sup2; + (p<sub>1</sub> &minus; p<sub>all</sub>)&sup2;) + N<sub>2</sub>(&sigma;<sub>2</sub>&sup2; + (p<sub>2</sub> &minus; p<sub>all</sub>)&sup2;)] / N }
+        <span class="fx-note">The (p<sub>i</sub> &minus; p<sub>all</sub>)&sup2; terms are the extra variance created by merging classes with different average times. The same formula appears in the Potty Parity appendix.</span>
+      </div>
+
+      <div class="table-wrap card" style="padding:0;margin-top:14px;">
+        <table>
+          <tr><th></th><th class="num">Large</th><th class="num">Small</th><th class="num">All (pooled)</th></tr>
+          <tr><td>Demand</td><td class="num">50 / hr</td><td class="num">50 / hr</td><td class="num">100 / hr</td></tr>
+          <tr><td>Service time p</td><td class="num">5 min</td><td class="num">1 min</td><td class="num">3 min</td></tr>
+          <tr><td>Std. dev. &sigma;<sub>p</sub></td><td class="num">10 min</td><td class="num">0.25 min</td><td class="num">7.35 min</td></tr>
+          <tr><td>CV<sub>p</sub></td><td class="num">2.00</td><td class="num">0.25</td><td class="num">2.45</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">Work per hour: 50 &times; 5 = 250 min and 50 &times; 1 = 50 min, so p<sub>all</sub> = 300/100 = 3 min. &sigma;<sub>all</sub> = &radic;[(50(100 + 4) + 50(0.0625 + 4))/100] = &radic;54.03 = 7.35. Note that merging two classes with CVs of 2.0 and 0.25 produces a pooled CV (2.45) larger than either one.</p>
+
+      <p style="margin-top:14px;">Six servers, 100 customers/hr, each server 20/hr (&rho; = 0.83). Pooled: CV<sub>a</sub> = 1, CV<sub>p</sub> = 2.45. Or dedicate 5 servers to large orders and 1 to small ones. QMacros results <span class="slide-ref">Slide 21</span>:</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">Large (5 servers)</th><th class="num">Small (1 server)</th><th class="num">Pooled (6 servers)</th></tr>
+          <tr><td>Average wait</td><td class="num">8.6 min</td><td class="num">2.7 min</td><td class="num">5.6 min</td></tr>
+          <tr><td>Avg. number in queue / in system</td><td class="num">7.19 / 11.35</td><td class="num">2.21 / 3.04</td><td class="num">9.31 / 14.31</td></tr>
+          <tr><td>P(no wait)</td><td class="num">0.38</td><td class="num">0.17</td><td class="num">0.41</td></tr>
+          <tr><td>P(wait &le; 5 min)</td><td class="num">0.58</td><td class="num">0.83</td><td class="num">0.67</td></tr>
+          <tr style="background:var(--accent-soft);font-weight:600;"><td>P(wait &gt; 5 min)</td><td class="num">42%</td><td class="num">17%</td><td class="num">33%</td></tr>
+        </table>
+      </div>
+      <div class="decision-grid" style="margin-top:14px;">
+        <div class="decision-chip"><div class="k">Averages hide the story</div>The two dedicated waits average (8.6 + 2.7) &divide; 2 = 5.65 min, almost exactly the pooled 5.6. What changes is who waits: small-order customers go from 33% to 17% long waits, large-order customers from 33% to 42%.</div>
+        <div class="decision-chip p"><div class="k">When to dedicate</div>When classes differ sharply in mean and std. dev. of service. It lowers the chance of a long wait for small jobs, and lets firms guarantee class-specific service levels, possibly at a high cost <span class="slide-ref">Slide 22</span>.</div>
+        <div class="decision-chip p"><div class="k">The cost</div>Breaking the pool violates first-come-first-served, so it is operationally effective but not fair to everyone.</div>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">Rounding note: the approximation formula from Lecture 5 gives 6.4 min for the pooled case and 9.6 min for large-order customers, against QMacros&rsquo; 5.6 and 8.6. The small-order figure (2.66 vs. 2.7) agrees. Use QMacros when the slide gives it.</p>
+
+      <h3 id="lecture-06-blocking" style="font-size:16px;margin:30px 0 12px 0;">Limiting access: blocking <span class="slide-ref">Slides 23-27</span></h3>
+      <p>Walk-in clinic: 10.8 patients/hr, 10 min per patient, 2 servers, CV<sub>a</sub> = CV<sub>p</sub> = 1. A system with K waiting spots and m servers has K + m places <span class="slide-ref">Slide 25</span>. An arrival who finds every place taken is blocked and lost.</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th></th><th class="num">No space limit (M/M/2)</th><th class="num">At most 7 in system (M/M/2/7)</th></tr>
+          <tr><td>Throughput</td><td class="num">10.8 / hr</td><td class="num">9.806 / hr</td></tr>
+          <tr><td>Fraction not served</td><td class="num">0</td><td class="num">9.2%</td></tr>
+          <tr><td>Utilization</td><td class="num">90%</td><td class="num">81.7%</td></tr>
+          <tr><td>Wait in queue</td><td class="num">42.66 min (0.711 hr)</td><td class="num">9.8 min (0.164 hr)</td></tr>
+          <tr><td>Time in system</td><td class="num">0.877 hr</td><td class="num">0.330 hr</td></tr>
+          <tr><td>Avg. number in queue / system</td><td class="num">7.67 / 9.47</td><td class="num">1.60 / 3.24</td></tr>
+          <tr><td>P(no wait)</td><td class="num">0.147</td><td class="num">0.297</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;"><strong>The trade-off:</strong> blocking cuts the wait from 42.66 to 9.8 minutes at the price of losing 9.2% of arrivals (throughput 9.806/hr instead of 10.8). Little&rsquo;s Law still holds, using the <em>served</em> rate: 9.806 &times; 0.164 hr = 1.61 patients in the queue. Whenever customers can be lost, use throughput, not the arrival rate, in Little&rsquo;s Law. Blocking is demand management: reject an order up front rather than let it wait a long time or overflow the space <span class="slide-ref">Slide 27</span>.</p>
+
+      <div class="class-prep" style="margin-top:14px;">
+        <div class="cp-label"><span>&#9679;</span> Learning summary <span class="slide-ref">Slide 27</span></div>
+        <ul>
+          <li>Dedicated queues beat a pooled system when customers are essentially heterogeneous in average processing time and variability.</li>
+          <li>Sequential queues beat parallel ones when specialization reduces average processing time and the arrival and process variabilities, especially at the first server.</li>
+          <li>Blocking is an effective demand-management tool: reject orders in anticipation of a long wait or because there is no room.</li>
+        </ul>
+      </div>
+
+      <h3 id="lecture-06-scheduling" style="font-size:16px;margin:30px 0 12px 0;">Scheduling rules <span class="slide-ref">Slides 28-35</span></h3>
+      <p>Queueing models assume first-come-first-served. If the order of work can be changed, sequencing rules cut the average wait without adding capacity. Five jobs, processing times A = 45, B = 20, C = 65, D = 30, E = 40 min, all present at time 0:</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Rule <span class="slide-ref">Slides 30-31</span></th><th>Sequence</th><th class="num">Completion times (min)</th><th class="num">Avg. flow time</th><th class="num">Avg. jobs in system (I = R&times;T)</th></tr>
+          <tr><td>FCFS</td><td>A, B, C, D, E</td><td class="num">45, 65, 130, 160, 200</td><td class="num">120 min</td><td class="num">0.025 &times; 120 = 3.0</td></tr>
+          <tr><td>SPT (shortest processing time)</td><td>B, D, E, A, C</td><td class="num">20, 50, 90, 135, 200</td><td class="num">99 min</td><td class="num">0.025 &times; 99 = 2.5</td></tr>
+        </table>
+      </div>
+      <div class="sheet-grid" style="margin-top:14px;">
+        <div class="sheet-box"><div class="t">Why SPT wins</div>Short jobs stop delaying long ones. The advantage grows with the number of customers and when processing times are fairly low, under random arrivals <span class="slide-ref">Slide 31</span>.</div>
+        <div class="sheet-box"><div class="t">Limits of SPT <span class="slide-ref">Slide 32</span></div><ul><li>Needs the processing time quickly and cheaply</li><li>Whoever estimates it can bias the estimate</li><li>Fairness: lower on average, not for every job</li></ul></div>
+      </div>
+      <p style="margin-top:14px;"><strong>Weighted SPT (WSPT)</strong> sequences by descending weight &divide; processing time, so heavy, short jobs go first <span class="slide-ref">Slides 33-34</span>. <em>Not on the final exam</em> (deck, Slide 4), kept here for completeness:</p>
+      <div class="table-wrap card" style="padding:0;">
+        <table>
+          <tr><th>Job</th><th class="num">A</th><th class="num">B</th><th class="num">C</th><th class="num">D</th><th class="num">E</th></tr>
+          <tr><td>Processing time (hr)</td><td class="num">10</td><td class="num">6</td><td class="num">24</td><td class="num">15</td><td class="num">18</td></tr>
+          <tr><td>Weight (cost per hr of waiting)</td><td class="num">$2</td><td class="num">$1</td><td class="num">$6</td><td class="num">$5</td><td class="num">$2</td></tr>
+          <tr><td>Weight &divide; time</td><td class="num">1/5</td><td class="num">1/6</td><td class="num">1/4</td><td class="num">1/3</td><td class="num">1/9</td></tr>
+        </table>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px;">WSPT order: D, C, A, B, E, with total weighted completion cost <strong>$608</strong>. Plain SPT (B, A, D, E, C) costs <strong>$729</strong>. Both totals check out. Scheduling is worth using when per-job information is easy to get and reordering raises no ethical or legal issue, and it can delay a strategic capacity purchase <span class="slide-ref">Slide 35</span>.</p>
+
+      <div class="callout" style="margin-top:18px;">
+        <div class="callout-label">Also in the folder: the newsvendor note (not midterm)</div>
+        <em>Note on the Role of Uncertainty in Capacity and Inventory Choice</em> (labelled Fall 2024) is reading for the inventory sessions (Session 9 on the session map). The core ideas: overage cost c<sub>o</sub> = cost &minus; salvage, underage cost c<sub>u</sub> = price &minus; cost (plus any shortage penalty), and the optimal quantity K* covers a fraction <strong>c<sub>u</sub> / (c<sub>o</sub> + c<sub>u</sub>)</strong> of demand. With normal demand, K* = &mu; + z&sigma;, where z = NORM.S.INV(critical ratio), expected lost sales = &sigma; &times; L(z), and service level = 1 &minus; CV &times; L(z). Its worked example (cost $80, price $180, salvage $40): c<sub>o</sub> = $40, c<sub>u</sub> = $100, ratio 0.714, demand N(150, 20) gives z &asymp; 0.566, K* = 162, lost sales 3.6, leftover 15.6, expected profit $14,016 and service level 98%. Same logic as this unit, applied to inventory: safety stock covers variability, priced by the cost of being wrong in each direction.
+      </div>
+
+      <div class="class-prep after">
+        <div class="cp-label"><span>&#9679;</span> After class: reading and deadlines</div>
+        <p>Read MSWD Ch. 10 or the Note on Queueing, then prepare for the midterm.</p>
+        <ul>
+          <li><strong>Midterm review session:</strong> Saturday Oct 17, 9:45 am to about 3:00 pm (may end 1:30 to 2:00 pm), livestreamed and recorded, covering the first five lectures <span class="slide-ref">Slide 36</span>.</li>
+          <li><strong>Midterm exam:</strong> Tuesday Oct 20, in class.</li>
+          <li><strong>Baria case:</strong> with this lecture you have every tool needed for all Baria questions <span class="cp-due">Due Mon Nov 9, 11:59pm</span></li>
+        </ul>
+      </div>
+
+      <div class="summary-sheet" id="lecture-06-summary">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">One-page review sheet</span></div>
+        <h3>Lecture 6 at a glance</h3>
+        <p class="sub">Three trade-offs, two new formulas, and the one question each answers.</p>
+
+        <div class="formula-box">
+          CV<sub>a2</sub>&sup2; = &rho;<sub>1</sub>&sup2;CV<sub>p1</sub>&sup2; + (1 &minus; &rho;<sub>1</sub>&sup2;)CV<sub>a1</sub>&sup2; &nbsp;&middot;&nbsp; &sigma;<sub>all</sub> = &radic;{&Sigma; N<sub>i</sub>[&sigma;<sub>i</sub>&sup2; + (p<sub>i</sub> &minus; p<sub>all</sub>)&sup2;] / N}
+          <span class="fx-note">Sequential propagation (slide 7) and heterogeneous aggregation (slide 18).</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">Sequential servers</div>
+            <ul>
+              <li>T = T<sub>q1</sub> + p<sub>1</sub> + T<sub>q2</sub> + p<sub>2</sub></li>
+              <li>If CV<sub>a1</sub> = CV<sub>p1</sub> = 1 then CV<sub>a2</sub> = 1: two independent M/M/1</li>
+              <li>Otherwise treat each as G/G/1 and propagate</li>
+              <li>Specialization must cut p or CV, else keep generalists</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Pooled vs. dedicated</div>
+            <ul>
+              <li>Pool when customers are alike</li>
+              <li>Dedicate when mean and std. dev. differ a lot</li>
+              <li>Average wait can stay the same while the tail shifts</li>
+              <li>Merging classes inflates the pooled CV</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Blocking (M/M/s/N)</div>
+            <ul>
+              <li>Places in system = buffer K + servers m</li>
+              <li>Cuts waits, loses throughput</li>
+              <li>Little&rsquo;s Law uses throughput, not arrival rate</li>
+              <li>Clinic: 42.66 to 9.8 min wait, 9.2% lost</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Scheduling</div>
+            <ul>
+              <li>FCFS 120 min vs. SPT 99 min average flow time (example)</li>
+              <li>SPT limits: estimation delay, bias, fairness</li>
+              <li>WSPT (weights): not on the final</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>Exam-ready takeaway:</strong> every lever here changes one of the three terms in the wait formula. Specialization changes p and CV, pooling or dedicating changes p/m and the effective CV, and blocking trades throughput for a shorter queue. State which term moves, then compute it.
+        </div>
+      </div>
+    </section>
+
     <div class="footer-note">
-      This notebook updates after each class. Next up: Lecture 6 &mdash; specialization vs. generalists (sequential queues), blocking, and scheduling demand.
+      This notebook updates after each class. Next up: the midterm review session (Sat Oct 17) and the midterm (Tue Oct 20, Lectures 1&ndash;5), then Lecture 8 on economic order quantity and reorder points.
     </div>
   </main>
 </div>

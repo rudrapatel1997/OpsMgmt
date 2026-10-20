@@ -653,6 +653,15 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
 .mp-calc .out b{display:block;font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--ink);font-weight:500;}
 .mp-calc .warn{color:var(--accent);font-weight:600;font-size:13px;margin-top:10px;}
 .mp-check li{margin-bottom:6px;}
+.mp-q summary .pr{font-size:11px;font-weight:600;border-radius:100px;padding:1px 9px;flex:none;}
+.pr.t1{background:var(--accent-soft);color:var(--accent);}
+.pr.t2{background:var(--gold-soft);color:var(--gold);}
+.pr.t3{background:var(--surface-2);color:var(--ink-soft);}
+.pr.t4{background:var(--surface-2);color:var(--ink-soft);opacity:.7;}
+.mp-q .ans ul{margin:6px 0;padding-left:18px;}
+.mp-q .ans li{margin-bottom:4px;}
+.mp-q .ans .why{margin:8px 0 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;font-size:12.5px;color:var(--ink-soft);}
+.mp-tier{font-size:15px;margin:26px 0 6px 0;}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
@@ -670,24 +679,6 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
     </div>
     <nav class="toc" id="toc">
       <a href="#overview" data-target="overview">Course overview</a>
-      <div class="nav-group open" data-group="midterm-prep">
-        <div class="group-row">
-          <a href="#midterm-prep" data-target="midterm-prep" style="color:var(--accent);font-weight:600;">Midterm prep (L1 to L5)</a>
-          <button type="button" class="group-toggle" aria-label="Toggle Midterm prep sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
-        </div>
-        <div class="sub-list"><div>
-          <a href="#mp-rules" data-target="mp-rules" class="sub">Exam rules &amp; what is cut</a>
-          <a href="#mp-l1" data-target="mp-l1" class="sub">L1 complete summary</a>
-          <a href="#mp-l2" data-target="mp-l2" class="sub">L2 complete summary</a>
-          <a href="#mp-l3" data-target="mp-l3" class="sub">L3 complete summary</a>
-          <a href="#mp-l4" data-target="mp-l4" class="sub">L4 complete summary</a>
-          <a href="#mp-l5" data-target="mp-l5" class="sub">L5 complete summary</a>
-          <a href="#mp-mcq" data-target="mp-mcq" class="sub">Self-test MCQ bank</a>
-          <a href="#mp-numerical" data-target="mp-numerical" class="sub">Numerical walkthroughs</a>
-          <a href="#mp-calc" data-target="mp-calc" class="sub">Calculators</a>
-          <a href="#mp-final" data-target="mp-final" class="sub">Last-night checklist</a>
-        </div></div>
-      </div>
       <a href="#professor" data-target="professor">The professor</a>
       <div class="nav-group open" data-group="cases">
         <div class="group-row">
@@ -790,6 +781,30 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <a href="#lecture-05-safety" data-target="lecture-05-safety" class="sub">Why safety capacity</a>
           <a href="#lecture-05-pooling" data-target="lecture-05-pooling" class="sub">Pooling wait lines</a>
           <a href="#lecture-05-summary" data-target="lecture-05-summary" class="sub">1-page exam summary</a>
+        </div></div>
+      </div>
+
+      <div class="nav-group open" data-group="midterm-prep">
+        <div class="group-row">
+          <a href="#midterm-prep" data-target="midterm-prep" style="color:var(--accent);font-weight:600;">Midterm prep</a>
+          <button type="button" class="group-toggle" aria-label="Toggle Midterm prep sections"><svg viewBox="0 0 8 8"><path d="M1 0 L7 4 L1 8 Z" fill="currentColor"/></svg></button>
+        </div>
+        <div class="sub-list"><div>
+          <a href="#mp-rules" data-target="mp-rules" class="sub">Exam rules &amp; what is cut</a>
+          <a href="#mp-l1" data-target="mp-l1" class="sub">L1 complete summary</a>
+          <a href="#mp-l2" data-target="mp-l2" class="sub">L2 complete summary</a>
+          <a href="#mp-l3" data-target="mp-l3" class="sub">L3 complete summary</a>
+          <a href="#mp-l4" data-target="mp-l4" class="sub">L4 complete summary</a>
+          <a href="#mp-l5" data-target="mp-l5" class="sub">L5 complete summary</a>
+          <a href="#mp-mcq" data-target="mp-mcq" class="sub">Self-test MCQ bank</a>
+          <a href="#mp-numerical" data-target="mp-numerical" class="sub">Numerical walkthroughs</a>
+          <a href="#mp-calc" data-target="mp-calc" class="sub">Calculators</a>
+          <a href="#mp-final" data-target="mp-final" class="sub">Last-night checklist</a>
+          <a href="#practice-midterm" data-target="practice-midterm" class="sub">Practice problems, ranked</a>
+          <a href="#pp-tier1" data-target="pp-tier1" class="sub">Practice: tier 1, very likely</a>
+          <a href="#pp-tier2" data-target="pp-tier2" class="sub">Practice: tier 2, likely</a>
+          <a href="#pp-tier3" data-target="pp-tier3" class="sub">Practice: tier 3, possible</a>
+          <a href="#pp-tier4" data-target="pp-tier4" class="sub">Practice: tier 4, out of scope</a>
         </div></div>
       </div>
 
@@ -917,551 +932,6 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
         </table>
       </div>
     </section>
-
-    <!-- ============ MIDTERM PREP ============ -->
-    <section class="block" id="midterm-prep">
-      <div class="block-head"><span class="num">&#9733;</span><h2>Midterm prep: Lectures 1 to 5</h2><span class="tag">Tue Oct 20 &middot; 6:30 to 8:30 pm</span></div>
-
-      <div class="mp-hero">
-        <h3>Built from the slides, the lecture transcripts, and the professor&rsquo;s Saturday review session</h3>
-        <p>Everything the exam can touch, in the order you will meet it. Tags: <strong>[EXAM]</strong> he said it will be tested, <strong>[TRAP]</strong> a typical mistake, <strong>[CUT]</strong> he said it is not on the exam. Items marked <em>(check)</em> come from a garbled transcript, so confirm them against the slides.</p>
-      </div>
-
-      <!-- ===== RULES ===== -->
-      <h3 class="mp-sub" id="mp-rules" style="margin-top:0;">Exam rules, scoring, and what is cut</h3>
-      <div class="sheet-grid">
-        <div class="sheet-box">
-          <div class="t">Structure (100 points)</div>
-          <ul>
-            <li><strong>40 pts MCQ:</strong> about 20 questions at 2 points each, some true/false, at most 5 options. Conceptual only, no calculations. The two cases (D&rsquo;O and ScharffenBerger) are folded into the MCQs.</li>
-            <li><strong>20 pts process analysis</strong> (Lecture 2). You may need to draw the flow diagram.</li>
-            <li><strong>20 pts first-order variability and production strategy</strong> (Lecture 3, slides 32-37).</li>
-            <li><strong>20 pts queueing</strong> (Lectures 4 and 5).</li>
-            <li>No qualitative written questions this year.</li>
-          </ul>
-        </div>
-        <div class="sheet-box">
-          <div class="t">Scoring and time rules</div>
-          <ul>
-            <li><strong>No double penalty:</strong> if your T<sub>q</sub> is wrong but you plug it correctly into the next formula, you keep the marks for that step. Keep going.</li>
-            <li>Standard deviations are given. Two decimals unless told otherwise. Do not round down 2.076 to 2.</li>
-            <li>Non-programmable calculator (you need exp()). No Excel or QMacros on the exam.</li>
-            <li>Spend at most about 30 minutes on the MCQs, then split the rest across the three numerical questions. Start with the one you know least if it is worth more marks to you.</li>
-            <li>MCQs are slide content with small tweaks. The four practice sets are &ldquo;true representative&rdquo; of the numerical questions.</li>
-          </ul>
-        </div>
-        <div class="sheet-box wide">
-          <div class="t">[CUT] Not on the midterm</div>
-          <ul>
-            <li><strong>All of Lecture 6.</strong> His words: &ldquo;unlearn whatever you learned in Lecture 6.&rdquo; Do not apply pooling-raises-CV<sub>p</sub> logic to MCQs. Inside the Lecture 5 formula, adding a server always helps.</li>
-            <li>Cycle time (1/throughput) and takt time (1/demand). He called them &ldquo;for your information.&rdquo;</li>
-            <li>Probability of a wait <em>between</em> two thresholds, and formula derivations.</li>
-            <li>Multiple customer types and re-entrant flows in process analysis: &ldquo;I don&rsquo;t think I will do that.&rdquo; Know the weighted-flow-unit method anyway, it is a cheap safeguard.</li>
-            <li>Optimal asset timing (economies of scale against time value of money), the cost-ratio bands, the newsvendor &ldquo;golden ratio&rdquo; (Lecture 9), and WSPT.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:16px;">
-        <div class="callout-label">Correction to read first: which average goes in the exponential?</div>
-        The printed formula sheet writes the exponential as e<sup>&minus;t/average flow time</sup>. In the review session the professor worked it with the <strong>average wait T<sub>q</sub></strong>: P(wait &lt; 60) = 1 &minus; e<sup>&minus;60/33.75</sup> = 0.83, so 17% wait longer than 60 minutes. I would use T<sub>q</sub> for any wait-time question, write the formula on your sheet, and say in one line which average you used. If a question defines the threshold on total time in system, use T. His line: &ldquo;this only works when the arrival and service variability are random&rdquo; (CV<sub>a</sub> = CV<sub>p</sub> = 1).
-      </div>
-
-      <!-- ===== L1 ===== -->
-      <div class="summary-sheet" id="mp-l1">
-        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
-        <h3>Lecture 1: Operations strategy and VCAP</h3>
-        <p class="sub">All MCQ material. No calculation, but the D&rsquo;O case facts are fair game.</p>
-
-        <div class="formula-box">
-          V = C &times; (A + P) &nbsp;&middot;&nbsp; Operations strategy = the optimal configuration of assets and processes that supports the business strategy
-          <span class="fx-note">V = value (a vector: price, quality, timeliness, variety). C = competencies. A = assets. P = processes.</span>
-        </div>
-
-        <div class="sheet-grid">
-          <div class="sheet-box">
-            <div class="t">[EXAM] Value to competency to operations focus</div>
-            <ul>
-              <li>Price &rarr; cost efficiency. Quality &rarr; quality processes and assets. Timeliness &rarr; responsiveness (shorter response time). Variety &rarr; flexibility.</li>
-              <li>Price (what the customer sees) is not cost (internal). Keep them apart.</li>
-              <li>Value is a vector, not a single number. Alignment is the success principle: design operations from what the firm promised customers, in a back-and-forth with business strategy.</li>
-              <li>Walmart: everyday low price, with selection and inventory good enough, so processes and assets target cost.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">Assets and processes trade off</div>
-            <ul>
-              <li>Strong assets allow weaker processes, and strong processes compensate for weak assets. Uber is asset-light and process-strong. Waste collection is asset-heavy with high fixed cost.</li>
-              <li>Competency comes from the synergy between assets and processes, which is what competitors cannot copy. Anyone can buy the same machine.</li>
-              <li>Three levels of fit: each choice reinforces the operations strategy, assets and processes have synergy within a business line, and operations is coordinated with marketing and finance (unaligned marketing leaves assets idle or demand unserved).</li>
-              <li>A firm can have several business lines, each with its own operations strategy under one corporate strategy.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">Asset decisions: location, size, type, timing</div>
-            <ul>
-              <li><strong>Location:</strong> mostly fixed cost. Downtown rent flows into price. D&rsquo;O sits about 35 km from central Milan for exactly this reason.</li>
-              <li><strong>Size:</strong> capacity and safety capacity. At 100% utilization there is no safety capacity. Right-size, not maximize.</li>
-              <li><strong>Type:</strong> dedicated vs flexible vs partially flexible. Flexibility = one resource performs more than one task. A little flexibility goes a long way, with diminishing returns. We right-size flexibility, we do not maximize it.</li>
-              <li><strong>Timing:</strong> capacity leading (anticipate demand), lagging (wait until demand is sticky, as ScharffenBerger and D&rsquo;O did), or tracking. Leading earns market position and costs opportunity cost if demand does not come.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">Process decisions: supply, demand, risk, technology, innovation</div>
-            <ul>
-              <li><strong>Supply:</strong> one vs many suppliers, in-house vs outsource, volume, supplier participation in design, yield and loss pricing, service guarantees.</li>
-              <li><strong>Demand:</strong> which demand to accept (batch sizes, order caps) because setup time kills productivity. Inventory build-up suits regular products, not customized ones.</li>
-              <li><strong>Risk</strong> = second-order variability. Managed with safety capacity, safety inventory, and safety time.</li>
-              <li><strong>Technology:</strong> tech vs touch. D&rsquo;O is cash-only because card fees of 3 to 6% conflict with a price-based proposition.</li>
-              <li><strong>Innovation:</strong> how often you iterate. More variety needs more flexibility, which operations dislikes. Toyota and BMW can differ inside one sector.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">[EXAM] Efficient frontier and productivity</div>
-            <ul>
-              <li>Axes: cost on x, a non-cost competency (quality, variety, timeliness) on y. Firms on the frontier must <strong>trade off</strong>: gain something, lose something (higher quality costs productivity). Firms inside the frontier can improve without a trade-off.</li>
-              <li>The frontier moves only with <strong>innovation</strong> in business and operations strategy. D&rsquo;O pushed it out with a new business model. Resource pooling (Lecture 5) is also an operations innovation that improves position with no trade-off.</li>
-              <li><strong>Productivity (output over input) cannot compare firms with different strategic positions.</strong> Toyota builds about 300,000 cars a year and Rolls-Royce a few thousand. Rolls-Royce is not &ldquo;a bad company,&rdquo; it sells exclusivity, not low price.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">D&rsquo;O case facts to hold on to</div>
-            <ul>
-              <li>Value proposition: excellent food made accessible (price-led), so every operating choice is judged against it.</li>
-              <li>Choose the change with the highest ROIC that does <strong>not</strong> violate the proposition. Raising price or the wine markup lifts ROIC but conflicts with the proposition. Dropping the 8:30 time slot lifts return to about 18% and is aligned. ROIC for the case was about 7.7% on operating capital.</li>
-              <li>The long reservation wait list works as a buffer against demand variability and lets the firm focus on cost. Removing flexibility raised throughput but needed more staff, which raised price. That broke alignment.</li>
-              <li>Investigate outliers, do not just delete them.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="takeaway"><strong>Exam-ready takeaway:</strong> for any Lecture 1 MCQ, name the value proposition first, then ask which competency it needs, then check that the asset or process choice supports that competency without breaking the proposition.</div>
-      </div>
-
-      <!-- ===== L2 ===== -->
-      <div class="summary-sheet" id="mp-l2">
-        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
-        <h3>Lecture 2: Process capacity analysis</h3>
-        <p class="sub">20 pts numerical plus MCQs. Work in rates, apply the minimum rule, keep units consistent.</p>
-
-        <div class="formula-box">
-          &mu; = 1/p &nbsp;&middot;&nbsp; capacity = m &times; &mu; &nbsp;&middot;&nbsp; process capacity = min over stations &nbsp;&middot;&nbsp; R = min(demand, capacity)
-          <span class="fx-note">Utilization = R / capacity of that resource. Implied utilization = demand / capacity (no min, can exceed 100%). T<sub>min</sub> = sum of p along one path.</span>
-        </div>
-
-        <div class="sheet-grid">
-          <div class="sheet-box">
-            <div class="t">[EXAM] Capacity and the bottleneck</div>
-            <ul>
-              <li>p = 1/&mu;. Put p in the same unit as the rate you want: 10 min = 1/6 hour, so &mu; = 6 per hour. <strong>[TRAP]</strong> Most students lose marks on this conversion.</li>
-              <li>m identical parallel resources: station capacity = m &times; &mu;. Parallel resources each take whole flow units, they do not cooperate.</li>
-              <li><strong>Bottleneck = the station with the lowest long-term capacity, not the slowest processing time.</strong> A slow p is compensated by more resources. Memorize: (1) bottleneck = lowest long-term capacity, (2) bottleneck capacity = process capacity.</li>
-              <li>&ldquo;The minimum rule is your friend in the exam.&rdquo; Always work with capacity rates once any station has more than one resource.</li>
-              <li>Why long-term: in the short run capacity can catch up in later periods. In the long run a persistent shortfall makes the backlog explode.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Throughput, utilization, implied utilization</div>
-            <ul>
-              <li>Throughput (flow, exit, output rate) R = min(demand rate, process capacity). Count units leaving, not arriving. &ldquo;Service rate&rdquo; is not a synonym.</li>
-              <li>Utilization = R / resource capacity, never above 100%. Write it this way and you cannot get any station wrong.</li>
-              <li><strong>Process utilization = the bottleneck&rsquo;s utilization.</strong> Do not report a resource-level figure like 57% as the process utilization.</li>
-              <li>Implied utilization = demand / capacity. 133% means a 33% capacity deficit. 200% means double the capacity. Equals utilization when demand is below capacity.</li>
-              <li>The highest-utilization resource is the bottleneck and the first one to bind as demand grows. Longest flow time is not the criterion.</li>
-              <li>Deterministic setting: unused capacity is underutilization (demand-constrained), not safety capacity. Real systems keep slack because of variability.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] T<sub>min</sub> and flow time</div>
-            <ul>
-              <li>T<sub>min</sub> = sum of the processing times along one path through an empty system. Minimum because no one waits, theoretical because the system is deterministic. Actual flow time is T<sub>min</sub> or worse.</li>
-              <li>Capacity is unrelated to T<sub>min</sub>. Process capacity is <strong>not</strong> 1/T<sub>min</sub>, because T<sub>min</sub> ignores how many resources a station has.</li>
-              <li>Adding capacity to a non-bottleneck, even infinite, changes neither process capacity nor flow time.</li>
-              <li>Shortening a non-bottleneck still has value (customer experience, lower WIP, cost). &ldquo;Offers no operational benefit&rdquo; is false.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">Flow unit, yield, flow diagram</div>
-            <ul>
-              <li>Define the process boundary first, then pick one flow unit and convert every station into it. The unit changes as it moves (beans, nibs, paste, chocolate), so convert with the actual input to each station.</li>
-              <li>Loss at a stage: multiply the yields (95% then 95% gives 90.25%). Work backwards for required input.</li>
-              <li>Flow diagram: boxes for activities, triangles for waiting. Draw a buffer before the bottleneck. <strong>For process-analysis questions no buffers are needed</strong> in the deterministic setting. A cooling step that needs attention is an activity, a pure wait is a triangle.</li>
-              <li>Moves between stations with no waiting are added to the neighbouring activity time.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">ScharffenBerger, the one case question</div>
-            <ul>
-              <li><strong>Why the ball mill does not add 75%:</strong> conching capacity jumps from about 40k to 68k kg a month, but process capacity only rises to the next limit (the roaster, about +10%). Fix the bottleneck and another resource becomes the bottleneck. The gain depends on the next constraint.</li>
-              <li>Typical OM pitfall: improving one part and forgetting the minimum rule. Check for a second bottleneck every time.</li>
-              <li>Growth: +50% demand needs a second roaster shift, +100% needs more shifts at several stations, +150% leaves everything near capacity, so any variability breaks the process. Operational choices must still protect quality, the value proposition.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">Multiple flow-unit types (likely not tested, cheap to know)</div>
-            Weighted-average time per task over the customer mix (a synthetic flow unit), add every task the same resource performs (a resource seen twice counts both times), convert to a rate, multiply by availability, take the minimum across resources. Valley Forge tax-firm example: admin 71.5 min per client gives 134 clients a month at 160 hours.
-          </div>
-        </div>
-        <div class="takeaway"><strong>Exam-ready takeaway:</strong> six steps every time: define the flow unit, compute m&times;&mu; per station in one time unit, take the minimum, set R = min(demand, capacity), compute utilization per resource and implied utilization, then T<sub>min</sub> as the sum of p. State units on every line.</div>
-      </div>
-
-      <!-- ===== L3 ===== -->
-      <div class="summary-sheet" id="mp-l3">
-        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
-        <h3>Lecture 3: Little&rsquo;s Law and first-order variability</h3>
-        <p class="sub">One MCQ-style question on the financial version, and the 20-point production-strategy question.</p>
-
-        <div class="formula-box">
-          I = R &times; T &nbsp;&middot;&nbsp; cash-to-cash = cost-to-cash &minus; AP flow time
-          <span class="fx-note">Any two of I, R, T give the third. Units must match.</span>
-        </div>
-
-        <div class="sheet-grid">
-          <div class="sheet-box">
-            <div class="t">[EXAM] Little&rsquo;s Law</div>
-            <ul>
-              <li>I = R &times; T: average inventory = throughput rate &times; average flow time. Holds for any boundary and any queue discipline (FCFS, LIFO, SPT) as long as customers are patient.</li>
-              <li><strong>[TRAP] Match the units.</strong> 10,000 claims a year over 50 weeks is 200 a week, times 3 weeks gives 600 claims. One coffee every 30 seconds is 2 a minute, so 6 in the system means 3 minutes.</li>
-              <li><strong>[TRAP] Name the flow unit</strong> (the claim, the bottle, the pound, the dollar), not the customer.</li>
-              <li>Snapshot reading: at any moment you see about I units in the system. Fractions are fine (2.08 patients). Do not round down.</li>
-              <li>Inflow/outflow diagram: vertical gap = inventory, horizontal gap = flow time (FCFS). Average inventory, throughput, and flow time all change with the window you analyse, and the law holds in each.</li>
-              <li>Inside a queue: T = T<sub>q</sub> + p, I<sub>q</sub> = &lambda;T<sub>q</sub>, number in service = &lambda;p = utilization (times m for m servers). Whole system: I = &lambda;T.</li>
-              <li>Turns: turns = R / I = 1 / flow time. 104 turns a year means a 0.5 week flow time. Inventory and payables relate to COGS, receivables to sales.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Cash cycles (he expects one question)</div>
-            <ul>
-              <li>Inventory flow time = 365 &times; inventory / COGS. Payables flow time = 365 &times; AP / COGS. Receivables flow time = 365 &times; AR / sales.</li>
-              <li><strong>Cost-to-cash = inventory days + receivable days.</strong> <strong>Cash-to-cash = cost-to-cash &minus; payable days.</strong> The slide label &ldquo;flow time of inventory&rdquo; on the AP bar should read accounts payable, which the professor corrected himself.</li>
-              <li>Worked check (sales $250M, COGS $176M, AR $28M, inventory $50.6M, AP $11.9M): payables 24.7 days, inventory 104.9, receivables 40.9. Cost-to-cash about 146 days, cash-to-cash about 121 days. (He once says &ldquo;101&rdquo;: a slip, the arithmetic gives 121.)</li>
-              <li>The cycle can be negative: suppliers and customers finance you, which signals bargaining power or a very fast process. Levers: longer supplier terms, faster internal conversion, faster collection.</li>
-              <li>A supplier discount lowers payables and COGS together, so the effect largely cancels. Do the math, do not assume.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] First vs second order</div>
-            <ul>
-              <li><strong>First-order variability</strong> = predictable change in the average (seasonality). <strong>Second-order</strong> = unpredictable noise around the average. Both can occur at once, on supply and on demand.</li>
-              <li>Priority: first make sure average capacity covers average demand. Then absorb the noise with safety capacity, safety inventory, or safety time.</li>
-              <li>OM triangle: capacity, inventory, information. Inventory is the physical form of missing information. With no information you buy capacity or inventory.</li>
-              <li>Balking = refuse to join after seeing the line. Reneging = join, then leave. Blocking = no room. Capacity below demand in the long run is not sustainable.</li>
-              <li>Even with daily capacity above daily demand, a temporary surge builds a queue.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Chase, level, hybrid</div>
-            <ul>
-              <li><strong>Chase:</strong> capacity follows demand each season. No inventory, but needs flexible capacity.</li>
-              <li><strong>Level:</strong> capacity = average demand all year. Build inventory in the low season, run it down in the peak. Cost is holding cost only, the area under the inventory curve times the carrying cost per unit.</li>
-              <li><strong>Hybrid:</strong> capacity between average and peak demand. Smaller shortfall, so it starts building later, holds less inventory, but pays for more capacity.</li>
-              <li>Level builds earlier at a lower rate, so its inventory triangle is larger than the hybrid&rsquo;s. Which is cheaper depends on the cost of extra capacity against the cost of holding inventory.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">[EXAM] The recipe for the 20-point question (Lecture 3 slides 32-37)</div>
-            <ol class="mp-steps">
-              <li>Magnitude of first-order variability = peak demand &minus; low demand.</li>
-              <li>Shortfall per week = peak demand &minus; capacity. Total shortage = shortfall per week &times; weeks of peak. This equals the maximum inventory.</li>
-              <li>Build rate = capacity &minus; low-season demand.</li>
-              <li>Weeks of build = total shortage / build rate. Start that many weeks before the peak begins.</li>
-              <li>Inventory cost = area under the inventory curve (triangles) &times; cost per unit per week.</li>
-            </ol>
-            <p style="margin:10px 0 0 0;font-size:13.5px;"><strong>His example:</strong> capacity 100, peak demand 120 for 12 weeks, low demand 40, peak starts at the beginning of week 41. Shortage 20 &times; 12 = 240. Build rate 100 &minus; 40 = 60. Build time 240/60 = 4 weeks, so production for stock starts at the beginning of <strong>week 37</strong>, with 240 units on hand when the peak starts. &ldquo;Don&rsquo;t forget the system runs 40 full weeks at low demand.&rdquo; Full numerical comparison with level and chase is in the walkthroughs below.</p>
-          </div>
-        </div>
-        <div class="takeaway"><strong>Exam-ready takeaway:</strong> draw the inventory triangle before computing. Slope up = capacity minus low demand, slope down = peak demand minus capacity, height = total shortage. Everything else is reading that picture.</div>
-      </div>
-
-      <!-- ===== L4 ===== -->
-      <div class="summary-sheet" id="mp-l4">
-        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
-        <h3>Lecture 4: Second-order variability</h3>
-        <p class="sub">The professor says Lectures 4 and 5 are where students struggle. Master the definitions and the CV interpretations.</p>
-
-        <div class="formula-box">
-          a = 1/&lambda; &nbsp;&middot;&nbsp; CV<sub>a</sub> = &sigma;<sub>a</sub>/a &nbsp;&middot;&nbsp; CV<sub>p</sub> = &sigma;<sub>p</sub>/p &nbsp;&middot;&nbsp; &rho; = &lambda;/(m&mu;) = &lambda;p/m
-          <span class="fx-note">Standing assumption in Lectures 4 and 5: &lambda; &lt; m&mu;, so throughput = &lambda; and customers are patient.</span>
-        </div>
-
-        <div class="sheet-grid">
-          <div class="sheet-box">
-            <div class="t">[EXAM] Notation and measurement</div>
-            <ul>
-              <li>a = average inter-arrival time (average the gaps between consecutive arrival times). &sigma;<sub>a</sub> = its standard deviation. If a = 1/10 hour, &lambda; = 10 per hour.</li>
-              <li>p = average processing time, &sigma;<sub>p</sub> its standard deviation, &mu; = 1/p.</li>
-              <li>Standard deviation is never negative. Averages are held fixed, only the spread varies.</li>
-              <li>Core intuition: the doctor sees a patient every 5 minutes and takes 4 minutes exactly, so utilization is 80% and there is no queue. Same averages with random timing and queues form. <strong>Congestion comes from variability, not from lost capacity.</strong> Do not say &ldquo;not enough capacity&rdquo; when 60 tourists arrive as one batch.</li>
-              <li>Implied utilization example: an arrival every 5 minutes against 10 minutes of service is 12 arrivals an hour against 6 capacity, 200%. Unsustainable.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Reading CV<sub>a</sub> (likely MCQ)</div>
-            <ul>
-              <li><strong>CV<sub>a</sub> = 0:</strong> deterministic. Identical gaps. Operations loves it, reality never delivers it.</li>
-              <li><strong>CV<sub>a</sub> &lt; 1:</strong> appointment system. Some spread around the booked time.</li>
-              <li><strong>CV<sub>a</sub> = 1:</strong> purely random, Poisson arrivals, exponential gaps, nobody coordinates (grocery store).</li>
-              <li><strong>CV<sub>a</sub> &gt; 1:</strong> batch arrivals. Tiny gaps inside a batch and huge gaps between batches. Worse than random.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Reading CV<sub>p</sub></div>
-            <ul>
-              <li><strong>CV<sub>p</sub> &lt; 1:</strong> standardized work, small spread (tire and oil changes, a single-procedure hernia clinic).</li>
-              <li><strong>CV<sub>p</sub> = 1:</strong> random, customer-specific (general surgery, 45 minutes to 7 hours).</li>
-              <li><strong>CV<sub>p</sub> &gt; 1:</strong> individualized, fully customized, heavy tail (emergency department, 2 minutes of resuscitation to 14 hours of operating).</li>
-              <li>CV<sub>a</sub> describes how customers arrive, CV<sub>p</sub> how they are processed. Worst case: batch arrivals and fully customized service.</li>
-              <li>Real distributions are usually exponential or hyper-exponential, not normal. Worked CVs: mean 3, sd 1.1 gives 0.36.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Variability and utilization (an old free-response, now an MCQ)</div>
-            <ul>
-              <li>&rho; = &lambda;p/m uses averages only. <strong>Variability by itself does not change utilization</strong> when customers are patient. 1 min + 9 min of work has the same utilization as 5 min + 5 min.</li>
-              <li><strong>Balking, reneging, or blocking lowers utilization</strong>, because effective &lambda; falls and work is lost.</li>
-              <li>Variability changes waiting, not utilization.</li>
-              <li>Averages mislead: an average wait of 30 minutes does not mean everyone waits 30. Some wait 90. This sets up the exponential tail in Lecture 5.</li>
-              <li>An emergency department is not FCFS (triage), a note on why its waits differ from the formula.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="takeaway"><strong>Exam-ready takeaway:</strong> convert everything to the same time unit first. Then compute CV<sub>a</sub> = &sigma;<sub>a</sub>/a and CV<sub>p</sub> = &sigma;<sub>p</sub>/p. If the question says M/M, skip both, they equal 1. Deterministic arrivals mean CV<sub>a</sub> = 0.</div>
-      </div>
-
-      <!-- ===== L5 ===== -->
-      <div class="summary-sheet" id="mp-l5">
-        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
-        <h3>Lecture 5: Queueing models and timeliness</h3>
-        <p class="sub">Three formulas, no more. Write the expanded wait formula on your aid sheet.</p>
-
-        <div class="formula-box">
-          T<sub>q</sub> = (p/m) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2] &times; [&rho;<sup>&radic;(2(m+1)) &minus; 1</sup> / (1 &minus; &rho;)]
-          <span class="fx-note">T = T<sub>q</sub> + p &nbsp;&middot;&nbsp; I<sub>q</sub> = &lambda;T<sub>q</sub> &nbsp;&middot;&nbsp; number in service = &rho;m &nbsp;&middot;&nbsp; I = I<sub>q</sub> + &rho;m = &lambda;T &nbsp;&middot;&nbsp; P(wait &gt; t) = e<sup>&minus;t/T<sub>q</sub></sup></span>
-        </div>
-
-        <div class="sheet-grid">
-          <div class="sheet-box">
-            <div class="t">[EXAM] The three effects</div>
-            <ul>
-              <li><strong>Service effect p/m</strong>: more or faster servers cut it.</li>
-              <li><strong>Variation effect (CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2</strong>: a simple average, not weighted. Arrival CV 0.5 with service CV 1 gives the same wait as arrival CV 1 with service CV 0.5.</li>
-              <li><strong>Dependency effect &rho;<sup>&radic;(2(m+1)) &minus; 1</sup>/(1 &minus; &rho;)</strong>: the numerator is P(wait), the denominator is safety capacity. For m = 1 the exponent is 1, so P(wait) = &rho;.</li>
-              <li>The three multiply. If any one worsens, the wait worsens.</li>
-              <li>M/M means CV<sub>a</sub> = CV<sub>p</sub> = 1, so the variation effect is 1 and drops out. G/G means compute both CVs.</li>
-              <li>Formulas are approximations. QMacros differs slightly for G/G, with the same insight. QMacros is not on the exam.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Comparative statics: add one server (m to m+1)</div>
-            <ul>
-              <li>p/m falls, &rho; falls, P(wait) falls (a number between 0 and 1 raised to a bigger power shrinks), safety capacity rises.</li>
-              <li>CV<sub>a</sub> and CV<sub>p</sub> are unchanged. Nothing in the variation term depends on m.</li>
-              <li>New technology that cuts p: capacity up and &rho; down, but &sigma;<sub>p</sub> may not shrink in proportion, so CV<sub>p</sub> could rise. If no new &sigma;<sub>p</sub> is given, <strong>assume CV<sub>p</sub> is unchanged</strong>.</li>
-              <li>In the exam formula, adding servers with everything else fixed always helps. Lecture 6 specialization logic does not apply.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Utilization and safety capacity</div>
-            <ul>
-              <li>Safety capacity = 1 &minus; &rho;. It can be tiny but never zero, because it is in the denominator.</li>
-              <li><strong>Safety capacity = 1 &minus; P(wait) only when m = 1.</strong></li>
-              <li>Nonlinear near the top: &rho;/(1 &minus; &rho;) is 1 at 50%, 1.04 at 51%, 49 at 98%, 99 at 99%. A one-point rise at 98% doubles the dependency factor.</li>
-              <li>Never say &ldquo;maximize utilization.&rdquo; Talk in utilization and safety capacity. The right level depends on the stakes: an ambulance is not a coffee shop.</li>
-              <li>More variability needs more safety capacity for the same wait. With no variability you can run near 100%. &ldquo;If you want to get rid of wait time, get rid of variability.&rdquo;</li>
-              <li>Waiting only happens when <em>all</em> servers are busy at once. With m servers, P(wait) is below &rho;.</li>
-            </ul>
-          </div>
-          <div class="sheet-box">
-            <div class="t">[EXAM] Pooling</div>
-            <ul>
-              <li>Call centre, same &lambda; = 100 per hour, same total capacity 120: one fast server (&mu; = 120) gives T<sub>q</sub> 1.56 and T 2.06 min. Ten slow servers (&mu; = 12 each) give P(wait) 51%, T<sub>q</sub> 0.96, but <strong>T 5.96 min</strong> because service takes 5 minutes. Pooling lowers the wait and can raise total time. Look at T, not only T<sub>q</sub>.</li>
-              <li>One shared line vs separate lines (coffee shop, &lambda; = 95 per hour, two baristas at 50 per hour, both at &rho; = 95%): separate lines each have T<sub>q</sub> 22.8 and T 24 min. A shared two-server line has T about 12.3 min. Same utilization, lower P(wait), balanced workload.</li>
-              <li>Costs: customers prefer to be last in a short line, a long single queue can drive balking, and servers must be interchangeable. Which design wins depends on whether customers react to the wait or to total time.</li>
-            </ul>
-          </div>
-          <div class="sheet-box wide">
-            <div class="t">[EXAM] Long waits, the exponential tail</div>
-            <ul>
-              <li>P(wait &le; t) = 1 &minus; e<sup>&minus;t/T<sub>q</sub></sup> and P(wait &gt; t) = e<sup>&minus;t/T<sub>q</sub></sup>. Valid when arrivals and service are random (M/M). Strict vs non-strict inequality makes no difference for a continuous wait.</li>
-              <li>Example: T<sub>q</sub> = 33.75, t = 60. 1 &minus; e<sup>&minus;1.778</sup> = 0.831, so 83% wait under an hour and <strong>17% wait longer</strong>. The professor expects you to compute T<sub>q</sub> first, then plug it in, and T is given.</li>
-              <li>Expected question shape: compute CV<sub>a</sub>, CV<sub>p</sub> and &rho;, then T<sub>q</sub>, then T, I<sub>q</sub>, I, then the tail probability. Check that I &minus; I<sub>q</sub> equals &rho;m.</li>
-              <li>Clinic exam-style example from the review: &lambda; = 10.8 per hour, &mu; = 12 per hour (p = 5 min), &rho; = 0.9, CV<sub>p</sub> = 0.7. T<sub>q</sub> about 33 min, T about 38, I<sub>q</sub> about 5.9, I about 6.8. He called it &ldquo;a good example we can use for the exam.&rdquo;</li>
-            </ul>
-          </div>
-        </div>
-        <div class="takeaway"><strong>Exam-ready takeaway:</strong> compute in this order: &lambda; and p in one unit, &rho;, CVs, T<sub>q</sub>, then T = T<sub>q</sub> + p, then Little&rsquo;s Law, then the tail. For any MCQ, say which of the three effects moves and in which direction, then read the answer off the formula.</div>
-      </div>
-
-      <!-- ===== MCQ BANK ===== -->
-      <h3 class="mp-sub" id="mp-mcq">Self-test: true/false and MCQ traps</h3>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">Click a statement to reveal the answer. These are the statements the professor posed, answered, or flagged in the review, plus the obvious twins of each. Try to answer before opening.</p>
-
-      <details class="mp-q"><summary><span class="qn">1</span><span class="qt">The bottleneck is the station with the lowest processing time.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> The bottleneck is the station with the lowest capacity m&times;&mu;. A station with several resources can have a long p and still not bind.</div></details>
-      <details class="mp-q"><summary><span class="qn">2</span><span class="qt">Process capacity is 1/T<sub>min</sub>.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> T<sub>min</sub> adds up processing times and ignores the number of resources. Capacity does not depend on it.</div></details>
-      <details class="mp-q"><summary><span class="qn">3</span><span class="qt">Doubling the capacity of a non-bottleneck station raises process capacity and shortens flow time.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Neither changes. The minimum rule still points at the old bottleneck.</div></details>
-      <details class="mp-q"><summary><span class="qn">4</span><span class="qt">Shortening the processing time at a non-bottleneck offers no operational benefit.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Capacity does not move, but flow time, WIP, and customer experience can improve.</div></details>
-      <details class="mp-q"><summary><span class="qn">5</span><span class="qt">Implied utilization can exceed 100%, utilization cannot.</span><span class="lec">L2</span></summary><div class="ans"><b class="t">True.</b> Implied utilization = demand/capacity with no min. Utilization uses throughput, which is capped by capacity.</div></details>
-      <details class="mp-q"><summary><span class="qn">6</span><span class="qt">If a question asks for the utilization of the process, report the utilization of the resource with the most units.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Process utilization is the bottleneck&rsquo;s utilization (100% when demand exceeds capacity). Resource-level figures like 57% describe individual resources.</div></details>
-      <details class="mp-q"><summary><span class="qn">7</span><span class="qt">Throughput rate and service rate are synonyms.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Throughput = exit = output = flow rate. Service rate is a capacity concept.</div></details>
-      <details class="mp-q"><summary><span class="qn">8</span><span class="qt">After ScharffenBerger installs the ball mill, capacity rises by the full improvement at the ball mill.</span><span class="lec">L2 case</span></summary><div class="ans"><b class="f">False.</b> Another resource (the roaster) becomes the bottleneck, so the gain is limited to the next constraint (about +10%, not +75%). Minimum rule.</div></details>
-      <details class="mp-q"><summary><span class="qn">9</span><span class="qt">Process-analysis questions require buffers (triangles) in the flow diagram for deterministic processes.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> No buffers are needed in the deterministic setting. Buffers matter once there is variability, and go before the bottleneck.</div></details>
-      <details class="mp-q"><summary><span class="qn">10</span><span class="qt">Little&rsquo;s Law only holds for first-come-first-served queues.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> It holds for any discipline with patient customers. Discipline changes who waits, not the average inventory.</div></details>
-      <details class="mp-q"><summary><span class="qn">11</span><span class="qt">Cash-to-cash can be negative.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> If you collect from customers before you pay suppliers (long payables, short receivables, fast process).</div></details>
-      <details class="mp-q"><summary><span class="qn">12</span><span class="qt">Cost-to-cash = cash-to-cash + payables flow time.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> Cost-to-cash = inventory days + receivable days. Subtract payable days to get cash-to-cash.</div></details>
-      <details class="mp-q"><summary><span class="qn">13</span><span class="qt">Seasonal demand is second-order variability.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Seasonality is first-order (a predictable change in the average). Second-order is unpredictable noise around the average.</div></details>
-      <details class="mp-q"><summary><span class="qn">14</span><span class="qt">A hybrid strategy holds less inventory than a level strategy but needs more capacity.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> Higher capacity shrinks the peak shortfall, so the build starts later and the inventory triangle is smaller. See the walkthrough: 1,920 vs 19,200 unit-weeks.</div></details>
-      <details class="mp-q"><summary><span class="qn">15</span><span class="qt">A chase strategy builds inventory in the low season.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Chase sets capacity equal to demand, so inventory stays near zero. Level and hybrid build stock.</div></details>
-      <details class="mp-q"><summary><span class="qn">16</span><span class="qt">Balking and reneging are the same thing.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Balking = refuse to join after seeing the line. Reneging = join then leave, which is worse because the line was inflated and capacity was spent on the customer.</div></details>
-      <details class="mp-q"><summary><span class="qn">17</span><span class="qt">For a system with deterministic arrivals, CV<sub>a</sub> = 0.</span><span class="lec">L4</span></summary><div class="ans"><b class="t">True.</b> Identical gaps mean &sigma;<sub>a</sub> = 0.</div></details>
-      <details class="mp-q"><summary><span class="qn">18</span><span class="qt">Batch arrivals correspond to CV<sub>a</sub> &gt; 1; an appointment system to CV<sub>a</sub> &lt; 1; Poisson arrivals to CV<sub>a</sub> = 1.</span><span class="lec">L4</span></summary><div class="ans"><b class="t">True.</b> All three.</div></details>
-      <details class="mp-q"><summary><span class="qn">19</span><span class="qt">Higher variability increases utilization.</span><span class="lec">L4</span></summary><div class="ans"><b class="f">False.</b> Utilization depends on averages. Variability lengthens waits. If it causes balking, reneging, or blocking, utilization <em>drops</em>.</div></details>
-      <details class="mp-q"><summary><span class="qn">20</span><span class="qt">Congestion means the process lacks capacity.</span><span class="lec">L4</span></summary><div class="ans"><b class="f">False.</b> Queues form with spare capacity whenever arrivals or service times vary. A batch of 60 tourists can congest a system that is fine on average.</div></details>
-      <details class="mp-q"><summary><span class="qn">21</span><span class="qt">A process with arrival CV 0.5 and service CV 1 has the same expected wait as one with arrival CV 1 and service CV 0.5 (same &lambda;, p, m).</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True.</b> The variation effect is (CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2, symmetric in the two.</div></details>
-      <details class="mp-q"><summary><span class="qn">22</span><span class="qt">Safety capacity always equals 1 minus the probability of waiting.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> Only for a single server, where P(wait) = &rho;. With m &gt; 1, safety capacity is 1 &minus; &rho; and P(wait) is lower than &rho;.</div></details>
-      <details class="mp-q"><summary><span class="qn">23</span><span class="qt">Adding a server reduces the service effect, the probability of waiting, and raises safety capacity, but does not change CV<sub>a</sub> or CV<sub>p</sub>.</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True.</b> All four statements hold inside the exam formula.</div></details>
-      <details class="mp-q"><summary><span class="qn">24</span><span class="qt">Cutting p with new technology lowers T<sub>q</sub> for sure.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">Not for sure.</b> &rho; and p/m fall, but &sigma;<sub>p</sub> may not shrink proportionally, so CV<sub>p</sub> could rise. If no new &sigma;<sub>p</sub> is given, assume CV<sub>p</sub> is unchanged, and then yes.</div></details>
-      <details class="mp-q"><summary><span class="qn">25</span><span class="qt">Splitting one fast server into many slow servers with the same total capacity always reduces the time a customer spends in the system.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> Wait falls (1.56 to 0.96 min in the call centre) but system time rises (2.06 to 5.96 min) because each service takes longer.</div></details>
-      <details class="mp-q"><summary><span class="qn">26</span><span class="qt">A single shared line with two servers beats two separate lines at the same utilization.</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True</b> on wait and system time (24 down to about 12.3 min in the coffee shop). It gives up customer continuity and may raise balking if the line looks long.</div></details>
-      <details class="mp-q"><summary><span class="qn">27</span><span class="qt">If the average wait is 34 minutes, no customer waits more than 60 minutes.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> With exponential waits, about 17% exceed 60 minutes.</div></details>
-      <details class="mp-q"><summary><span class="qn">28</span><span class="qt">At 98% utilization, one more point of utilization has the same effect on waiting as one more point at 50%.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> The dependency factor &rho;/(1&minus;&rho;) goes 1 to 1.04 from 50% to 51%, and 49 to 99 from 98% to 99%.</div></details>
-      <details class="mp-q"><summary><span class="qn">29</span><span class="qt">Utilization should be maximized to use assets well.</span><span class="lec">L1, L5</span></summary><div class="ans"><b class="f">False.</b> Safety capacity cannot be zero. Choose utilization to match the promised timeliness and the stakes.</div></details>
-      <details class="mp-q"><summary><span class="qn">30</span><span class="qt">For a firm on the efficient frontier, quality can rise with no loss on another dimension.</span><span class="lec">L1</span></summary><div class="ans"><b class="f">False.</b> On the frontier you trade off. Only innovation (new business or operations strategy, or pooling) moves the frontier outward. Firms inside it can improve for free.</div></details>
-      <details class="mp-q"><summary><span class="qn">31</span><span class="qt">Toyota has higher productivity than Rolls-Royce, so Toyota executes its strategy better.</span><span class="lec">L1</span></summary><div class="ans"><b class="f">False.</b> Productivity measures cost efficiency only, not strategic positioning. Rolls-Royce competes on exclusivity.</div></details>
-      <details class="mp-q"><summary><span class="qn">32</span><span class="qt">In the VCAP framework, strong assets allow weaker processes and vice versa.</span><span class="lec">L1</span></summary><div class="ans"><b class="t">True.</b> They partly substitute. Uber (asset-light, process-strong) against a garbage hauler (asset-heavy).</div></details>
-
-      <!-- ===== NUMERICAL ===== -->
-      <h3 class="mp-sub" id="mp-numerical">Numerical walkthroughs</h3>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">Each one mirrors a 20-point question. Cover the answers and redo them on paper. All figures were recomputed.</p>
-
-      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
-        <h4 style="font-size:16px;">1. Process analysis (Lecture 2)</h4>
-        <p style="font-size:13.5px;">Three stations in series. A: 1 worker, p = 10 min. B: 1 worker, p = 4 min. C: 3 workers, p = 20 min each. Demand is 10 units per hour. Flow unit: one job.</p>
-        <div class="table-wrap"><table>
-          <tr><th>Station</th><th class="num">&mu; per hour</th><th class="num">m</th><th class="num">Capacity</th><th class="num">Utilization at R = 6</th><th class="num">Implied util. (demand 10)</th></tr>
-          <tr><td>A</td><td class="num">6</td><td class="num">1</td><td class="num">6</td><td class="num">100%</td><td class="num">167%</td></tr>
-          <tr><td>B</td><td class="num">15</td><td class="num">1</td><td class="num">15</td><td class="num">40%</td><td class="num">67%</td></tr>
-          <tr><td>C</td><td class="num">3</td><td class="num">3</td><td class="num">9</td><td class="num">67%</td><td class="num">111%</td></tr>
-        </table></div>
-        <ul style="font-size:13.5px;">
-          <li><strong>Bottleneck is A (6 per hour), even though C has the longest p (20 min).</strong> Process capacity 6. Throughput R = min(10, 6) = 6. Process utilization 100%. Process implied utilization 10/6 = 167%, a 67% capacity deficit.</li>
-          <li>T<sub>min</sub> = 10 + 4 + 20 = 34 min, regardless of how many workers there are.</li>
-          <li><strong>Second-bottleneck test:</strong> add a second worker at A. A becomes 12 per hour, but C (9 per hour) now binds. R = 9, a 50% gain, not the 100% that doubling A suggests. Utilizations become A 75%, B 60%, C 100%.</li>
-          <li>Draw the diagram: A, B, C boxes in series with the number of resources written in each. No triangles needed in the deterministic case.</li>
-        </ul>
-      </div>
-
-      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
-        <h4 style="font-size:16px;">2. Production strategy (Lecture 3, slides 32-37)</h4>
-        <p style="font-size:13.5px;">Demand is 40 per week for 40 weeks, then 120 per week for 12 weeks (the peak starts at the beginning of week 41). Annual demand 40&times;40 + 12&times;120 = 3,040, so the average is 58.46 per week.</p>
-        <div class="table-wrap"><table>
-          <tr><th>Strategy</th><th class="num">Capacity per week</th><th class="num">Peak shortfall per week</th><th class="num">Total shortage = max inventory</th><th class="num">Build rate</th><th class="num">Weeks of build</th><th class="num">Inventory, unit-weeks</th></tr>
-          <tr><td>Hybrid (his example)</td><td class="num">100</td><td class="num">20</td><td class="num">240</td><td class="num">60</td><td class="num">4 (start week 37)</td><td class="num">1,920</td></tr>
-          <tr><td>Level</td><td class="num">58.46</td><td class="num">61.54</td><td class="num">738.5</td><td class="num">18.46</td><td class="num">40 (whole low season)</td><td class="num">19,200</td></tr>
-          <tr><td>Chase</td><td class="num">40, then 120</td><td class="num">0</td><td class="num">0</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">0</td></tr>
-        </table></div>
-        <ul style="font-size:13.5px;">
-          <li>Hybrid inventory: build triangle 0.5 &times; 4 &times; 240 = 480, drawdown triangle 0.5 &times; 12 &times; 240 = 1,440, total 1,920 unit-weeks. Multiply by the carrying cost per unit per week for the cost.</li>
-          <li>Level inventory: 0.5 &times; 40 &times; 738.5 + 0.5 &times; 12 &times; 738.5 = 19,200 unit-weeks, ten times the hybrid. Check: the build over 40 weeks at 18.46 per week equals the 738.5 shortage.</li>
-          <li>The comparison is the exam answer: hybrid saves 90% of the holding cost, but it pays for 100 units of capacity instead of 58.46. Decide by comparing that extra capacity cost with the holding cost saved. Chase needs the flexible capacity and holds no stock.</li>
-          <li>Check that the drawdown works: 240 units at 20 per week lasts exactly 12 weeks.</li>
-        </ul>
-      </div>
-
-      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
-        <h4 style="font-size:16px;">3. Queueing (Lectures 4 and 5)</h4>
-        <p style="font-size:13.5px;"><strong>Call centre, one server.</strong> Calls arrive at 100 per hour (&sigma;<sub>a</sub> = 0.6 min), service averages 0.5 min with &sigma;<sub>p</sub> = 0.25 min.</p>
-        <ol class="mp-steps">
-          <li>a = 60/100 = 0.6 min, so CV<sub>a</sub> = 0.6/0.6 = 1. p = 0.5 min, so CV<sub>p</sub> = 0.25/0.5 = 0.5. &mu; = 120 per hour.</li>
-          <li>&rho; = 100/120 = 0.8333. Safety capacity 0.1667. m = 1, so P(wait) = &rho; = 0.8333.</li>
-          <li>Variation effect = (1 + 0.25)/2 = 0.625. Dependency effect = 0.8333/0.1667 = 5.</li>
-          <li>T<sub>q</sub> = 0.5 &times; 0.625 &times; 5 = <strong>1.5625 min</strong>. T = 1.5625 + 0.5 = <strong>2.0625 min</strong>.</li>
-          <li>&lambda; = 1.6667 per minute. I<sub>q</sub> = 1.6667 &times; 1.5625 = 2.60. I = 1.6667 &times; 2.0625 = 3.44 (= 2.60 + 0.83).</li>
-          <li>P(wait &gt; 2 min) = e<sup>&minus;2/1.5625</sup> = 0.278 (valid when CV<sub>a</sub> = CV<sub>p</sub> = 1, so here it is only a rough guide).</li>
-        </ol>
-        <p style="font-size:13.5px;margin-top:14px;"><strong>Tail example from the review.</strong> T<sub>q</sub> = 33.75 min, threshold 60 min. P(wait &lt; 60) = 1 &minus; e<sup>&minus;60/33.75</sup> = 1 &minus; 0.169 = 0.831. So 83% wait less than an hour and 17% wait longer.</p>
-        <p style="font-size:13.5px;"><strong>Shared line, coffee shop.</strong> &lambda; = 95 per hour, two baristas, p = 1.2 min each, M/M. Separate lines: &lambda; = 47.5 each, &rho; = 0.95, T<sub>q</sub> = 1.2 &times; 0.95/0.05 = 22.8, T = 24.0 min. Shared line (m = 2): exponent &radic;6 &minus; 1 = 1.449, P(wait) = 0.95<sup>1.449</sup> = 0.928, T<sub>q</sub> = (1.2/2) &times; 0.928/0.05 = 11.1, T = 12.3 min.</p>
-        <p style="font-size:13.5px;margin-bottom:0;"><strong>Walk-in clinic.</strong> &lambda; = 10.8 per hour, p = 5 min (&mu; = 12), &rho; = 0.9, CV<sub>a</sub> about 1, CV<sub>p</sub> = 0.7. T<sub>q</sub> = 5 &times; (1 + 0.49)/2 &times; 9 = 33.5 min with CV<sub>a</sub> = 1 (33.1 with 0.99). T about 38.5. The professor&rsquo;s class figure was about 33 and 38, and QMacros gave 39. Accept anything within rounding, and show the steps.</p>
-      </div>
-
-      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
-        <h4 style="font-size:16px;">4. Cash cycle (Lecture 3, the one expected MCQ-style calculation)</h4>
-        <p style="font-size:13.5px;margin-bottom:0;">Sales $250M, COGS $176M, AR $28M, inventory $50.6M, AP $11.9M. Inventory 365 &times; 50.6/176 = 105 days (3.5 turns). Receivables 365 &times; 28/250 = 41 days. Payables 365 &times; 11.9/176 = 25 days. Cost-to-cash = 105 + 41 = 146. Cash-to-cash = 146 &minus; 25 = 121 days.</p>
-      </div>
-
-      <!-- ===== CALCULATORS ===== -->
-      <h3 class="mp-sub" id="mp-calc">Calculators for self-checking</h3>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">For practice only. They do not come into the exam, so use them to check your hand calculations on the practice sets.</p>
-
-      <div class="mp-calc" id="calcQ">
-        <h4>Queue calculator (Lecture 5 formula)</h4>
-        <div class="row">
-          <label>Arrival rate &lambda; (per hour)<input type="number" step="any" id="q_lam" value="100"></label>
-          <label>Processing time p (minutes)<input type="number" step="any" id="q_p" value="0.5"></label>
-          <label>Servers m<input type="number" step="1" min="1" id="q_m" value="1"></label>
-          <label>CV<sub>a</sub><input type="number" step="any" id="q_cva" value="1"></label>
-          <label>CV<sub>p</sub><input type="number" step="any" id="q_cvp" value="0.5"></label>
-          <label>Threshold t (minutes)<input type="number" step="any" id="q_t" value="2"></label>
-        </div>
-        <div class="out" id="q_out"></div>
-        <div class="warn" id="q_warn"></div>
-      </div>
-
-      <div class="mp-calc" id="calcH">
-        <h4>Production strategy calculator (Lecture 3 recipe)</h4>
-        <div class="row">
-          <label>Low-season demand per week<input type="number" step="any" id="h_low" value="40"></label>
-          <label>Peak demand per week<input type="number" step="any" id="h_peak" value="120"></label>
-          <label>Capacity per week<input type="number" step="any" id="h_cap" value="100"></label>
-          <label>Peak length (weeks)<input type="number" step="any" id="h_wk" value="12"></label>
-          <label>Peak starts at beginning of week<input type="number" step="any" id="h_start" value="41"></label>
-        </div>
-        <div class="out" id="h_out"></div>
-        <div class="warn" id="h_warn"></div>
-      </div>
-
-      <!-- ===== FINAL CHECKLIST ===== -->
-      <h3 class="mp-sub" id="mp-final">Last-night checklist</h3>
-      <div class="sheet-grid">
-        <div class="sheet-box">
-          <div class="t">Ten things the professor flagged most</div>
-          <ol class="mp-check" style="margin:0;padding-left:18px;">
-            <li>Minimum rule. Bottleneck = lowest long-term capacity, not the slowest step.</li>
-            <li>Process utilization is the bottleneck&rsquo;s. Implied utilization can exceed 100%.</li>
-            <li>p = 1/&mu; with matching units. Convert minutes to hours before you divide.</li>
-            <li>I = R &times; T with consistent units, and the correct flow unit.</li>
-            <li>Cost-to-cash and cash-to-cash from financial statements (one question).</li>
-            <li>First-order = predictable, second-order = noise. Fix the average first.</li>
-            <li>Chase, level, hybrid, and the 5-step recipe (answer week 37 in his example).</li>
-            <li>CV interpretation: 0, below 1, 1, above 1 for both arrivals and service.</li>
-            <li>T<sub>q</sub> = service &times; variation &times; dependency, safety capacity never zero.</li>
-            <li>Pooling lowers wait but can raise system time. The tail is e<sup>&minus;t/T<sub>q</sub></sup>.</li>
-          </ol>
-        </div>
-        <div class="sheet-box">
-          <div class="t">Process on the day</div>
-          <ul class="mp-check">
-            <li>Arrive 15 minutes early. Calculator, aid sheet, ID.</li>
-            <li>Photograph your aid sheet beforehand. It is collected with the paper and booklet.</li>
-            <li>MCQs first, but cap them at about 30 minutes. Mark and skip anything slow.</li>
-            <li>On every numerical question: write the formula, the substitution, the answer, and the unit. A wrong earlier number does not cost you again if you carry it forward correctly.</li>
-            <li>Queueing order: units, &rho;, CVs, T<sub>q</sub>, T, Little&rsquo;s Law, tail.</li>
-            <li>Do not use Lecture 6 logic. Do not spend time on cycle time or takt time.</li>
-            <li>Keep two decimals. Do not round fractions of people or units down.</li>
-          </ul>
-        </div>
-        <div class="sheet-box wide">
-          <div class="t">Things I could not settle from the transcripts</div>
-          <ul>
-            <li>Whether yield and loss will be tested. He mentioned it briefly and did not say. Practise one example.</li>
-            <li>The exact count of true/false questions, and the exact wording of the section names. The weights (40/20/20/20) are consistent.</li>
-            <li>The cost-ratio bands (below 2, 2 to 8, above 8) he mentioned in Lecture 3 were garbled. He said he would not return to them.</li>
-            <li>The slide says &ldquo;average flow time&rdquo; in the exponential formula, but he used T<sub>q</sub> in his example. See the correction at the top of this section.</li>
-            <li>The printed formula sheet is the same one posted for practice. Check which formulas it already gives, and do not duplicate them on your aid sheet.</li>
-          </ul>
-        </div>
-      </div>
-
-    </section>
-
     <!-- ============ PROFESSOR ============ -->
     <section class="block" id="professor">
       <div class="block-head"><span class="num">02</span><h2>The professor</h2></div>
@@ -3085,6 +2555,789 @@ h3 .slide-ref, h4 .slide-ref{margin-left:10px;}
           <strong>Exam-ready takeaway:</strong> three levers move waiting time: variability (the CV term), utilization (the 1/(1 &minus; &rho;) term), and the number and speed of servers (the p/m and P(wait) terms). Pooling works through the last one. Check the units, since p, a, and the final answer must share one time unit.
         </div>
       </div>
+    </section>
+
+    <!-- ============ MIDTERM PREP ============ -->
+    <section class="block" id="midterm-prep">
+      <div class="block-head"><span class="num">&#9733;</span><h2>Midterm prep</h2><span class="tag">Lectures 1 to 5 &middot; Tue Oct 20, 6:30 to 8:30 pm</span></div>
+
+      <div class="mp-hero">
+        <h3>Built from the slides, the lecture transcripts, and the professor&rsquo;s Saturday review session</h3>
+        <p>Everything the exam can touch, in the order you will meet it. Tags: <strong>[EXAM]</strong> he said it will be tested, <strong>[TRAP]</strong> a typical mistake, <strong>[CUT]</strong> he said it is not on the exam. Items marked <em>(check)</em> come from a garbled transcript, so confirm them against the slides.</p>
+      </div>
+
+      <!-- ===== RULES ===== -->
+      <h3 class="mp-sub" id="mp-rules" style="margin-top:0;">Exam rules, scoring, and what is cut</h3>
+      <div class="sheet-grid">
+        <div class="sheet-box">
+          <div class="t">Structure (100 points)</div>
+          <ul>
+            <li><strong>40 pts MCQ:</strong> about 20 questions at 2 points each, some true/false, at most 5 options. Conceptual only, no calculations. The two cases (D&rsquo;O and ScharffenBerger) are folded into the MCQs.</li>
+            <li><strong>20 pts process analysis</strong> (Lecture 2). You may need to draw the flow diagram.</li>
+            <li><strong>20 pts first-order variability and production strategy</strong> (Lecture 3, slides 32-37).</li>
+            <li><strong>20 pts queueing</strong> (Lectures 4 and 5).</li>
+            <li>No qualitative written questions this year.</li>
+          </ul>
+        </div>
+        <div class="sheet-box">
+          <div class="t">Scoring and time rules</div>
+          <ul>
+            <li><strong>No double penalty:</strong> if your T<sub>q</sub> is wrong but you plug it correctly into the next formula, you keep the marks for that step. Keep going.</li>
+            <li>Standard deviations are given. Two decimals unless told otherwise. Do not round down 2.076 to 2.</li>
+            <li>Non-programmable calculator (you need exp()). No Excel or QMacros on the exam.</li>
+            <li>Spend at most about 30 minutes on the MCQs, then split the rest across the three numerical questions. Start with the one you know least if it is worth more marks to you.</li>
+            <li>MCQs are slide content with small tweaks. The four practice sets are &ldquo;true representative&rdquo; of the numerical questions.</li>
+          </ul>
+        </div>
+        <div class="sheet-box wide">
+          <div class="t">[CUT] Not on the midterm</div>
+          <ul>
+            <li><strong>All of Lecture 6.</strong> His words: &ldquo;unlearn whatever you learned in Lecture 6.&rdquo; Do not apply pooling-raises-CV<sub>p</sub> logic to MCQs. Inside the Lecture 5 formula, adding a server always helps.</li>
+            <li>Cycle time (1/throughput) and takt time (1/demand). He called them &ldquo;for your information.&rdquo;</li>
+            <li>Probability of a wait <em>between</em> two thresholds, and formula derivations.</li>
+            <li>Multiple customer types and re-entrant flows in process analysis: &ldquo;I don&rsquo;t think I will do that.&rdquo; Know the weighted-flow-unit method anyway, it is a cheap safeguard.</li>
+            <li>Optimal asset timing (economies of scale against time value of money), the cost-ratio bands, the newsvendor &ldquo;golden ratio&rdquo; (Lecture 9), and WSPT.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:16px;">
+        <div class="callout-label">Correction to read first: which average goes in the exponential?</div>
+        The printed formula sheet writes the exponential as e<sup>&minus;t/average flow time</sup>. In the review session the professor worked it with the <strong>average wait T<sub>q</sub></strong>: P(wait &lt; 60) = 1 &minus; e<sup>&minus;60/33.75</sup> = 0.83, so 17% wait longer than 60 minutes. I would use T<sub>q</sub> for any wait-time question, write the formula on your sheet, and say in one line which average you used. If a question defines the threshold on total time in system, use T. His line: &ldquo;this only works when the arrival and service variability are random&rdquo; (CV<sub>a</sub> = CV<sub>p</sub> = 1).
+      </div>
+
+      <!-- ===== L1 ===== -->
+      <div class="summary-sheet" id="mp-l1">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
+        <h3>Lecture 1: Operations strategy and VCAP</h3>
+        <p class="sub">All MCQ material. No calculation, but the D&rsquo;O case facts are fair game.</p>
+
+        <div class="formula-box">
+          V = C &times; (A + P) &nbsp;&middot;&nbsp; Operations strategy = the optimal configuration of assets and processes that supports the business strategy
+          <span class="fx-note">V = value (a vector: price, quality, timeliness, variety). C = competencies. A = assets. P = processes.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">[EXAM] Value to competency to operations focus</div>
+            <ul>
+              <li>Price &rarr; cost efficiency. Quality &rarr; quality processes and assets. Timeliness &rarr; responsiveness (shorter response time). Variety &rarr; flexibility.</li>
+              <li>Price (what the customer sees) is not cost (internal). Keep them apart.</li>
+              <li>Value is a vector, not a single number. Alignment is the success principle: design operations from what the firm promised customers, in a back-and-forth with business strategy.</li>
+              <li>Walmart: everyday low price, with selection and inventory good enough, so processes and assets target cost.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Assets and processes trade off</div>
+            <ul>
+              <li>Strong assets allow weaker processes, and strong processes compensate for weak assets. Uber is asset-light and process-strong. Waste collection is asset-heavy with high fixed cost.</li>
+              <li>Competency comes from the synergy between assets and processes, which is what competitors cannot copy. Anyone can buy the same machine.</li>
+              <li>Three levels of fit: each choice reinforces the operations strategy, assets and processes have synergy within a business line, and operations is coordinated with marketing and finance (unaligned marketing leaves assets idle or demand unserved).</li>
+              <li>A firm can have several business lines, each with its own operations strategy under one corporate strategy.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Asset decisions: location, size, type, timing</div>
+            <ul>
+              <li><strong>Location:</strong> mostly fixed cost. Downtown rent flows into price. D&rsquo;O sits about 35 km from central Milan for exactly this reason.</li>
+              <li><strong>Size:</strong> capacity and safety capacity. At 100% utilization there is no safety capacity. Right-size, not maximize.</li>
+              <li><strong>Type:</strong> dedicated vs flexible vs partially flexible. Flexibility = one resource performs more than one task. A little flexibility goes a long way, with diminishing returns. We right-size flexibility, we do not maximize it.</li>
+              <li><strong>Timing:</strong> capacity leading (anticipate demand), lagging (wait until demand is sticky, as ScharffenBerger and D&rsquo;O did), or tracking. Leading earns market position and costs opportunity cost if demand does not come.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Process decisions: supply, demand, risk, technology, innovation</div>
+            <ul>
+              <li><strong>Supply:</strong> one vs many suppliers, in-house vs outsource, volume, supplier participation in design, yield and loss pricing, service guarantees.</li>
+              <li><strong>Demand:</strong> which demand to accept (batch sizes, order caps) because setup time kills productivity. Inventory build-up suits regular products, not customized ones.</li>
+              <li><strong>Risk</strong> = second-order variability. Managed with safety capacity, safety inventory, and safety time.</li>
+              <li><strong>Technology:</strong> tech vs touch. D&rsquo;O is cash-only because card fees of 3 to 6% conflict with a price-based proposition.</li>
+              <li><strong>Innovation:</strong> how often you iterate. More variety needs more flexibility, which operations dislikes. Toyota and BMW can differ inside one sector.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">[EXAM] Efficient frontier and productivity</div>
+            <ul>
+              <li>Axes: cost on x, a non-cost competency (quality, variety, timeliness) on y. Firms on the frontier must <strong>trade off</strong>: gain something, lose something (higher quality costs productivity). Firms inside the frontier can improve without a trade-off.</li>
+              <li>The frontier moves only with <strong>innovation</strong> in business and operations strategy. D&rsquo;O pushed it out with a new business model. Resource pooling (Lecture 5) is also an operations innovation that improves position with no trade-off.</li>
+              <li><strong>Productivity (output over input) cannot compare firms with different strategic positions.</strong> Toyota builds about 300,000 cars a year and Rolls-Royce a few thousand. Rolls-Royce is not &ldquo;a bad company,&rdquo; it sells exclusivity, not low price.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">D&rsquo;O case facts to hold on to</div>
+            <ul>
+              <li>Value proposition: excellent food made accessible (price-led), so every operating choice is judged against it.</li>
+              <li>Choose the change with the highest ROIC that does <strong>not</strong> violate the proposition. Raising price or the wine markup lifts ROIC but conflicts with the proposition. Dropping the 8:30 time slot lifts return to about 18% and is aligned. ROIC for the case was about 7.7% on operating capital.</li>
+              <li>The long reservation wait list works as a buffer against demand variability and lets the firm focus on cost. Removing flexibility raised throughput but needed more staff, which raised price. That broke alignment.</li>
+              <li>Investigate outliers, do not just delete them.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="takeaway"><strong>Exam-ready takeaway:</strong> for any Lecture 1 MCQ, name the value proposition first, then ask which competency it needs, then check that the asset or process choice supports that competency without breaking the proposition.</div>
+      </div>
+
+      <!-- ===== L2 ===== -->
+      <div class="summary-sheet" id="mp-l2">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
+        <h3>Lecture 2: Process capacity analysis</h3>
+        <p class="sub">20 pts numerical plus MCQs. Work in rates, apply the minimum rule, keep units consistent.</p>
+
+        <div class="formula-box">
+          &mu; = 1/p &nbsp;&middot;&nbsp; capacity = m &times; &mu; &nbsp;&middot;&nbsp; process capacity = min over stations &nbsp;&middot;&nbsp; R = min(demand, capacity)
+          <span class="fx-note">Utilization = R / capacity of that resource. Implied utilization = demand / capacity (no min, can exceed 100%). T<sub>min</sub> = sum of p along one path.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">[EXAM] Capacity and the bottleneck</div>
+            <ul>
+              <li>p = 1/&mu;. Put p in the same unit as the rate you want: 10 min = 1/6 hour, so &mu; = 6 per hour. <strong>[TRAP]</strong> Most students lose marks on this conversion.</li>
+              <li>m identical parallel resources: station capacity = m &times; &mu;. Parallel resources each take whole flow units, they do not cooperate.</li>
+              <li><strong>Bottleneck = the station with the lowest long-term capacity, not the slowest processing time.</strong> A slow p is compensated by more resources. Memorize: (1) bottleneck = lowest long-term capacity, (2) bottleneck capacity = process capacity.</li>
+              <li>&ldquo;The minimum rule is your friend in the exam.&rdquo; Always work with capacity rates once any station has more than one resource.</li>
+              <li>Why long-term: in the short run capacity can catch up in later periods. In the long run a persistent shortfall makes the backlog explode.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Throughput, utilization, implied utilization</div>
+            <ul>
+              <li>Throughput (flow, exit, output rate) R = min(demand rate, process capacity). Count units leaving, not arriving. &ldquo;Service rate&rdquo; is not a synonym.</li>
+              <li>Utilization = R / resource capacity, never above 100%. Write it this way and you cannot get any station wrong.</li>
+              <li><strong>Process utilization = the bottleneck&rsquo;s utilization.</strong> Do not report a resource-level figure like 57% as the process utilization.</li>
+              <li>Implied utilization = demand / capacity. 133% means a 33% capacity deficit. 200% means double the capacity. Equals utilization when demand is below capacity.</li>
+              <li>The highest-utilization resource is the bottleneck and the first one to bind as demand grows. Longest flow time is not the criterion.</li>
+              <li>Deterministic setting: unused capacity is underutilization (demand-constrained), not safety capacity. Real systems keep slack because of variability.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] T<sub>min</sub> and flow time</div>
+            <ul>
+              <li>T<sub>min</sub> = sum of the processing times along one path through an empty system. Minimum because no one waits, theoretical because the system is deterministic. Actual flow time is T<sub>min</sub> or worse.</li>
+              <li>Capacity is unrelated to T<sub>min</sub>. Process capacity is <strong>not</strong> 1/T<sub>min</sub>, because T<sub>min</sub> ignores how many resources a station has.</li>
+              <li>Adding capacity to a non-bottleneck, even infinite, changes neither process capacity nor flow time.</li>
+              <li>Shortening a non-bottleneck still has value (customer experience, lower WIP, cost). &ldquo;Offers no operational benefit&rdquo; is false.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">Flow unit, yield, flow diagram</div>
+            <ul>
+              <li>Define the process boundary first, then pick one flow unit and convert every station into it. The unit changes as it moves (beans, nibs, paste, chocolate), so convert with the actual input to each station.</li>
+              <li>Loss at a stage: multiply the yields (95% then 95% gives 90.25%). Work backwards for required input.</li>
+              <li>Flow diagram: boxes for activities, triangles for waiting. Draw a buffer before the bottleneck. <strong>For process-analysis questions no buffers are needed</strong> in the deterministic setting. A cooling step that needs attention is an activity, a pure wait is a triangle.</li>
+              <li>Moves between stations with no waiting are added to the neighbouring activity time.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">ScharffenBerger, the one case question</div>
+            <ul>
+              <li><strong>Why the ball mill does not add 75%:</strong> conching capacity jumps from about 40k to 68k kg a month, but process capacity only rises to the next limit (the roaster, about +10%). Fix the bottleneck and another resource becomes the bottleneck. The gain depends on the next constraint.</li>
+              <li>Typical OM pitfall: improving one part and forgetting the minimum rule. Check for a second bottleneck every time.</li>
+              <li>Growth: +50% demand needs a second roaster shift, +100% needs more shifts at several stations, +150% leaves everything near capacity, so any variability breaks the process. Operational choices must still protect quality, the value proposition.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">Multiple flow-unit types (likely not tested, cheap to know)</div>
+            Weighted-average time per task over the customer mix (a synthetic flow unit), add every task the same resource performs (a resource seen twice counts both times), convert to a rate, multiply by availability, take the minimum across resources. Valley Forge tax-firm example: admin 71.5 min per client gives 134 clients a month at 160 hours.
+          </div>
+        </div>
+        <div class="takeaway"><strong>Exam-ready takeaway:</strong> six steps every time: define the flow unit, compute m&times;&mu; per station in one time unit, take the minimum, set R = min(demand, capacity), compute utilization per resource and implied utilization, then T<sub>min</sub> as the sum of p. State units on every line.</div>
+      </div>
+
+
+      <!-- ===== L3 ===== -->
+      <div class="summary-sheet" id="mp-l3">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
+        <h3>Lecture 3: Little&rsquo;s Law and first-order variability</h3>
+        <p class="sub">One MCQ-style question on the financial version, and the 20-point production-strategy question.</p>
+
+        <div class="formula-box">
+          I = R &times; T &nbsp;&middot;&nbsp; cash-to-cash = cost-to-cash &minus; AP flow time
+          <span class="fx-note">Any two of I, R, T give the third. Units must match.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">[EXAM] Little&rsquo;s Law</div>
+            <ul>
+              <li>I = R &times; T: average inventory = throughput rate &times; average flow time. Holds for any boundary and any queue discipline (FCFS, LIFO, SPT) as long as customers are patient.</li>
+              <li><strong>[TRAP] Match the units.</strong> 10,000 claims a year over 50 weeks is 200 a week, times 3 weeks gives 600 claims. One coffee every 30 seconds is 2 a minute, so 6 in the system means 3 minutes.</li>
+              <li><strong>[TRAP] Name the flow unit</strong> (the claim, the bottle, the pound, the dollar), not the customer.</li>
+              <li>Snapshot reading: at any moment you see about I units in the system. Fractions are fine (2.08 patients). Do not round down.</li>
+              <li>Inflow/outflow diagram: vertical gap = inventory, horizontal gap = flow time (FCFS). Average inventory, throughput, and flow time all change with the window you analyse, and the law holds in each.</li>
+              <li>Inside a queue: T = T<sub>q</sub> + p, I<sub>q</sub> = &lambda;T<sub>q</sub>, number in service = &lambda;p = utilization (times m for m servers). Whole system: I = &lambda;T.</li>
+              <li>Turns: turns = R / I = 1 / flow time. 104 turns a year means a 0.5 week flow time. Inventory and payables relate to COGS, receivables to sales.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Cash cycles (he expects one question)</div>
+            <ul>
+              <li>Inventory flow time = 365 &times; inventory / COGS. Payables flow time = 365 &times; AP / COGS. Receivables flow time = 365 &times; AR / sales.</li>
+              <li><strong>Cost-to-cash = inventory days + receivable days.</strong> <strong>Cash-to-cash = cost-to-cash &minus; payable days.</strong> The slide label &ldquo;flow time of inventory&rdquo; on the AP bar should read accounts payable, which the professor corrected himself.</li>
+              <li>Worked check (sales $250M, COGS $176M, AR $28M, inventory $50.6M, AP $11.9M): payables 24.7 days, inventory 104.9, receivables 40.9. Cost-to-cash about 146 days, cash-to-cash about 121 days. (He once says &ldquo;101&rdquo;: a slip, the arithmetic gives 121.)</li>
+              <li>The cycle can be negative: suppliers and customers finance you, which signals bargaining power or a very fast process. Levers: longer supplier terms, faster internal conversion, faster collection.</li>
+              <li>A supplier discount lowers payables and COGS together, so the effect largely cancels. Do the math, do not assume.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] First vs second order</div>
+            <ul>
+              <li><strong>First-order variability</strong> = predictable change in the average (seasonality). <strong>Second-order</strong> = unpredictable noise around the average. Both can occur at once, on supply and on demand.</li>
+              <li>Priority: first make sure average capacity covers average demand. Then absorb the noise with safety capacity, safety inventory, or safety time.</li>
+              <li>OM triangle: capacity, inventory, information. Inventory is the physical form of missing information. With no information you buy capacity or inventory.</li>
+              <li>Balking = refuse to join after seeing the line. Reneging = join, then leave. Blocking = no room. Capacity below demand in the long run is not sustainable.</li>
+              <li>Even with daily capacity above daily demand, a temporary surge builds a queue.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Chase, level, hybrid</div>
+            <ul>
+              <li><strong>Chase:</strong> capacity follows demand each season. No inventory, but needs flexible capacity.</li>
+              <li><strong>Level:</strong> capacity = average demand all year. Build inventory in the low season, run it down in the peak. Cost is holding cost only, the area under the inventory curve times the carrying cost per unit.</li>
+              <li><strong>Hybrid:</strong> capacity between average and peak demand. Smaller shortfall, so it starts building later, holds less inventory, but pays for more capacity.</li>
+              <li>Level builds earlier at a lower rate, so its inventory triangle is larger than the hybrid&rsquo;s. Which is cheaper depends on the cost of extra capacity against the cost of holding inventory.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">[EXAM] The recipe for the 20-point question (Lecture 3 slides 32-37)</div>
+            <ol class="mp-steps">
+              <li>Magnitude of first-order variability = peak demand &minus; low demand.</li>
+              <li>Shortfall per week = peak demand &minus; capacity. Total shortage = shortfall per week &times; weeks of peak. This equals the maximum inventory.</li>
+              <li>Build rate = capacity &minus; low-season demand.</li>
+              <li>Weeks of build = total shortage / build rate. Start that many weeks before the peak begins.</li>
+              <li>Inventory cost = area under the inventory curve (triangles) &times; cost per unit per week.</li>
+            </ol>
+            <p style="margin:10px 0 0 0;font-size:13.5px;"><strong>His example:</strong> capacity 100, peak demand 120 for 12 weeks, low demand 40, peak starts at the beginning of week 41. Shortage 20 &times; 12 = 240. Build rate 100 &minus; 40 = 60. Build time 240/60 = 4 weeks, so production for stock starts at the beginning of <strong>week 37</strong>, with 240 units on hand when the peak starts. &ldquo;Don&rsquo;t forget the system runs 40 full weeks at low demand.&rdquo; Full numerical comparison with level and chase is in the walkthroughs below.</p>
+          </div>
+        </div>
+        <div class="takeaway"><strong>Exam-ready takeaway:</strong> draw the inventory triangle before computing. Slope up = capacity minus low demand, slope down = peak demand minus capacity, height = total shortage. Everything else is reading that picture.</div>
+      </div>
+
+      <!-- ===== L4 ===== -->
+      <div class="summary-sheet" id="mp-l4">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
+        <h3>Lecture 4: Second-order variability</h3>
+        <p class="sub">The professor says Lectures 4 and 5 are where students struggle. Master the definitions and the CV interpretations.</p>
+
+        <div class="formula-box">
+          a = 1/&lambda; &nbsp;&middot;&nbsp; CV<sub>a</sub> = &sigma;<sub>a</sub>/a &nbsp;&middot;&nbsp; CV<sub>p</sub> = &sigma;<sub>p</sub>/p &nbsp;&middot;&nbsp; &rho; = &lambda;/(m&mu;) = &lambda;p/m
+          <span class="fx-note">Standing assumption in Lectures 4 and 5: &lambda; &lt; m&mu;, so throughput = &lambda; and customers are patient.</span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">[EXAM] Notation and measurement</div>
+            <ul>
+              <li>a = average inter-arrival time (average the gaps between consecutive arrival times). &sigma;<sub>a</sub> = its standard deviation. If a = 1/10 hour, &lambda; = 10 per hour.</li>
+              <li>p = average processing time, &sigma;<sub>p</sub> its standard deviation, &mu; = 1/p.</li>
+              <li>Standard deviation is never negative. Averages are held fixed, only the spread varies.</li>
+              <li>Core intuition: the doctor sees a patient every 5 minutes and takes 4 minutes exactly, so utilization is 80% and there is no queue. Same averages with random timing and queues form. <strong>Congestion comes from variability, not from lost capacity.</strong> Do not say &ldquo;not enough capacity&rdquo; when 60 tourists arrive as one batch.</li>
+              <li>Implied utilization example: an arrival every 5 minutes against 10 minutes of service is 12 arrivals an hour against 6 capacity, 200%. Unsustainable.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Reading CV<sub>a</sub> (likely MCQ)</div>
+            <ul>
+              <li><strong>CV<sub>a</sub> = 0:</strong> deterministic. Identical gaps. Operations loves it, reality never delivers it.</li>
+              <li><strong>CV<sub>a</sub> &lt; 1:</strong> appointment system. Some spread around the booked time.</li>
+              <li><strong>CV<sub>a</sub> = 1:</strong> purely random, Poisson arrivals, exponential gaps, nobody coordinates (grocery store).</li>
+              <li><strong>CV<sub>a</sub> &gt; 1:</strong> batch arrivals. Tiny gaps inside a batch and huge gaps between batches. Worse than random.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Reading CV<sub>p</sub></div>
+            <ul>
+              <li><strong>CV<sub>p</sub> &lt; 1:</strong> standardized work, small spread (tire and oil changes, a single-procedure hernia clinic).</li>
+              <li><strong>CV<sub>p</sub> = 1:</strong> random, customer-specific (general surgery, 45 minutes to 7 hours).</li>
+              <li><strong>CV<sub>p</sub> &gt; 1:</strong> individualized, fully customized, heavy tail (emergency department, 2 minutes of resuscitation to 14 hours of operating).</li>
+              <li>CV<sub>a</sub> describes how customers arrive, CV<sub>p</sub> how they are processed. Worst case: batch arrivals and fully customized service.</li>
+              <li>Real distributions are usually exponential or hyper-exponential, not normal. Worked CVs: mean 3, sd 1.1 gives 0.36.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Variability and utilization (an old free-response, now an MCQ)</div>
+            <ul>
+              <li>&rho; = &lambda;p/m uses averages only. <strong>Variability by itself does not change utilization</strong> when customers are patient. 1 min + 9 min of work has the same utilization as 5 min + 5 min.</li>
+              <li><strong>Balking, reneging, or blocking lowers utilization</strong>, because effective &lambda; falls and work is lost.</li>
+              <li>Variability changes waiting, not utilization.</li>
+              <li>Averages mislead: an average wait of 30 minutes does not mean everyone waits 30. Some wait 90. This sets up the exponential tail in Lecture 5.</li>
+              <li>An emergency department is not FCFS (triage), a note on why its waits differ from the formula.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="takeaway"><strong>Exam-ready takeaway:</strong> convert everything to the same time unit first. Then compute CV<sub>a</sub> = &sigma;<sub>a</sub>/a and CV<sub>p</sub> = &sigma;<sub>p</sub>/p. If the question says M/M, skip both, they equal 1. Deterministic arrivals mean CV<sub>a</sub> = 0.</div>
+      </div>
+
+      <!-- ===== L5 ===== -->
+      <div class="summary-sheet" id="mp-l5">
+        <div class="sheet-label"><span class="dot"></span><span class="txt">Lecture summary</span></div>
+        <h3>Lecture 5: Queueing models and timeliness</h3>
+        <p class="sub">Three formulas, no more. Write the expanded wait formula on your aid sheet.</p>
+
+        <div class="formula-box">
+          T<sub>q</sub> = (p/m) &times; [(CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2] &times; [&rho;<sup>&radic;(2(m+1)) &minus; 1</sup> / (1 &minus; &rho;)]
+          <span class="fx-note">T = T<sub>q</sub> + p &nbsp;&middot;&nbsp; I<sub>q</sub> = &lambda;T<sub>q</sub> &nbsp;&middot;&nbsp; number in service = &rho;m &nbsp;&middot;&nbsp; I = I<sub>q</sub> + &rho;m = &lambda;T &nbsp;&middot;&nbsp; P(wait &gt; t) = e<sup>&minus;t/T<sub>q</sub></sup></span>
+        </div>
+
+        <div class="sheet-grid">
+          <div class="sheet-box">
+            <div class="t">[EXAM] The three effects</div>
+            <ul>
+              <li><strong>Service effect p/m</strong>: more or faster servers cut it.</li>
+              <li><strong>Variation effect (CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2</strong>: a simple average, not weighted. Arrival CV 0.5 with service CV 1 gives the same wait as arrival CV 1 with service CV 0.5.</li>
+              <li><strong>Dependency effect &rho;<sup>&radic;(2(m+1)) &minus; 1</sup>/(1 &minus; &rho;)</strong>: the numerator is P(wait), the denominator is safety capacity. For m = 1 the exponent is 1, so P(wait) = &rho;.</li>
+              <li>The three multiply. If any one worsens, the wait worsens.</li>
+              <li>M/M means CV<sub>a</sub> = CV<sub>p</sub> = 1, so the variation effect is 1 and drops out. G/G means compute both CVs.</li>
+              <li>Formulas are approximations. QMacros differs slightly for G/G, with the same insight. QMacros is not on the exam.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Comparative statics: add one server (m to m+1)</div>
+            <ul>
+              <li>p/m falls, &rho; falls, P(wait) falls (a number between 0 and 1 raised to a bigger power shrinks), safety capacity rises.</li>
+              <li>CV<sub>a</sub> and CV<sub>p</sub> are unchanged. Nothing in the variation term depends on m.</li>
+              <li>New technology that cuts p: capacity up and &rho; down, but &sigma;<sub>p</sub> may not shrink in proportion, so CV<sub>p</sub> could rise. If no new &sigma;<sub>p</sub> is given, <strong>assume CV<sub>p</sub> is unchanged</strong>.</li>
+              <li>In the exam formula, adding servers with everything else fixed always helps. Lecture 6 specialization logic does not apply.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Utilization and safety capacity</div>
+            <ul>
+              <li>Safety capacity = 1 &minus; &rho;. It can be tiny but never zero, because it is in the denominator.</li>
+              <li><strong>Safety capacity = 1 &minus; P(wait) only when m = 1.</strong></li>
+              <li>Nonlinear near the top: &rho;/(1 &minus; &rho;) is 1 at 50%, 1.04 at 51%, 49 at 98%, 99 at 99%. A one-point rise at 98% doubles the dependency factor.</li>
+              <li>Never say &ldquo;maximize utilization.&rdquo; Talk in utilization and safety capacity. The right level depends on the stakes: an ambulance is not a coffee shop.</li>
+              <li>More variability needs more safety capacity for the same wait. With no variability you can run near 100%. &ldquo;If you want to get rid of wait time, get rid of variability.&rdquo;</li>
+              <li>Waiting only happens when <em>all</em> servers are busy at once. With m servers, P(wait) is below &rho;.</li>
+            </ul>
+          </div>
+          <div class="sheet-box">
+            <div class="t">[EXAM] Pooling</div>
+            <ul>
+              <li>Call centre, same &lambda; = 100 per hour, same total capacity 120: one fast server (&mu; = 120) gives T<sub>q</sub> 1.56 and T 2.06 min. Ten slow servers (&mu; = 12 each) give P(wait) 51%, T<sub>q</sub> 0.96, but <strong>T 5.96 min</strong> because service takes 5 minutes. Pooling lowers the wait and can raise total time. Look at T, not only T<sub>q</sub>.</li>
+              <li>One shared line vs separate lines (coffee shop, &lambda; = 95 per hour, two baristas at 50 per hour, both at &rho; = 95%): separate lines each have T<sub>q</sub> 22.8 and T 24 min. A shared two-server line has T about 12.3 min. Same utilization, lower P(wait), balanced workload.</li>
+              <li>Costs: customers prefer to be last in a short line, a long single queue can drive balking, and servers must be interchangeable. Which design wins depends on whether customers react to the wait or to total time.</li>
+            </ul>
+          </div>
+          <div class="sheet-box wide">
+            <div class="t">[EXAM] Long waits, the exponential tail</div>
+            <ul>
+              <li>P(wait &le; t) = 1 &minus; e<sup>&minus;t/T<sub>q</sub></sup> and P(wait &gt; t) = e<sup>&minus;t/T<sub>q</sub></sup>. Valid when arrivals and service are random (M/M). Strict vs non-strict inequality makes no difference for a continuous wait.</li>
+              <li>Example: T<sub>q</sub> = 33.75, t = 60. 1 &minus; e<sup>&minus;1.778</sup> = 0.831, so 83% wait under an hour and <strong>17% wait longer</strong>. The professor expects you to compute T<sub>q</sub> first, then plug it in, and T is given.</li>
+              <li>Expected question shape: compute CV<sub>a</sub>, CV<sub>p</sub> and &rho;, then T<sub>q</sub>, then T, I<sub>q</sub>, I, then the tail probability. Check that I &minus; I<sub>q</sub> equals &rho;m.</li>
+              <li>Clinic exam-style example from the review: &lambda; = 10.8 per hour, &mu; = 12 per hour (p = 5 min), &rho; = 0.9, CV<sub>p</sub> = 0.7. T<sub>q</sub> about 33 min, T about 38, I<sub>q</sub> about 5.9, I about 6.8. He called it &ldquo;a good example we can use for the exam.&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="takeaway"><strong>Exam-ready takeaway:</strong> compute in this order: &lambda; and p in one unit, &rho;, CVs, T<sub>q</sub>, then T = T<sub>q</sub> + p, then Little&rsquo;s Law, then the tail. For any MCQ, say which of the three effects moves and in which direction, then read the answer off the formula.</div>
+      </div>
+
+
+      <!-- ===== MCQ BANK ===== -->
+      <h3 class="mp-sub" id="mp-mcq">Self-test: true/false and MCQ traps</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">Click a statement to reveal the answer. These are the statements the professor posed, answered, or flagged in the review, plus the obvious twins of each. Try to answer before opening.</p>
+
+      <details class="mp-q"><summary><span class="qn">1</span><span class="qt">The bottleneck is the station with the lowest processing time.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> The bottleneck is the station with the lowest capacity m&times;&mu;. A station with several resources can have a long p and still not bind.</div></details>
+      <details class="mp-q"><summary><span class="qn">2</span><span class="qt">Process capacity is 1/T<sub>min</sub>.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> T<sub>min</sub> adds up processing times and ignores the number of resources. Capacity does not depend on it.</div></details>
+      <details class="mp-q"><summary><span class="qn">3</span><span class="qt">Doubling the capacity of a non-bottleneck station raises process capacity and shortens flow time.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Neither changes. The minimum rule still points at the old bottleneck.</div></details>
+      <details class="mp-q"><summary><span class="qn">4</span><span class="qt">Shortening the processing time at a non-bottleneck offers no operational benefit.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Capacity does not move, but flow time, WIP, and customer experience can improve.</div></details>
+      <details class="mp-q"><summary><span class="qn">5</span><span class="qt">Implied utilization can exceed 100%, utilization cannot.</span><span class="lec">L2</span></summary><div class="ans"><b class="t">True.</b> Implied utilization = demand/capacity with no min. Utilization uses throughput, which is capped by capacity.</div></details>
+      <details class="mp-q"><summary><span class="qn">6</span><span class="qt">If a question asks for the utilization of the process, report the utilization of the resource with the most units.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Process utilization is the bottleneck&rsquo;s utilization (100% when demand exceeds capacity). Resource-level figures like 57% describe individual resources.</div></details>
+      <details class="mp-q"><summary><span class="qn">7</span><span class="qt">Throughput rate and service rate are synonyms.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> Throughput = exit = output = flow rate. Service rate is a capacity concept.</div></details>
+      <details class="mp-q"><summary><span class="qn">8</span><span class="qt">After ScharffenBerger installs the ball mill, capacity rises by the full improvement at the ball mill.</span><span class="lec">L2 case</span></summary><div class="ans"><b class="f">False.</b> Another resource (the roaster) becomes the bottleneck, so the gain is limited to the next constraint (about +10%, not +75%). Minimum rule.</div></details>
+      <details class="mp-q"><summary><span class="qn">9</span><span class="qt">Process-analysis questions require buffers (triangles) in the flow diagram for deterministic processes.</span><span class="lec">L2</span></summary><div class="ans"><b class="f">False.</b> No buffers are needed in the deterministic setting. Buffers matter once there is variability, and go before the bottleneck.</div></details>
+      <details class="mp-q"><summary><span class="qn">10</span><span class="qt">Little&rsquo;s Law only holds for first-come-first-served queues.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> It holds for any discipline with patient customers. Discipline changes who waits, not the average inventory.</div></details>
+      <details class="mp-q"><summary><span class="qn">11</span><span class="qt">Cash-to-cash can be negative.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> If you collect from customers before you pay suppliers (long payables, short receivables, fast process).</div></details>
+      <details class="mp-q"><summary><span class="qn">12</span><span class="qt">Cost-to-cash = cash-to-cash + payables flow time.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> Cost-to-cash = inventory days + receivable days. Subtract payable days to get cash-to-cash.</div></details>
+      <details class="mp-q"><summary><span class="qn">13</span><span class="qt">Seasonal demand is second-order variability.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Seasonality is first-order (a predictable change in the average). Second-order is unpredictable noise around the average.</div></details>
+      <details class="mp-q"><summary><span class="qn">14</span><span class="qt">A hybrid strategy holds less inventory than a level strategy but needs more capacity.</span><span class="lec">L3</span></summary><div class="ans"><b class="t">True.</b> Higher capacity shrinks the peak shortfall, so the build starts later and the inventory triangle is smaller. See the walkthrough: 1,920 vs 19,200 unit-weeks.</div></details>
+      <details class="mp-q"><summary><span class="qn">15</span><span class="qt">A chase strategy builds inventory in the low season.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Chase sets capacity equal to demand, so inventory stays near zero. Level and hybrid build stock.</div></details>
+      <details class="mp-q"><summary><span class="qn">16</span><span class="qt">Balking and reneging are the same thing.</span><span class="lec">L3</span></summary><div class="ans"><b class="f">False.</b> Balking = refuse to join after seeing the line. Reneging = join then leave, which is worse because the line was inflated and capacity was spent on the customer.</div></details>
+      <details class="mp-q"><summary><span class="qn">17</span><span class="qt">For a system with deterministic arrivals, CV<sub>a</sub> = 0.</span><span class="lec">L4</span></summary><div class="ans"><b class="t">True.</b> Identical gaps mean &sigma;<sub>a</sub> = 0.</div></details>
+      <details class="mp-q"><summary><span class="qn">18</span><span class="qt">Batch arrivals correspond to CV<sub>a</sub> &gt; 1; an appointment system to CV<sub>a</sub> &lt; 1; Poisson arrivals to CV<sub>a</sub> = 1.</span><span class="lec">L4</span></summary><div class="ans"><b class="t">True.</b> All three.</div></details>
+      <details class="mp-q"><summary><span class="qn">19</span><span class="qt">Higher variability increases utilization.</span><span class="lec">L4</span></summary><div class="ans"><b class="f">False.</b> Utilization depends on averages. Variability lengthens waits. If it causes balking, reneging, or blocking, utilization <em>drops</em>.</div></details>
+      <details class="mp-q"><summary><span class="qn">20</span><span class="qt">Congestion means the process lacks capacity.</span><span class="lec">L4</span></summary><div class="ans"><b class="f">False.</b> Queues form with spare capacity whenever arrivals or service times vary. A batch of 60 tourists can congest a system that is fine on average.</div></details>
+      <details class="mp-q"><summary><span class="qn">21</span><span class="qt">A process with arrival CV 0.5 and service CV 1 has the same expected wait as one with arrival CV 1 and service CV 0.5 (same &lambda;, p, m).</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True.</b> The variation effect is (CV<sub>a</sub>&sup2; + CV<sub>p</sub>&sup2;)/2, symmetric in the two.</div></details>
+      <details class="mp-q"><summary><span class="qn">22</span><span class="qt">Safety capacity always equals 1 minus the probability of waiting.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> Only for a single server, where P(wait) = &rho;. With m &gt; 1, safety capacity is 1 &minus; &rho; and P(wait) is lower than &rho;.</div></details>
+      <details class="mp-q"><summary><span class="qn">23</span><span class="qt">Adding a server reduces the service effect, the probability of waiting, and raises safety capacity, but does not change CV<sub>a</sub> or CV<sub>p</sub>.</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True.</b> All four statements hold inside the exam formula.</div></details>
+      <details class="mp-q"><summary><span class="qn">24</span><span class="qt">Cutting p with new technology lowers T<sub>q</sub> for sure.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">Not for sure.</b> &rho; and p/m fall, but &sigma;<sub>p</sub> may not shrink proportionally, so CV<sub>p</sub> could rise. If no new &sigma;<sub>p</sub> is given, assume CV<sub>p</sub> is unchanged, and then yes.</div></details>
+      <details class="mp-q"><summary><span class="qn">25</span><span class="qt">Splitting one fast server into many slow servers with the same total capacity always reduces the time a customer spends in the system.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> Wait falls (1.56 to 0.96 min in the call centre) but system time rises (2.06 to 5.96 min) because each service takes longer.</div></details>
+      <details class="mp-q"><summary><span class="qn">26</span><span class="qt">A single shared line with two servers beats two separate lines at the same utilization.</span><span class="lec">L5</span></summary><div class="ans"><b class="t">True</b> on wait and system time (24 down to about 12.3 min in the coffee shop). It gives up customer continuity and may raise balking if the line looks long.</div></details>
+      <details class="mp-q"><summary><span class="qn">27</span><span class="qt">If the average wait is 34 minutes, no customer waits more than 60 minutes.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> With exponential waits, about 17% exceed 60 minutes.</div></details>
+      <details class="mp-q"><summary><span class="qn">28</span><span class="qt">At 98% utilization, one more point of utilization has the same effect on waiting as one more point at 50%.</span><span class="lec">L5</span></summary><div class="ans"><b class="f">False.</b> The dependency factor &rho;/(1&minus;&rho;) goes 1 to 1.04 from 50% to 51%, and 49 to 99 from 98% to 99%.</div></details>
+      <details class="mp-q"><summary><span class="qn">29</span><span class="qt">Utilization should be maximized to use assets well.</span><span class="lec">L1, L5</span></summary><div class="ans"><b class="f">False.</b> Safety capacity cannot be zero. Choose utilization to match the promised timeliness and the stakes.</div></details>
+      <details class="mp-q"><summary><span class="qn">30</span><span class="qt">For a firm on the efficient frontier, quality can rise with no loss on another dimension.</span><span class="lec">L1</span></summary><div class="ans"><b class="f">False.</b> On the frontier you trade off. Only innovation (new business or operations strategy, or pooling) moves the frontier outward. Firms inside it can improve for free.</div></details>
+      <details class="mp-q"><summary><span class="qn">31</span><span class="qt">Toyota has higher productivity than Rolls-Royce, so Toyota executes its strategy better.</span><span class="lec">L1</span></summary><div class="ans"><b class="f">False.</b> Productivity measures cost efficiency only, not strategic positioning. Rolls-Royce competes on exclusivity.</div></details>
+      <details class="mp-q"><summary><span class="qn">32</span><span class="qt">In the VCAP framework, strong assets allow weaker processes and vice versa.</span><span class="lec">L1</span></summary><div class="ans"><b class="t">True.</b> They partly substitute. Uber (asset-light, process-strong) against a garbage hauler (asset-heavy).</div></details>
+
+
+      <!-- ===== NUMERICAL ===== -->
+      <h3 class="mp-sub" id="mp-numerical">Numerical walkthroughs</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">Each one mirrors a 20-point question. Cover the answers and redo them on paper. All figures were recomputed.</p>
+
+      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
+        <h4 style="font-size:16px;">1. Process analysis (Lecture 2)</h4>
+        <p style="font-size:13.5px;">Three stations in series. A: 1 worker, p = 10 min. B: 1 worker, p = 4 min. C: 3 workers, p = 20 min each. Demand is 10 units per hour. Flow unit: one job.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Station</th><th class="num">&mu; per hour</th><th class="num">m</th><th class="num">Capacity</th><th class="num">Utilization at R = 6</th><th class="num">Implied util. (demand 10)</th></tr>
+          <tr><td>A</td><td class="num">6</td><td class="num">1</td><td class="num">6</td><td class="num">100%</td><td class="num">167%</td></tr>
+          <tr><td>B</td><td class="num">15</td><td class="num">1</td><td class="num">15</td><td class="num">40%</td><td class="num">67%</td></tr>
+          <tr><td>C</td><td class="num">3</td><td class="num">3</td><td class="num">9</td><td class="num">67%</td><td class="num">111%</td></tr>
+        </table></div>
+        <ul style="font-size:13.5px;">
+          <li><strong>Bottleneck is A (6 per hour), even though C has the longest p (20 min).</strong> Process capacity 6. Throughput R = min(10, 6) = 6. Process utilization 100%. Process implied utilization 10/6 = 167%, a 67% capacity deficit.</li>
+          <li>T<sub>min</sub> = 10 + 4 + 20 = 34 min, regardless of how many workers there are.</li>
+          <li><strong>Second-bottleneck test:</strong> add a second worker at A. A becomes 12 per hour, but C (9 per hour) now binds. R = 9, a 50% gain, not the 100% that doubling A suggests. Utilizations become A 75%, B 60%, C 100%.</li>
+          <li>Draw the diagram: A, B, C boxes in series with the number of resources written in each. No triangles needed in the deterministic case.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
+        <h4 style="font-size:16px;">2. Production strategy (Lecture 3, slides 32-37)</h4>
+        <p style="font-size:13.5px;">Demand is 40 per week for 40 weeks, then 120 per week for 12 weeks (the peak starts at the beginning of week 41). Annual demand 40&times;40 + 12&times;120 = 3,040, so the average is 58.46 per week.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Strategy</th><th class="num">Capacity per week</th><th class="num">Peak shortfall per week</th><th class="num">Total shortage = max inventory</th><th class="num">Build rate</th><th class="num">Weeks of build</th><th class="num">Inventory, unit-weeks</th></tr>
+          <tr><td>Hybrid (his example)</td><td class="num">100</td><td class="num">20</td><td class="num">240</td><td class="num">60</td><td class="num">4 (start week 37)</td><td class="num">1,920</td></tr>
+          <tr><td>Level</td><td class="num">58.46</td><td class="num">61.54</td><td class="num">738.5</td><td class="num">18.46</td><td class="num">40 (whole low season)</td><td class="num">19,200</td></tr>
+          <tr><td>Chase</td><td class="num">40, then 120</td><td class="num">0</td><td class="num">0</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">0</td></tr>
+        </table></div>
+        <ul style="font-size:13.5px;">
+          <li>Hybrid inventory: build triangle 0.5 &times; 4 &times; 240 = 480, drawdown triangle 0.5 &times; 12 &times; 240 = 1,440, total 1,920 unit-weeks. Multiply by the carrying cost per unit per week for the cost.</li>
+          <li>Level inventory: 0.5 &times; 40 &times; 738.5 + 0.5 &times; 12 &times; 738.5 = 19,200 unit-weeks, ten times the hybrid. Check: the build over 40 weeks at 18.46 per week equals the 738.5 shortage.</li>
+          <li>The comparison is the exam answer: hybrid saves 90% of the holding cost, but it pays for 100 units of capacity instead of 58.46. Decide by comparing that extra capacity cost with the holding cost saved. Chase needs the flexible capacity and holds no stock.</li>
+          <li>Check that the drawdown works: 240 units at 20 per week lasts exactly 12 weeks.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
+        <h4 style="font-size:16px;">3. Queueing (Lectures 4 and 5)</h4>
+        <p style="font-size:13.5px;"><strong>Call centre, one server.</strong> Calls arrive at 100 per hour (&sigma;<sub>a</sub> = 0.6 min), service averages 0.5 min with &sigma;<sub>p</sub> = 0.25 min.</p>
+        <ol class="mp-steps">
+          <li>a = 60/100 = 0.6 min, so CV<sub>a</sub> = 0.6/0.6 = 1. p = 0.5 min, so CV<sub>p</sub> = 0.25/0.5 = 0.5. &mu; = 120 per hour.</li>
+          <li>&rho; = 100/120 = 0.8333. Safety capacity 0.1667. m = 1, so P(wait) = &rho; = 0.8333.</li>
+          <li>Variation effect = (1 + 0.25)/2 = 0.625. Dependency effect = 0.8333/0.1667 = 5.</li>
+          <li>T<sub>q</sub> = 0.5 &times; 0.625 &times; 5 = <strong>1.5625 min</strong>. T = 1.5625 + 0.5 = <strong>2.0625 min</strong>.</li>
+          <li>&lambda; = 1.6667 per minute. I<sub>q</sub> = 1.6667 &times; 1.5625 = 2.60. I = 1.6667 &times; 2.0625 = 3.44 (= 2.60 + 0.83).</li>
+          <li>P(wait &gt; 2 min) = e<sup>&minus;2/1.5625</sup> = 0.278 (valid when CV<sub>a</sub> = CV<sub>p</sub> = 1, so here it is only a rough guide).</li>
+        </ol>
+        <p style="font-size:13.5px;margin-top:14px;"><strong>Tail example from the review.</strong> T<sub>q</sub> = 33.75 min, threshold 60 min. P(wait &lt; 60) = 1 &minus; e<sup>&minus;60/33.75</sup> = 1 &minus; 0.169 = 0.831. So 83% wait less than an hour and 17% wait longer.</p>
+        <p style="font-size:13.5px;"><strong>Shared line, coffee shop.</strong> &lambda; = 95 per hour, two baristas, p = 1.2 min each, M/M. Separate lines: &lambda; = 47.5 each, &rho; = 0.95, T<sub>q</sub> = 1.2 &times; 0.95/0.05 = 22.8, T = 24.0 min. Shared line (m = 2): exponent &radic;6 &minus; 1 = 1.449, P(wait) = 0.95<sup>1.449</sup> = 0.928, T<sub>q</sub> = (1.2/2) &times; 0.928/0.05 = 11.1, T = 12.3 min.</p>
+        <p style="font-size:13.5px;margin-bottom:0;"><strong>Walk-in clinic.</strong> &lambda; = 10.8 per hour, p = 5 min (&mu; = 12), &rho; = 0.9, CV<sub>a</sub> about 1, CV<sub>p</sub> = 0.7. T<sub>q</sub> = 5 &times; (1 + 0.49)/2 &times; 9 = 33.5 min with CV<sub>a</sub> = 1 (33.1 with 0.99). T about 38.5. The professor&rsquo;s class figure was about 33 and 38, and QMacros gave 39. Accept anything within rounding, and show the steps.</p>
+      </div>
+
+      <div class="card" style="padding:20px 22px;margin-bottom:16px;">
+        <h4 style="font-size:16px;">4. Cash cycle (Lecture 3, the one expected MCQ-style calculation)</h4>
+        <p style="font-size:13.5px;margin-bottom:0;">Sales $250M, COGS $176M, AR $28M, inventory $50.6M, AP $11.9M. Inventory 365 &times; 50.6/176 = 105 days (3.5 turns). Receivables 365 &times; 28/250 = 41 days. Payables 365 &times; 11.9/176 = 25 days. Cost-to-cash = 105 + 41 = 146. Cash-to-cash = 146 &minus; 25 = 121 days.</p>
+      </div>
+
+      <!-- ===== CALCULATORS ===== -->
+      <h3 class="mp-sub" id="mp-calc">Calculators for self-checking</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-4px;">For practice only. They do not come into the exam, so use them to check your hand calculations on the practice sets.</p>
+
+      <div class="mp-calc" id="calcQ">
+        <h4>Queue calculator (Lecture 5 formula)</h4>
+        <div class="row">
+          <label>Arrival rate &lambda; (per hour)<input type="number" step="any" id="q_lam" value="100"></label>
+          <label>Processing time p (minutes)<input type="number" step="any" id="q_p" value="0.5"></label>
+          <label>Servers m<input type="number" step="1" min="1" id="q_m" value="1"></label>
+          <label>CV<sub>a</sub><input type="number" step="any" id="q_cva" value="1"></label>
+          <label>CV<sub>p</sub><input type="number" step="any" id="q_cvp" value="0.5"></label>
+          <label>Threshold t (minutes)<input type="number" step="any" id="q_t" value="2"></label>
+        </div>
+        <div class="out" id="q_out"></div>
+        <div class="warn" id="q_warn"></div>
+      </div>
+
+      <div class="mp-calc" id="calcH">
+        <h4>Production strategy calculator (Lecture 3 recipe)</h4>
+        <div class="row">
+          <label>Low-season demand per week<input type="number" step="any" id="h_low" value="40"></label>
+          <label>Peak demand per week<input type="number" step="any" id="h_peak" value="120"></label>
+          <label>Capacity per week<input type="number" step="any" id="h_cap" value="100"></label>
+          <label>Peak length (weeks)<input type="number" step="any" id="h_wk" value="12"></label>
+          <label>Peak starts at beginning of week<input type="number" step="any" id="h_start" value="41"></label>
+        </div>
+        <div class="out" id="h_out"></div>
+        <div class="warn" id="h_warn"></div>
+      </div>
+
+      <!-- ===== FINAL CHECKLIST ===== -->
+      <h3 class="mp-sub" id="mp-final">Last-night checklist</h3>
+      <div class="sheet-grid">
+        <div class="sheet-box">
+          <div class="t">Ten things the professor flagged most</div>
+          <ol class="mp-check" style="margin:0;padding-left:18px;">
+            <li>Minimum rule. Bottleneck = lowest long-term capacity, not the slowest step.</li>
+            <li>Process utilization is the bottleneck&rsquo;s. Implied utilization can exceed 100%.</li>
+            <li>p = 1/&mu; with matching units. Convert minutes to hours before you divide.</li>
+            <li>I = R &times; T with consistent units, and the correct flow unit.</li>
+            <li>Cost-to-cash and cash-to-cash from financial statements (one question).</li>
+            <li>First-order = predictable, second-order = noise. Fix the average first.</li>
+            <li>Chase, level, hybrid, and the 5-step recipe (answer week 37 in his example).</li>
+            <li>CV interpretation: 0, below 1, 1, above 1 for both arrivals and service.</li>
+            <li>T<sub>q</sub> = service &times; variation &times; dependency, safety capacity never zero.</li>
+            <li>Pooling lowers wait but can raise system time. The tail is e<sup>&minus;t/T<sub>q</sub></sup>.</li>
+          </ol>
+        </div>
+        <div class="sheet-box">
+          <div class="t">Process on the day</div>
+          <ul class="mp-check">
+            <li>Arrive 15 minutes early. Calculator, aid sheet, ID.</li>
+            <li>Photograph your aid sheet beforehand. It is collected with the paper and booklet.</li>
+            <li>MCQs first, but cap them at about 30 minutes. Mark and skip anything slow.</li>
+            <li>On every numerical question: write the formula, the substitution, the answer, and the unit. A wrong earlier number does not cost you again if you carry it forward correctly.</li>
+            <li>Queueing order: units, &rho;, CVs, T<sub>q</sub>, T, Little&rsquo;s Law, tail.</li>
+            <li>Do not use Lecture 6 logic. Do not spend time on cycle time or takt time.</li>
+            <li>Keep two decimals. Do not round fractions of people or units down.</li>
+          </ul>
+        </div>
+        <div class="sheet-box wide">
+          <div class="t">Things I could not settle from the transcripts</div>
+          <ul>
+            <li>Whether yield and loss will be tested. He mentioned it briefly and did not say. Practise one example.</li>
+            <li>The exact count of true/false questions, and the exact wording of the section names. The weights (40/20/20/20) are consistent.</li>
+            <li>The cost-ratio bands (below 2, 2 to 8, above 8) he mentioned in Lecture 3 were garbled. He said he would not return to them.</li>
+            <li>The slide says &ldquo;average flow time&rdquo; in the exponential formula, but he used T<sub>q</sub> in his example. See the correction at the top of this section.</li>
+            <li>The printed formula sheet is the same one posted for practice. Check which formulas it already gives, and do not duplicate them on your aid sheet.</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ===== PRACTICE QUESTIONS ===== -->
+      <h3 class="mp-sub" id="practice-midterm" style="font-size:22px;margin-top:48px;">Practice midterm questions, ranked <span class="slide-ref">16 problems from Practice Sets 1 to 4</span></h3>
+
+      <div class="mp-hero">
+        <h3>Every problem in the four practice sets, ordered from most to least likely to resemble an exam question</h3>
+        <p>The professor called the practice problems &ldquo;true representative&rdquo; of the numerical questions, and said the exam is no harder. Click a problem to open the setup, the solution, and what to watch for. Cover the answer and try it first.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">How I ranked them, and what to trust</div>
+        The ranking is my judgement, not the professor&rsquo;s. I scored each problem on three things: how closely it matches one of the three numerical slots (process analysis, production strategy, queueing), whether he singled out that topic in the review (the clinic example, the cash-cycle question, the inventory triangle, the minimum rule), and whether the topic is inside Lectures 1 to 5. The two finite-buffer problems come last because blocking is Lecture 6.
+        <br><br>
+        <strong>Caveat on the textbook problems.</strong> The folder holds the practice-set PDFs with answers, but the statements of the textbook questions (for example 3.1 or 9.5) are not reproduced. I reconstructed each setup from the instructor&rsquo;s solution, so check the exact wording against the textbook before relying on a detail. The Loan Approval and Dr. C problems come with full statements. Where I recomputed a figure and it differs from the posted solution, I say so.
+      </div>
+
+      <div class="table-wrap card" style="padding:0;margin-top:18px;">
+        <table>
+          <tr><th class="num">#</th><th>Problem</th><th>Set</th><th>Exam slot it trains</th><th>Likelihood</th></tr>
+          <tr><td class="num">1</td><td>9.2 My-Law.com</td><td>4</td><td>Queueing, G/G/1 plus the variance trap</td><td>Very high</td></tr>
+          <tr><td class="num">2</td><td>3.4 Western Pennsylvania Milk</td><td>3</td><td>Inventory build and depletion, the triangle method</td><td>Very high</td></tr>
+          <tr><td class="num">3</td><td>3.1 One flow unit</td><td>2</td><td>Process analysis core</td><td>Very high</td></tr>
+          <tr><td class="num">4</td><td>9.5 Atlantic Video</td><td>4</td><td>Queueing, high CV<sub>p</sub>, adding servers, cost</td><td>Very high</td></tr>
+          <tr><td class="num">5</td><td>9.4 Tom Opim</td><td>4</td><td>Queueing plus Little&rsquo;s Law on a cost</td><td>Very high</td></tr>
+          <tr><td class="num">6</td><td>2.4 Apparel retailing</td><td>1</td><td>Inventory turns, financial Little&rsquo;s Law</td><td>High</td></tr>
+          <tr><td class="num">7</td><td>Dr. C&rsquo;s diet program</td><td>1</td><td>Little&rsquo;s Law with split flows</td><td>High</td></tr>
+          <tr><td class="num">8</td><td>Loan approval</td><td>1</td><td>Little&rsquo;s Law by segment, mixed flow</td><td>High</td></tr>
+          <tr><td class="num">9</td><td>3.7 Car wash</td><td>2</td><td>Process analysis, implied utilization above 100%</td><td>High</td></tr>
+          <tr><td class="num">10</td><td>9.3 Car rental</td><td>4</td><td>Queueing with many servers, utilization decision</td><td>High</td></tr>
+          <tr><td class="num">11</td><td>3.9 Paris airport</td><td>3</td><td>Process analysis plus a growing queue</td><td>Medium</td></tr>
+          <tr><td class="num">12</td><td>2.5 La Villa</td><td>1</td><td>Little&rsquo;s Law, mix average</td><td>Medium</td></tr>
+          <tr><td class="num">13</td><td>2.2 Airline</td><td>1</td><td>Little&rsquo;s Law, one line (MCQ level)</td><td>Medium</td></tr>
+          <tr><td class="num">14</td><td>3.2 Multiple flow units</td><td>2</td><td>Weighted flow unit (he said unlikely)</td><td>Medium-low</td></tr>
+          <tr><td class="num">15</td><td>10.3 Video store</td><td>4</td><td>Finite buffer, QMacros</td><td>Lowest</td></tr>
+          <tr><td class="num">16</td><td>10.4 Gas station</td><td>4</td><td>Finite buffer, QMacros</td><td>Lowest</td></tr>
+        </table>
+      </div>
+
+      <!-- ================= TIER 1 ================= -->
+      <h3 class="mp-tier" id="pp-tier1">Tier 1: very likely</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-2px;">These have the same skeleton as the three 20-point numerical questions. Do these first, on paper, with the clock running.</p>
+
+      <details class="mp-q"><summary><span class="qn">1</span><span class="qt">9.2 My-Law.com: single-server email desk</span><span class="pr t1">Very likely</span><span class="lec">Set 4 &middot; L4-5</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a law firm answers 10 emails an hour, one every 6 minutes at random (CV<sub>a</sub> = 1). One lawyer takes 5 minutes per email with standard deviation 4 minutes. The lawyer works a 10-hour day.</p>
+        <ul>
+          <li><strong>(a)</strong> a = 6, p = 5, CV<sub>p</sub> = 4/5 = 0.8, m = 1, &rho; = 5/6. T<sub>q</sub> = 5 &times; (1 + 0.64)/2 &times; (0.8333/0.1667) = 5 &times; 0.82 &times; 5 = <strong>20.5 min</strong>. T = 20.5 + 5 = <strong>25.5 min</strong>. (QMacros gives 20.35 and 25.35.)</li>
+          <li><strong>(b)</strong> Emails a day = 10 &times; 10 = <strong>100</strong>.</li>
+          <li><strong>(c)</strong> Idle time = (1 &minus; 5/6) &times; 10 hours = <strong>1.67 hours</strong>.</li>
+          <li><strong>(d)</strong> The solution says the answer would not change when the standard deviation changes, because utilization depends only on average processing and inter-arrival times. This is the variability-does-not-change-utilization trap, so the quantity asked about is the idle time or utilization, not the wait.</li>
+          <li><strong>(e)</strong> CV<sub>p</sub> = 0.5/5 = 0.1: T<sub>q</sub> = 5 &times; (1 + 0.01)/2 &times; 5 = <strong>12.63 min</strong>, T = <strong>17.63 min</strong>. Cutting service variability cut the wait by 38% with no change in p.</li>
+        </ul>
+        <div class="why">Why it ranks first: it is the clinic-style recipe (CVs, &rho;, T<sub>q</sub>, T) and part (d) is a ready-made MCQ trap. I checked the arithmetic.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">2</span><span class="qt">3.4 Western Pennsylvania Milk: stock-out and recovery</span><span class="pr t1">Very likely</span><span class="lec">Set 3 &middot; L2-3</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed from the solution):</strong> a dairy starts the day with 25,000 gallons. From 8 am it produces 5,000 gallons an hour while trucks arrive until 6 pm and ship 10,000 gallons an hour. A truck holds 1,250 gallons. Waiting costs $50 per truck-hour.</p>
+        <ul>
+          <li><strong>(a) Stock-out time.</strong> Inventory falls 5,000 an hour, so 25,000 lasts 5 hours: <strong>1 pm</strong>.</li>
+          <li><strong>(b) When waiting ends.</strong> By 6 pm the backlog is 5 hours &times; 5,000 = 25,000 gallons. After 6 pm no shipping, production continues at 5,000 an hour, so the backlog clears 5 hours later: <strong>11 pm</strong>.</li>
+          <li><strong>(c) Trucks waiting at 6 pm.</strong> 25,000/1,250 = <strong>20 trucks</strong>.</li>
+          <li><strong>(d) Waiting cost.</strong> Triangle: base from 1 pm to 11 pm = 10 hours, height 20 trucks. Area = &frac12; &times; 10 &times; 20 = <strong>100 truck-hours</strong>, so 100 &times; $50 = <strong>$5,000</strong>. Cross-check: 4 trucks an hour &times; 10 hours = 40 trucks, average wait 2.5 hours, 40 &times; 2.5 = 100.</li>
+          <li>After 11 pm inventory rebuilds at 5,000 an hour and reaches 25,000 at 4 am (5 hours).</li>
+        </ul>
+        <div class="why">Why it ranks second: it is the same triangle you draw in the 20-point production-strategy question. Slopes are production minus shipments, height is the peak shortfall, cost is area times rate. The slide-based hybrid example earlier in this section is the other version of the same skill.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">3</span><span class="qt">3.1 One flow unit: three-station bottleneck</span><span class="pr t1">Very likely</span><span class="lec">Set 2 &middot; L2</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> three stations. Station 1: 2 workers, 10 min each. Station 2: 1 worker, 6 min. Station 3: 3 workers, 16 min each. Demand is 8 per hour.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Station</th><th class="num">p (min)</th><th class="num">&mu; per hour</th><th class="num">m</th><th class="num">Capacity</th><th class="num">Utilization at 8 per hour</th></tr>
+          <tr><td>1</td><td class="num">10</td><td class="num">6</td><td class="num">2</td><td class="num">12</td><td class="num">66.7%</td></tr>
+          <tr><td>2</td><td class="num">6</td><td class="num">10</td><td class="num">1</td><td class="num">10</td><td class="num">80%</td></tr>
+          <tr><td>3</td><td class="num">16</td><td class="num">3.75</td><td class="num">3</td><td class="num">11.25</td><td class="num">71.1%</td></tr>
+        </table></div>
+        <ul>
+          <li><strong>Bottleneck: station 2.</strong> Process capacity 10 per hour. Flow rate = min(8, 10) = <strong>8</strong>.</li>
+          <li>Station 3 has the longest processing time (16 min) and is not the bottleneck. This is the exact MCQ trap.</li>
+          <li>Process utilization is the bottleneck&rsquo;s: 8/10 = 80%. Implied utilization of the process at demand 8 is also 80%.</li>
+        </ul>
+        <div class="why">Why it ranks third: it is the cleanest process-analysis question and the minimum rule is the professor&rsquo;s stated &ldquo;friend in the exam.&rdquo; Re-do it with demand 12 to see throughput capped at 10.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">4</span><span class="qt">9.5 Atlantic Video: high service variability and extra servers</span><span class="pr t1">Very likely</span><span class="lec">Set 4 &middot; L4-5</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a video store checkout gets 30 customers an hour (one per 2 min, random). Service averages 1.7 min with standard deviation 3 min. An employee is paid to sort returns at 1.5 min per sort when idle. A waiting customer costs $0.75 per minute.</p>
+        <ul>
+          <li><strong>(a)</strong> CV<sub>p</sub> = 3/1.7 = 1.765, &rho; = 1.7/2 = 0.85. T<sub>q</sub> = 1.7 &times; (1 + 3.115)/2 &times; (0.85/0.15) = <strong>19.82 min</strong>. QMacros: 19.25.</li>
+          <li><strong>(b)</strong> Idle = 0.15 &times; 8 hours = 72 min, which is 72/1.5 = <strong>48 sorts</strong>.</li>
+          <li><strong>(c)</strong> T = 19.82 + 1.7 = <strong>21.5 min</strong>. I = &lambda;T = 0.5 &times; 21.5 = <strong>10.75 customers</strong>.</li>
+          <li><strong>(d)</strong> Only 90% of customers pay, so &lambda; = 27 per hour, a = 2.22 min, &rho; = 0.765, T<sub>q</sub> = <strong>11.4 min</strong>.</li>
+          <li><strong>(e)</strong> Waiting cost per hour = $0.75 &times; T<sub>q</sub> &times; 30. With one server $445.95. With two servers (&rho; = 0.425, exponent &radic;6 &minus; 1) T<sub>q</sub> = 0.88 min, cost $19.79. With three (&rho; = 0.283) T<sub>q</sub> = 0.162 min, cost $3.65. The solution picks <strong>3 servers</strong>. I rechecked 0.88 and 0.162 by hand and they match.</li>
+        </ul>
+        <div class="why">Why it ranks fourth: it exercises the multi-server exponent and a cost trade-off, both of which the professor walked through. Note the solution compares waiting cost only. The wage cost per extra server in the original statement decides the final count, so state that in an exam answer.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">5</span><span class="qt">9.4 Tom Opim: help line with a paid phone line</span><span class="pr t1">Very likely</span><span class="lec">Set 4 &middot; L4-5</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> one call every 3 minutes at random, so 20 an hour. Tom takes 2 minutes per call with standard deviation 1 minute. Between calls he reads at 1 page a minute. Each phone line in use costs $5 an hour. His shift is 8 hours.</p>
+        <ul>
+          <li><strong>(a)</strong> &rho; = 2/3, so Tom is free 1/3 of the time = 160 min, which is <strong>160 pages</strong>.</li>
+          <li><strong>(b)</strong> CV<sub>a</sub> = 1, CV<sub>p</sub> = 0.5. T<sub>q</sub> = 2 &times; (1 + 0.25)/2 &times; (0.667/0.333) = 2 &times; 0.625 &times; 2 = <strong>2.5 min</strong>. QMacros: 2.48.</li>
+          <li><strong>(c)</strong> Line usage per call = wait + talk = 4.5 min, 20 calls an hour = 90 min of line time an hour = 1.5 lines. Cost = 1.5 &times; $5 &times; 8 = <strong>$60</strong>. Cross-check with Little&rsquo;s Law: I<sub>q</sub> = &lambda;T<sub>q</sub> = 0.333 &times; 2.5 = 0.83, plus 0.67 in service = 1.5 lines.</li>
+        </ul>
+        <div class="why">Why it ranks fifth: it is short, it checks I = I<sub>q</sub> + &rho;m, which the professor told you to verify, and the Little&rsquo;s Law cost framing is a common twist.</div>
+      </div></details>
+
+      <!-- ================= TIER 2 ================= -->
+      <h3 class="mp-tier" id="pp-tier2">Tier 2: likely, as a numerical part or an MCQ</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-2px;">Lecture 3 Little&rsquo;s Law material and two process or queue variants. The professor said one question comes from the financial version of Little&rsquo;s Law.</p>
+
+      <details class="mp-q"><summary><span class="qn">6</span><span class="qt">2.4 Apparel retailing: inventory turns and holding cost</span><span class="pr t2">Likely</span><span class="lec">Set 1 &middot; L3</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a retailer has $100M in sales at a 50% cost of goods and $5M of inventory. An item costs $30 and the annual holding cost is 40% of the item cost.</p>
+        <ul>
+          <li><strong>(a)</strong> Throughput is COGS, not sales: $100M &times; 50% = $50M a year. Flow time = $5M/$50M = 0.1 year (about 5 weeks). <strong>Turns = 10 a year.</strong></li>
+          <li><strong>(b)</strong> Holding cost per item = $30 &times; 40% &times; 0.1 year = <strong>$1.20</strong>.</li>
+        </ul>
+        <div class="why">Why it ranks sixth: it is the cost-dollars-versus-sales-dollars trap that the professor flagged, and turns = 1/flow time is a recurring MCQ.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">7</span><span class="qt">Dr. C&rsquo;s diet program: split flows and a bonus</span><span class="pr t2">Likely</span><span class="lec">Set 1 &middot; L3</span></summary><div class="ans">
+        <p><strong>Statement:</strong> 40% of clients complete the 50-week program. Price is $125 a week. 20 new clients join each week and the average client stays 28 weeks. Dr. C considers paying a $500 bonus to anyone who finishes, which would lift the success rate to 50%, with unsuccessful clients still staying the same time.</p>
+        <ul>
+          <li><strong>(a)</strong> I = 20 &times; 28 = <strong>560 clients</strong>.</li>
+          <li><strong>(b)</strong> Successful: 8 a week &times; 50 weeks = 400 in the program. Unsuccessful inventory = 560 &minus; 400 = 160, throughput 12 a week, so flow time = 160/12 = <strong>13.33 weeks</strong>.</li>
+          <li><strong>(c)</strong> Revenue = 560 &times; $125 = <strong>$70,000 a week</strong>.</li>
+          <li><strong>(d)</strong> Now 10 succeed a week (500 in the program) and 10 do not (10 &times; 13.33 = 133.3). Inventory 633.3 &times; $125 = $79,166. Minus bonus 10 &times; $500 = $5,000 gives <strong>$74,166 a week</strong>, better than $70,000.</li>
+        </ul>
+        <div class="why">Why it ranks seventh: it shows how to apply Little&rsquo;s Law to a subset of the flow and subtract to get the other subset. That method is reusable on any exam Little&rsquo;s Law question.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">8</span><span class="qt">Loan approval: flow time by application type</span><span class="pr t2">Likely</span><span class="lec">Set 1 &middot; L3</span></summary><div class="ans">
+        <p><strong>Statement:</strong> a bank receives 1,000 applications a month with 500 pending on average and 20% approved. In the redesign, an initial review (200 pending) routes 25% to desk A (25 pending, 70% approved), 25% to desk B (150 pending, 10% approved) and rejects 50% (type C).</p>
+        <ul>
+          <li><strong>(a)</strong> Time for an approved loan before the change = 500/1,000 = <strong>0.5 month</strong>.</li>
+          <li><strong>(b)</strong> Initial review: 200/1,000 = <strong>0.2 month</strong>.</li>
+          <li><strong>(c)</strong> Desk A: 25 pending, 250 a month enter (25% of 1,000), so 25/250 = <strong>0.1 month</strong>.</li>
+          <li><strong>(d)</strong> Desk B: 150/250 = <strong>0.6 month</strong>.</li>
+          <li><strong>(e)</strong> Total for A = 0.2 + 0.1 = <strong>0.3</strong>. For B = 0.2 + 0.6 = <strong>0.8</strong>.</li>
+          <li><strong>(f)</strong> Approved: A = 70% &times; 250 = 175, B = 10% &times; 250 = 25, total 200. Shares: <strong>7/8 and 1/8</strong>.</li>
+          <li><strong>(g)</strong> Average for approved loans = 0.875 &times; 0.3 + 0.125 &times; 0.8 = <strong>0.3625 month</strong>. The posted solution prints 0.3635, which looks like a typo, since the same weights give 0.3625.</li>
+          <li><strong>(h)</strong> Approved flow time falls from 0.5 to about 0.36 month. B applications, however, now wait 0.8 month. If B loans are the profitable ones, the bank may lose business to a competitor who approves in 0.5 month, so the change is not clearly beneficial.</li>
+        </ul>
+        <div class="why">Why it ranks eighth: the key move is to use the throughput into each stage, not 1,000, for each Little&rsquo;s Law division. That is the same boundary-matching trap the professor flagged.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">9</span><span class="qt">3.7 Car wash: utilization and an overloaded step</span><span class="pr t2">Likely</span><span class="lec">Set 2 &middot; L2</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a 12-hour day. Four steps: wash (10 min), wax (6 min), wheel cleaning (7 min, only 45% of customers), interior cleaning (6 min). Part (a) has 40 customers a day, part (c) has 80 and changed times.</p>
+        <ul>
+          <li><strong>(a)</strong> Demand = 40/12 = 3.33 an hour. Wheel cleaning averages 45% &times; 7 = 3.15 min per customer, capacity 19 an hour, utilization 3.33/19 = <strong>17.5%</strong>.</li>
+          <li><strong>(b)</strong> Implied utilizations at 3.33 an hour: wash 55.6%, wax 33.3%, wheel 17.5%, interior 33.3%. Wash is the bottleneck at 6 an hour.</li>
+          <li><strong>(c)</strong> Demand 80/12 = 6.67 an hour with two wash stations and new times. Implied utilizations: wash 55.6%, wax 77.8%, wheel 46.7%, <strong>interior 111%</strong>. Only interior cleaning is overloaded, and only customers who need it are affected. 80 &times; 50% = 40 need it, 1/1.11 = 90% are served, so <strong>4 customers a day go unserved</strong>.</li>
+        </ul>
+        <div class="why">Why it ranks ninth: it practises implied utilization above 100% and turning that into a capacity deficit, both explicitly flagged. The weighted wheel time is the same synthetic-flow-unit idea the professor called unlikely to be tested, so treat that part as a bonus.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">10</span><span class="qt">9.3 Car rental company: 50 cars as 50 servers</span><span class="pr t2">Likely</span><span class="lec">Set 4 &middot; L5</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a company has 50 cars. Rentals arrive every 2.4 hours at random, last 72 hours on average (standard deviation 24 hours). Revenue is $80 per car per day. A proposal raises demand to 12 rentals a day (a = 2 hours), lengthens rentals to 4 days (p = 96 hours) at $55 a day, with standard deviations unchanged.</p>
+        <ul>
+          <li><strong>(a)</strong> Each car is a server: &rho; = 72/(50 &times; 2.4) = 60%, so 30 cars are out and <strong>20 sit on the lot</strong>.</li>
+          <li><strong>(b)</strong> New &rho; = 96/(50 &times; 2) = 96%, so 48 cars out. Revenue $80 &times; 30 = $2,400 against $55 &times; 48 = $2,640. <strong>Adopt the proposal</strong>, with the caution that 96% utilization leaves almost no safety capacity.</li>
+          <li><strong>(c)</strong> CV<sub>p</sub> = 24/72 = 0.33. P(all busy) = 0.6<sup>&radic;102 &minus; 1</sup> = 0.0096. T<sub>q</sub> = (72/50) &times; (1 + 0.111)/2 &times; 0.0096/0.4 = 0.019 hr = <strong>1.15 min</strong>. QMacros gives about 5 seconds, so the formula overestimates when m is large and &rho; is modest.</li>
+          <li><strong>(d)</strong> Fixed 4-day rentals: a = 3, p = 96, CV<sub>p</sub> = 0, &rho; = 0.64. P(all busy) = 0.0172, T<sub>q</sub> = 0.046 hr. The solution prints 2.72 min, but 0.046 hr is 2.76 min by my recomputation. QMacros: 0.42 min.</li>
+        </ul>
+        <div class="why">Why it ranks tenth: it is a long calculation with m = 50 and an exam-unlikely scale, but part (b) is a good utilization-versus-revenue judgement and part (c) shows when the formula overestimates.</div>
+      </div></details>
+
+      <!-- ================= TIER 3 ================= -->
+      <h3 class="mp-tier" id="pp-tier3">Tier 3: possible, lower weight</h3>
+
+      <details class="mp-q"><summary><span class="qn">11</span><span class="qt">3.9 Paris airport: a queue that builds during the day</span><span class="pr t3">Possible</span><span class="lec">Set 3 &middot; L2-3</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> three steps (agent, kiosk, security). Agents: 6 of them, 120 passengers an hour arrive between 4 and 8 pm, two-thirds taking 3 minutes and one-third taking 5.</p>
+        <ul>
+          <li><strong>(a)</strong> Implied utilization: agent 122%, kiosk 88.9%, security 62.5%. Agents are the bottleneck.</li>
+          <li><strong>(b)</strong> Average agent time = &frac23; &times; 3 + &frac13; &times; 5 = 3.667 min, so each agent handles 16.36 an hour and six handle 98.18. Backlog grows 120 &minus; 98.18 = 21.82 an hour. After 4 hours: 87.28 passengers. Clearing them takes 87.28/98.18 = 0.889 hr = <strong>53.3 min</strong>. The last passenger clears security at about <strong>8:54 pm</strong>.</li>
+          <li><strong>(c)</strong> A passenger arriving 2 hours in finds 44.64 ahead and waits 26.67 min at the agent.</li>
+          <li><strong>(d)</strong> A faster agent time of 3.13 min gives capacity 114.9. Backlog at 8 pm = 4 &times; 5.1 = 20.4, cleared in 10.66 min, plus 0.5 min security: <strong>8:11 pm</strong>.</li>
+        </ul>
+        <div class="why">Why it ranks eleventh: it blends process analysis with the inventory-build idea, but the mixed flow unit and time-of-day framing make it a long problem for a 20-point slot. Good practice for reading the build rate as demand minus capacity.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">12</span><span class="qt">2.5 La Villa: skiers in the resort</span><span class="pr t3">Possible</span><span class="lec">Set 1 &middot; L3</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> 1,200 skiers are in the resort on an average day, staying 10 days on average. First-day skiers spend $50 in local restaurants and others $30. A promotion cuts the stay to 5 days.</p>
+        <ul>
+          <li><strong>(a)</strong> Throughput = 1,200/10 = <strong>120 skiers a day</strong>.</li>
+          <li><strong>(b)</strong> Last year 1 in 10 skiers is on day 1: average spend 0.1 &times; $50 + 0.9 &times; $30 = $32. This year 1 in 5: 0.2 &times; $50 + 0.8 &times; $30 = $34. A <strong>6.25% increase</strong>.</li>
+        </ul>
+        <div class="why">Why it ranks twelfth: the snapshot interpretation (the share of skiers on day one equals 1/flow time) is a nice insight, but it is less central than the other Little&rsquo;s Law problems.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">13</span><span class="qt">2.2 Airline: passengers at a gate</span><span class="pr t3">Possible</span><span class="lec">Set 1 &middot; L3</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> 35 passengers are in a process on average and 255 pass through each hour.</p>
+        <ul><li>Flow time = I/R = 35/255 = 0.1373 hr = <strong>8.23 min</strong>. Convert the hours to minutes at the end.</li></ul>
+        <div class="why">Why it ranks thirteenth: it is one line of Little&rsquo;s Law and fits the MCQ slot, but a numerical slot would add more steps. It checks the units discipline the professor repeated.</div>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">14</span><span class="qt">3.2 Multiple flow units: three products, five resources</span><span class="pr t3">Medium-low</span><span class="lec">Set 2 &middot; L2</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> demand mix 40, 50, 60 of types A, B, C (26.7%, 33.3%, 40%). Five resources with product-specific times. The professor said multiple customer types are unlikely, so use this one as a safeguard.</p>
+        <ul>
+          <li>Weighted unit time per resource: R1 5 min, R2 0.2667 &times; 3 + 0.3333 &times; 4 + 0.4 &times; 5 = 4.133, R3 0.2667 &times; 15 = 4.0, R4 0.3333 &times; 3 + 0.4 &times; 3 = 2.2, R5 6 min.</li>
+          <li>Capacities per hour: R1 24, R2 29.0, R3 15, R4 27.3, R5 20. <strong>Bottleneck R3</strong>, <strong>15 an hour = 120 a day</strong>.</li>
+          <li>Output by type at the bottleneck: <strong>32 A, 40 B, 48 C</strong>.</li>
+          <li>Utilization at full process capacity: 62.5%, 51.7%, 100%, 55%, 75%.</li>
+        </ul>
+        <div class="why">Why it ranks fourteenth: the method is the synthetic flow unit. Do it once so the idea is fresh in case a simplified version appears.</div>
+      </div></details>
+
+      <!-- ================= TIER 4 ================= -->
+      <h3 class="mp-tier" id="pp-tier4">Tier 4: lowest, finite buffers are Lecture 6</h3>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:-2px;">The professor said Lecture 6 and QMacros are not on the midterm. These two use M/M/s/N and cannot be done with the wait formula. Read them only if you finish everything above.</p>
+
+      <details class="mp-q"><summary><span class="qn">15</span><span class="qt">10.3 Video store: nine copies, customers will not wait</span><span class="pr t4">Out of scope</span><span class="lec">Set 4 &middot; L6</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> a store has 9 copies of a movie. Customers arrive at 15 a day (0.625 an hour), rent for 36 hours on average, and leave if none is in stock. A rental earns $5, a lost customer costs $1.</p>
+        <ul>
+          <li>M/M/9/9 in QMacros: fraction not served <strong>62.44%</strong>, so a copy is available 37.56% of the time. Throughput 0.2347 an hour.</li>
+          <li>Revenue $5 &times; 0.2347 &times; 24 = <strong>$28.17 a day</strong>. Loss rate 0.625 &minus; 0.2347 = 0.390 an hour, <strong>$9.36 a day</strong>.</li>
+          <li>With a tenth copy: revenue $31.19, loss $8.76, a profit gain of <strong>$3.62 a day</strong>, so the copy pays for itself in under 14 days.</li>
+        </ul>
+      </div></details>
+
+      <details class="mp-q"><summary><span class="qn">16</span><span class="qt">10.4 Gas station: six pumps, no waiting room</span><span class="pr t4">Out of scope</span><span class="lec">Set 4 &middot; L6</span></summary><div class="ans">
+        <p><strong>Setup (reconstructed):</strong> cars arrive at 20 an hour, each takes 12 an hour per pump (5 min), six pumps, no room to wait.</p>
+        <ul>
+          <li>M/M/6/6: probability that all pumps are busy (a car is lost) = <strong>0.0056</strong>.</li>
+          <li>Flow rate = 20 &times; (1 &minus; 0.0056) = <strong>19.89 cars an hour</strong>.</li>
+        </ul>
+        <div class="why">Both problems use throughput (not the arrival rate) in Little&rsquo;s Law. That one idea is worth keeping as an MCQ, since the professor listed blocking as a case where utilization falls.</div>
+      </div></details>
+
+      <div class="class-prep" style="margin-top:22px;">
+        <div class="cp-label"><span>&#9679;</span> How to use this in the last hours</div>
+        <ul>
+          <li>Do problems 1 to 5 on paper, timed to roughly 20 minutes each. Compare against the solutions only after you finish.</li>
+          <li>For problems 6 to 10, read the setup and do just the parts that feel least automatic.</li>
+          <li>Skip 15 and 16 unless you have time. Scan 11 to 14 for the method only.</li>
+          <li>The calculators earlier in this section will check any queueing or production-strategy number you compute by hand.</li>
+        </ul>
+      </div>
+
     </section>
 
     <!-- ============ LECTURE 6 ============ -->
